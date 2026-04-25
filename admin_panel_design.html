@@ -1,0 +1,268 @@
+
+<h2 class="sr-only">Interactive admin panel mockup for the Skill Portal. Demonstrates track management, skill editing with resources, and role configuration flows.</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.shell{display:grid;grid-template-columns:200px 1fr;min-height:520px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;background:var(--color-background-primary)}
+.sidebar{background:var(--color-background-secondary);border-right:0.5px solid var(--color-border-tertiary);padding:1rem 0}
+.sb-head{font-size:11px;font-weight:500;color:var(--color-text-tertiary);padding:0 1rem 8px;letter-spacing:.04em;text-transform:uppercase}
+.sb-item{display:block;width:100%;text-align:left;background:none;border:none;padding:8px 1rem;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-left:2px solid transparent;font-family:var(--font-sans)}
+.sb-item:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.sb-item.active{color:var(--color-text-primary);font-weight:500;border-left-color:var(--color-text-primary);background:var(--color-background-primary)}
+.sb-divider{height:0.5px;background:var(--color-border-tertiary);margin:8px 0}
+.sb-badge{font-size:10px;background:var(--color-background-tertiary);color:var(--color-text-tertiary);padding:1px 6px;border-radius:20px;margin-left:auto;font-family:var(--font-sans)}
+.sb-item{display:flex;align-items:center}
+.main{padding:1.25rem;overflow-y:auto}
+.panel{display:none}
+.panel.active{display:block}
+.panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.panel-title{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.btn-add{background:none;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:5px 12px;font-size:12px;cursor:pointer;color:var(--color-text-primary);font-family:var(--font-sans)}
+.btn-add:hover{background:var(--color-background-secondary)}
+.btn-sm{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:3px 8px;font-size:11px;cursor:pointer;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.btn-sm:hover{border-color:var(--color-border-secondary);color:var(--color-text-primary)}
+.btn-danger{color:var(--color-text-danger,#A32D2D);border-color:transparent}
+.track-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:6px;background:var(--color-background-primary)}
+.track-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.track-name{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1}
+.track-count{font-size:11px;color:var(--color-text-tertiary)}
+.skill-row{display:grid;grid-template-columns:1fr auto auto auto;align-items:center;gap:8px;padding:7px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:5px;background:var(--color-background-primary)}
+.skill-name{font-size:13px;color:var(--color-text-primary)}
+.skill-track{font-size:10px;padding:2px 6px;border-radius:20px;white-space:nowrap}
+.form-section{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:1rem}
+.form-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;font-size:13px;font-family:var(--font-sans)}
+.field textarea{height:70px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.res-row{display:grid;grid-template-columns:1fr 120px 32px;gap:6px;margin-bottom:6px;align-items:center}
+.res-row input,.res-row select{font-size:12px;font-family:var(--font-sans)}
+.form-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.btn-primary{background:var(--color-text-primary);color:var(--color-background-primary);border:none;border-radius:var(--border-radius-md);padding:6px 14px;font-size:12px;cursor:pointer;font-family:var(--font-sans)}
+.btn-primary:hover{opacity:.85}
+.btn-cancel{background:none;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:6px 14px;font-size:12px;cursor:pointer;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11px;padding:2px 8px;border-radius:20px;border:0.5px solid var(--color-border-secondary);cursor:pointer;color:var(--color-text-secondary);background:transparent}
+.tag.selected{background:var(--color-background-info,#E6F1FB);border-color:#378ADD;color:#0C447C}
+.role-row{padding:10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:6px}
+.role-name{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.role-skills{display:flex;flex-wrap:wrap;gap:4px}
+.floor-pill{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.phase-note{font-size:11px;color:var(--color-text-tertiary);background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:6px 10px;margin-bottom:1rem;border-left:2px solid var(--color-border-secondary);border-radius:0}
+.del-btn{width:28px;height:28px;background:none;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;color:var(--color-text-tertiary);font-size:14px;display:flex;align-items:center;justify-content:center;font-family:var(--font-sans)}
+.del-btn:hover{border-color:#E24B4A;color:#A32D2D}
+.empty{font-size:12px;color:var(--color-text-tertiary);text-align:center;padding:1.5rem;border:0.5px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md)}
+.filter-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.filter-btn{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:3px 10px;font-size:11px;cursor:pointer;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.filter-btn.active{background:var(--color-background-secondary);border-color:var(--color-border-primary);color:var(--color-text-primary)}
+</style>
+
+<div style="padding:1rem 0">
+<div class="shell">
+  <div class="sidebar">
+    <div class="sb-head">Content</div>
+    <button class="sb-item active" onclick="nav('tracks')">Tracks <span class="sb-badge">5</span></button>
+    <button class="sb-item" onclick="nav('skills')">Skills <span class="sb-badge">42</span></button>
+    <button class="sb-item" onclick="nav('resources')">Resources</button>
+    <div class="sb-divider"></div>
+    <div class="sb-head">Structure</div>
+    <button class="sb-item" onclick="nav('roles')">Roles</button>
+    <div class="sb-divider"></div>
+    <div class="sb-head">System</div>
+    <button class="sb-item" onclick="nav('access')">Access</button>
+  </div>
+
+  <div class="main">
+
+    <div id="panel-tracks" class="panel active">
+      <div class="panel-head">
+        <span class="panel-title">Tracks</span>
+        <button class="btn-add" onclick="showTrackForm()">+ Add track</button>
+      </div>
+      <div id="track-list">
+        <div class="track-row"><div class="track-dot" style="background:#378ADD"></div><span class="track-name">Azure Cloud</span><span class="track-count">10 skills</span><button class="btn-sm" onclick="editTrack('Azure Cloud')">Edit</button></div>
+        <div class="track-row"><div class="track-dot" style="background:#7F77DD"></div><span class="track-name">AI Engineering</span><span class="track-count">9 skills</span><button class="btn-sm" onclick="editTrack('AI Engineering')">Edit</button></div>
+        <div class="track-row"><div class="track-dot" style="background:#1D9E75"></div><span class="track-name">Staff Engineering</span><span class="track-count">8 skills</span><button class="btn-sm" onclick="editTrack('Staff Engineering')">Edit</button></div>
+        <div class="track-row"><div class="track-dot" style="background:#D85A30"></div><span class="track-name">Web Development</span><span class="track-count">8 skills</span><button class="btn-sm" onclick="editTrack('Web Development')">Edit</button></div>
+        <div class="track-row"><div class="track-dot" style="background:#BA7517"></div><span class="track-name">Platform Engineering</span><span class="track-count">8 skills</span><button class="btn-sm" onclick="editTrack('Platform Engineering')">Edit</button></div>
+      </div>
+      <div id="track-form" style="display:none;margin-top:1rem">
+        <div class="form-section">
+          <div class="form-title" id="track-form-title">New track</div>
+          <div class="field-row">
+            <div class="field"><label>Track name</label><input type="text" id="tf-name" placeholder="e.g. IT Security"></div>
+            <div class="field"><label>Track ID (no spaces)</label><input type="text" id="tf-id" placeholder="e.g. security"></div>
+          </div>
+          <div class="field"><label>Color</label>
+            <div class="tag-row" style="margin-top:4px">
+              <span class="tag selected" data-color="#378ADD" onclick="selectColor(this)" style="border-color:#378ADD;background:#E6F1FB;color:#0C447C">Blue</span>
+              <span class="tag" data-color="#7F77DD" onclick="selectColor(this)">Purple</span>
+              <span class="tag" data-color="#1D9E75" onclick="selectColor(this)">Teal</span>
+              <span class="tag" data-color="#D85A30" onclick="selectColor(this)">Coral</span>
+              <span class="tag" data-color="#BA7517" onclick="selectColor(this)">Amber</span>
+              <span class="tag" data-color="#D4537E" onclick="selectColor(this)">Pink</span>
+              <span class="tag" data-color="#888780" onclick="selectColor(this)">Gray</span>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn-cancel" onclick="hideTrackForm()">Cancel</button>
+            <button class="btn-primary" onclick="saveTrack()">Save track</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-skills" class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Skills</span>
+        <button class="btn-add" onclick="showSkillForm()">+ Add skill</button>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterSkills(this,'all')">All</button>
+        <button class="filter-btn" onclick="filterSkills(this,'azure')">Azure Cloud</button>
+        <button class="filter-btn" onclick="filterSkills(this,'ai')">AI Engineering</button>
+        <button class="filter-btn" onclick="filterSkills(this,'staff')">Staff Engineering</button>
+      </div>
+      <div class="skill-row"><span class="skill-name">Bicep / IaC</span><span class="skill-track" style="background:#E6F1FB;color:#185FA5">Azure</span><span class="skill-track" style="background:#FAEEDA;color:#854F0B">Platform</span><button class="btn-sm" onclick="openSkillEdit()">Edit</button><button class="btn-sm btn-danger">Remove</button></div>
+      <div class="skill-row"><span class="skill-name">Azure Functions</span><span class="skill-track" style="background:#E6F1FB;color:#185FA5">Azure</span><span style=""></span><button class="btn-sm" onclick="openSkillEdit()">Edit</button><button class="btn-sm btn-danger">Remove</button></div>
+      <div class="skill-row"><span class="skill-name">LLM Fundamentals</span><span class="skill-track" style="background:#EEEDFE;color:#534AB7">AI Eng</span><span style=""></span><button class="btn-sm" onclick="openSkillEdit()">Edit</button><button class="btn-sm btn-danger">Remove</button></div>
+      <div class="skill-row"><span class="skill-name">RAG & Embeddings</span><span class="skill-track" style="background:#EEEDFE;color:#534AB7">AI Eng</span><span style=""></span><button class="btn-sm" onclick="openSkillEdit()">Edit</button><button class="btn-sm btn-danger">Remove</button></div>
+      <div id="skill-form" style="display:none;margin-top:1rem">
+        <div class="form-section">
+          <div class="form-title">Edit skill — Bicep / IaC</div>
+          <div class="field-row">
+            <div class="field"><label>Skill name</label><input type="text" value="Bicep / Infrastructure as Code"></div>
+            <div class="field"><label>Parent track</label><select><option>Azure Cloud</option><option>Platform Engineering</option><option>AI Engineering</option></select></div>
+          </div>
+          <div class="field"><label>Summary (shown on skill card)</label><textarea>Define and deploy Azure resources using Bicep — Azure's native IaC language. Covers module structure, parameter files, and deployment pipelines.</textarea></div>
+          <div class="field"><label>Cross-track tags</label>
+            <div class="tag-row" style="margin-top:4px">
+              <span class="tag selected" onclick="this.classList.toggle('selected')">Platform Eng</span>
+              <span class="tag" onclick="this.classList.toggle('selected')">Azure</span>
+              <span class="tag" onclick="this.classList.toggle('selected')">Staff Eng</span>
+              <span class="tag" onclick="this.classList.toggle('selected')">Web Dev</span>
+              <span class="tag" onclick="this.classList.toggle('selected')">AI Eng</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-title">Resources</div>
+          <div id="res-list">
+            <div class="res-row"><input type="text" value="Bicep documentation — Microsoft Learn" placeholder="Title"><select><option>Official docs</option><option>Course</option><option>Video</option><option>Internal</option></select><button class="del-btn" onclick="this.parentElement.remove()">×</button></div>
+            <div class="res-row"><input type="text" value="John Savill — Bicep masterclass" placeholder="Title"><select><option>Official docs</option><option selected>Video</option><option>Course</option><option>Internal</option></select><button class="del-btn" onclick="this.parentElement.remove()">×</button></div>
+          </div>
+          <button class="btn-sm" style="margin-top:6px" onclick="addResource()">+ Add resource</button>
+        </div>
+        <div class="form-footer">
+          <button class="btn-cancel" onclick="document.getElementById('skill-form').style.display='none'">Cancel</button>
+          <button class="btn-primary">Save skill</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-resources" class="panel">
+      <div class="panel-head"><span class="panel-title">Resources</span></div>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem">Resources are managed inline within each skill. Use the Skills panel to add, edit, or remove links for a specific skill.</p>
+      <div class="empty">Select a skill from the Skills panel and open its editor to manage its resources.</div>
+    </div>
+
+    <div id="panel-roles" class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Roles</span>
+        <button class="btn-add">+ Add role</button>
+      </div>
+      <div class="phase-note">Roles map to skill floors — the minimum proficiency required per skill for that role. Active in Phase 2 when user accounts are added.</div>
+      <div class="role-row">
+        <div class="role-name">Cloud Platform Engineer</div>
+        <div class="role-skills">
+          <span class="floor-pill">Bicep → Proficient</span>
+          <span class="floor-pill">Entra ID → Proficient</span>
+          <span class="floor-pill">Azure Functions → Proficient</span>
+          <span class="floor-pill">GitHub Actions → Proficient</span>
+          <span class="floor-pill">Python → Aware</span>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-name">AI Engineer</div>
+        <div class="role-skills">
+          <span class="floor-pill">LLM Fundamentals → Proficient</span>
+          <span class="floor-pill">RAG & Embeddings → Proficient</span>
+          <span class="floor-pill">Azure OpenAI → Learning</span>
+          <span class="floor-pill">Python → Proficient</span>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-name">Security Analyst</div>
+        <div class="role-skills">
+          <span class="floor-pill">Entra ID → Proficient</span>
+          <span class="floor-pill">Zero Trust → Proficient</span>
+          <span class="floor-pill">Azure Policy → Aware</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-access" class="panel">
+      <div class="panel-head"><span class="panel-title">Access control</span></div>
+      <div class="phase-note">Phase 1: admin panel is localhost-only. Phase 2: replaced by Entra ID app roles.</div>
+      <div class="form-section">
+        <div class="form-title">Phase 1 — localhost gate</div>
+        <div class="field"><label>Admin is accessible from</label><input type="text" value="localhost only" disabled style="opacity:.5;cursor:not-allowed"></div>
+        <p style="font-size:12px;color:var(--color-text-tertiary);margin-top:6px">The admin section renders only when hostname === 'localhost'. Anyone on the live URL sees the tracker only. No passphrase needed.</p>
+      </div>
+      <div class="form-section">
+        <div class="form-title">Phase 2 — Entra ID app roles (planned)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="padding:8px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-secondary)"><strong style="display:block;color:var(--color-text-primary);margin-bottom:3px">SkillPortal.Admin</strong>Full access — manage tracks, skills, roles, users</div>
+          <div style="padding:8px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-secondary)"><strong style="display:block;color:var(--color-text-primary);margin-bottom:3px">SkillPortal.User</strong>Own skill state only — no admin access</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+function nav(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function showTrackForm(){
+  const f=document.getElementById('track-form');
+  f.style.display=f.style.display==='none'?'block':'none';
+}
+function hideTrackForm(){document.getElementById('track-form').style.display='none'}
+function editTrack(name){
+  document.getElementById('tf-name').value=name;
+  document.getElementById('track-form').style.display='block';
+  document.getElementById('track-form-title').textContent='Edit track — '+name;
+  document.getElementById('track-form').scrollIntoView({behavior:'smooth'});
+}
+function saveTrack(){hideTrackForm()}
+function selectColor(el){
+  document.querySelectorAll('[data-color]').forEach(t=>{t.classList.remove('selected');t.style.background='';t.style.borderColor='';t.style.color=''});
+  el.classList.add('selected');
+}
+function openSkillEdit(){
+  const f=document.getElementById('skill-form');
+  f.style.display=f.style.display==='none'?'block':'none';
+  if(f.style.display==='block')f.scrollIntoView({behavior:'smooth'});
+}
+function showSkillForm(){
+  document.getElementById('skill-form').style.display='block';
+  document.getElementById('skill-form').scrollIntoView({behavior:'smooth'});
+}
+function addResource(){
+  const row=document.createElement('div');
+  row.className='res-row';
+  row.innerHTML='<input type="text" placeholder="Resource title"><select><option>Official docs</option><option>Course</option><option>Video</option><option>Internal</option></select><button class="del-btn" onclick="this.parentElement.remove()">×</button>';
+  document.getElementById('res-list').appendChild(row);
+}
+function filterSkills(btn,track){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
