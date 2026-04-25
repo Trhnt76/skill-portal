@@ -1,0 +1,223 @@
+
+<h2 class="sr-only">Skill roadmap tracker across five engineering disciplines. Click any skill card to cycle its status from not started through to expert.</h2>
+
+<style>
+*{box-sizing:border-box}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.tab-btn{background:none;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 11px;font-size:12px;cursor:pointer;color:var(--color-text-secondary);font-family:var(--font-sans)}
+.tab-btn.active{border-color:var(--color-border-primary);color:var(--color-text-primary);background:var(--color-background-secondary);font-weight:500}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.leg-it{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--color-text-secondary)}
+.sum-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.tk-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.tk-pct{font-size:12px;color:var(--color-text-secondary)}
+.pb-bg{height:5px;background:var(--color-background-secondary);border-radius:3px;margin-bottom:1.25rem;overflow:hidden}
+.pb-fill{height:100%;border-radius:3px;transition:width .4s}
+.sk-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid;flex-shrink:0;margin-top:4px;cursor:pointer;transition:transform .15s}
+.dot:hover{transform:scale(1.3)}
+.sk-card{flex:1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:9px 12px;cursor:pointer;transition:border-color .15s}
+.sk-card:hover{border-color:var(--color-border-secondary)}
+.sk-card.rh{border:1px solid #378ADD}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sk-nm{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1;line-height:1.4}
+.pill{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0;border:0.5px solid}
+.ov{font-size:10px;color:var(--color-text-tertiary);margin-top:3px}
+.bar-bg{height:3px;background:var(--color-background-secondary);border-radius:2px;margin-top:7px}
+.bar-fill{height:3px;border-radius:2px;transition:width .3s}
+.rtag{font-size:10px;color:#378ADD;margin-left:6px;font-weight:400}
+.done-msg{font-size:13px;color:var(--color-text-secondary);text-align:center;padding:1rem;border:0.5px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-top:4px}
+.hint{font-size:11px;color:var(--color-text-tertiary);margin-bottom:1.25rem;margin-top:-0.5rem}
+.rst{background:none;border:none;cursor:pointer;font-size:11px;color:var(--color-text-tertiary);text-decoration:underline;padding:0;font-family:var(--font-sans);margin-left:auto}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:1.5rem}
+.sum-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;text-align:center}
+.sum-num{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.sum-lbl{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+</style>
+
+<div style="padding:1rem 0">
+
+<div class="legend">
+  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;border:2px solid #888780;background:transparent;display:inline-block;flex-shrink:0"></span>Not started</span>
+  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:#EF9F27;display:inline-block"></span>Aware</span>
+  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:#378ADD;display:inline-block"></span>Learning</span>
+  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E75;display:inline-block"></span>Proficient</span>
+  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:#639922;display:inline-block"></span>Expert</span>
+  <button class="rst" id="rst-btn" onclick="doReset()">reset all</button>
+</div>
+
+<div class="summary-grid" id="sum-grid"></div>
+<div class="tabs" id="tabs"></div>
+<div id="view"></div>
+
+</div>
+
+<script>
+const T={
+  azure:{label:'Azure Cloud',color:'#378ADD',skills:[
+    {id:'az1',name:'Resource Model & Azure CLI',tags:[]},
+    {id:'az2',name:'Networking — VNets, NSGs, DNS',tags:[]},
+    {id:'az3',name:'Identity & Entra ID',tags:['Platform Eng']},
+    {id:'az4',name:'Key Vault & Secrets Mgmt',tags:['Platform Eng']},
+    {id:'az5',name:'Azure Functions',tags:[]},
+    {id:'az6',name:'Static Web Apps',tags:['Web Dev']},
+    {id:'az7',name:'Container Apps',tags:[]},
+    {id:'az8',name:'Bicep / Infrastructure as Code',tags:['Platform Eng']},
+    {id:'az9',name:'Monitor & Log Analytics',tags:['Platform Eng']},
+    {id:'az10',name:'Policy & Governance',tags:[]}
+  ]},
+  ai:{label:'AI Engineering',color:'#7F77DD',skills:[
+    {id:'ai1',name:'LLM Fundamentals',tags:[]},
+    {id:'ai2',name:'Prompt Engineering',tags:[]},
+    {id:'ai3',name:'Azure OpenAI Service',tags:['Azure']},
+    {id:'ai4',name:'RAG & Embeddings',tags:[]},
+    {id:'ai5',name:'Vector Databases',tags:[]},
+    {id:'ai6',name:'AI Agents & MCP',tags:[]},
+    {id:'ai7',name:'LLM Orchestration',tags:[]},
+    {id:'ai8',name:'Model Evaluation & Testing',tags:[]},
+    {id:'ai9',name:'Fine-tuning Concepts',tags:[]}
+  ]},
+  staff:{label:'Staff Engineering',color:'#1D9E75',skills:[
+    {id:'se1',name:'System Design',tags:[]},
+    {id:'se2',name:'Architecture Decision Records',tags:[]},
+    {id:'se3',name:'Technical Documentation',tags:[]},
+    {id:'se4',name:'Engineering Metrics & KPIs',tags:['Platform Eng']},
+    {id:'se5',name:'Mentoring & Coaching',tags:[]},
+    {id:'se6',name:'Cross-functional Communication',tags:[]},
+    {id:'se7',name:'Platform Strategy',tags:['Platform Eng']},
+    {id:'se8',name:'Tech Roadmapping',tags:[]}
+  ]},
+  web:{label:'Web Dev',color:'#D85A30',skills:[
+    {id:'wd1',name:'HTML & CSS Foundations',tags:[]},
+    {id:'wd2',name:'JavaScript & TypeScript',tags:[]},
+    {id:'wd3',name:'React',tags:[]},
+    {id:'wd4',name:'Next.js',tags:[]},
+    {id:'wd5',name:'REST API Design',tags:[]},
+    {id:'wd6',name:'Auth Patterns — OAuth/OIDC',tags:['Azure']},
+    {id:'wd7',name:'Performance & Core Web Vitals',tags:[]},
+    {id:'wd8',name:'Deployment & CI-CD',tags:['Platform Eng']}
+  ]},
+  platform:{label:'Platform Engineering',color:'#BA7517',skills:[
+    {id:'pe1',name:'Observability Strategy',tags:['Azure']},
+    {id:'pe2',name:'GitHub Actions & CI-CD',tags:['Web Dev']},
+    {id:'pe3',name:'Infrastructure as Code',tags:['Azure']},
+    {id:'pe4',name:'Zero Trust & Cloudflare',tags:[]},
+    {id:'pe5',name:'Platform Metrics & SLOs',tags:['Staff Eng']},
+    {id:'pe6',name:'Incident Management',tags:[]},
+    {id:'pe7',name:'Developer Experience (DevX)',tags:[]},
+    {id:'pe8',name:'Cloud Cost Management',tags:[]}
+  ]}
+};
+
+const STS=['none','aware','learning','proficient','expert'];
+const SC={
+  none:{dot:'transparent',bdr:'#888780',txt:'#888780',lbl:'Not started',sc:0},
+  aware:{dot:'#EF9F27',bdr:'#EF9F27',txt:'#BA7517',lbl:'Aware',sc:.25},
+  learning:{dot:'#378ADD',bdr:'#378ADD',txt:'#185FA5',lbl:'Learning',sc:.5},
+  proficient:{dot:'#1D9E75',bdr:'#1D9E75',txt:'#0F6E56',lbl:'Proficient',sc:.75},
+  expert:{dot:'#639922',bdr:'#639922',txt:'#3B6D11',lbl:'Expert',sc:1}
+};
+
+let st={},act='azure',sv,resetPending=false,resetTimer;
+
+const gs=id=>st[id]||{status:'none'};
+
+function cycle(id){
+  const cur=gs(id).status;
+  st[id]={status:STS[(STS.indexOf(cur)+1)%STS.length]};
+  clearTimeout(sv);sv=setTimeout(save,700);
+  render(act);renderSummary();
+}
+
+async function save(){try{await window.storage.set('skm3',JSON.stringify(st))}catch(e){}}
+
+async function loadData(){
+  try{const r=await window.storage.get('skm3');if(r&&r.value)st=JSON.parse(r.value)}catch(e){st={}}
+  ra();
+}
+
+function doReset(){
+  const btn=document.getElementById('rst-btn');
+  if(!resetPending){
+    resetPending=true;
+    btn.textContent='confirm reset?';
+    btn.style.color='var(--color-text-danger,#A32D2D)';
+    resetTimer=setTimeout(()=>{
+      resetPending=false;
+      btn.textContent='reset all';
+      btn.style.color='';
+    },3000);
+    return;
+  }
+  clearTimeout(resetTimer);resetPending=false;
+  btn.textContent='reset all';btn.style.color='';
+  st={};
+  try{window.storage.delete('skm3')}catch(e){}
+  ra();
+}
+
+function prog(k){
+  const sk=T[k].skills;
+  return Math.round(sk.reduce((a,s)=>a+SC[gs(s.id).status].sc,0)/sk.length*100);
+}
+
+function totalStats(){
+  let tot=0,done=0,inprog=0;
+  Object.values(T).forEach(t=>t.skills.forEach(s=>{
+    tot++;
+    const ss=gs(s.id).status;
+    if(ss==='proficient'||ss==='expert')done++;
+    else if(ss==='learning'||ss==='aware')inprog++;
+  }));
+  return{tot,done,inprog,notStarted:tot-done-inprog};
+}
+
+function ri(k){
+  const sk=T[k].skills;
+  for(let i=0;i<sk.length;i++){const s=gs(sk[i].id).status;if(s==='none'||s==='aware'||s==='learning')return i;}
+  return -1;
+}
+
+function renderSummary(){
+  const {tot,done,inprog,notStarted}=totalStats();
+  const overall=Math.round(Object.keys(T).reduce((a,k)=>a+prog(k),0)/Object.keys(T).length);
+  document.getElementById('sum-grid').innerHTML=`
+    <div class="sum-card"><div class="sum-num">${overall}%</div><div class="sum-lbl">overall progress</div></div>
+    <div class="sum-card"><div class="sum-num" style="color:#639922">${done}</div><div class="sum-lbl">mastered</div></div>
+    <div class="sum-card"><div class="sum-num" style="color:#378ADD">${inprog}</div><div class="sum-lbl">in progress</div></div>
+    <div class="sum-card"><div class="sum-num" style="color:var(--color-text-tertiary)">${notStarted}</div><div class="sum-lbl">not started</div></div>`;
+}
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=Object.entries(T).map(([k,t])=>`
+    <button class="tab-btn${k===act?' active':''}" onclick="sw('${k}')">${t.label} <span style="font-size:10px;opacity:.6">${prog(k)}%</span></button>`
+  ).join('');
+}
+
+function render(k){
+  const t=T[k],p=prog(k),r=ri(k);
+  let h=`<div class="sum-row"><span class="tk-title">${t.label}</span><span class="tk-pct">${p}% mastered</span></div>
+<div class="pb-bg"><div class="pb-fill" style="width:${p}%;background:${t.color}"></div></div>
+<p class="hint">Click a skill to cycle status. Tags show where skills cross into other tracks.</p>`;
+  t.skills.forEach((s,i)=>{
+    const ss=gs(s.id).status,sc=SC[ss],res=i===r;
+    const ov=s.tags.length?`<div class="ov">also in: ${s.tags.join(', ')}</div>`:'';
+    h+=`<div class="sk-row">
+<div class="dot" style="background:${sc.dot};border-color:${sc.bdr}" onclick="cycle('${s.id}')"></div>
+<div class="sk-card${res?' rh':''}" onclick="cycle('${s.id}')">
+  <div class="card-top">
+    <span class="sk-nm">${s.name}${res?'<span class="rtag">↑ continue here</span>':''}</span>
+    <span class="pill" style="color:${sc.txt};border-color:${sc.bdr};background:transparent">${sc.lbl}</span>
+  </div>${ov}
+  <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(sc.sc*100)}%;background:${t.color}"></div></div>
+</div></div>`;
+  });
+  if(r===-1&&p>0)h+=`<div class="done-msg">All skills at proficient or expert — track complete.</div>`;
+  document.getElementById('view').innerHTML=h;
+  renderTabs();
+}
+
+function sw(k){act=k;render(k)}
+function ra(){renderSummary();renderTabs();render(act)}
+loadData();
+</script>

@@ -1,0 +1,17 @@
+cat > .gitignore << 'EOF'
+# Azure
+.azure/
+
+# Local env files - never commit these
+.env
+.env.local
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+*.swp
+EOF
