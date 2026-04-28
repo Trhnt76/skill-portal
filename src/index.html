@@ -6,41 +6,34 @@
   <title>Skill Portal</title>
 </head>
 <body>
-<h2 class="sr-only">Skill roadmap tracker across five engineering disciplines. Click any skill card to cycle its status from not started through to expert.</h2>
+<h2 class="sr-only">Engineering skill tracker across six role disciplines. Click any skill card to cycle its proficiency level from not rated through to expert.</h2>
 
 <style>
 :root {
-  /* Brand */
   --sp-accent:       #0078d4;
   --sp-accent-hover: #106ebe;
   --sp-accent-light: #deecf9;
-  /* Text */
   --sp-text-primary:   #201f1e;
   --sp-text-secondary: #484644;
   --sp-text-muted:     #8a8886;
   --sp-text-danger:    #a4262c;
-  /* Backgrounds */
   --sp-bg-primary:   #ffffff;
   --sp-bg-secondary: #f3f2f1;
   --sp-bg-hover:     #edebe9;
-  /* Borders */
   --sp-border:        #edebe9;
   --sp-border-mid:    #d2d0ce;
   --sp-border-strong: #c8c6c4;
-  /* Status indicator colors — values must match SC object in JS */
-  --sp-s-none:       #888780;
-  --sp-s-aware:      #EF9F27;
-  --sp-s-learning:   #378ADD;
-  --sp-s-proficient: #1D9E75;
-  --sp-s-expert:     #639922;
-  /* Layout */
-  --sp-max-width: 960px;
+  /* Proficiency level colors */
+  --sp-l0: #888780;
+  --sp-l1: #EF9F27;
+  --sp-l2: #378ADD;
+  --sp-l3: #1D9E75;
+  --sp-l4: #639922;
+  --sp-l5: #2D5C0E;
+  --sp-max-width: 1060px;
   --sp-radius:    6px;
   --sp-radius-sm: 4px;
   --sp-font: system-ui, -apple-system, sans-serif;
-  /* Compatibility aliases for JS inline var() references */
-  --color-text-tertiary: var(--sp-text-muted);
-  --color-text-danger:   var(--sp-text-danger);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -48,35 +41,41 @@
 
 /* ── Page shell ── */
 .sp-page{max-width:var(--sp-max-width);margin:0 auto;background:var(--sp-bg-primary);min-height:100vh}
-.sp-header{background:var(--sp-bg-primary);border-bottom:1px solid var(--sp-border-strong);padding:0 1.5rem;height:48px;display:flex;align-items:center}
-.sp-logo{font-size:15px;letter-spacing:-.01em;font-family:var(--sp-font);user-select:none}
+.sp-header{background:var(--sp-bg-primary);border-bottom:1px solid var(--sp-border-strong);padding:0 1.5rem;height:48px;display:flex;align-items:center;gap:1rem}
+.sp-logo{font-size:15px;letter-spacing:-.01em;font-family:var(--sp-font);user-select:none;flex-shrink:0}
 .sp-logo-a{color:var(--sp-accent);font-weight:600}
 .sp-logo-b{color:var(--sp-text-primary);font-weight:400}
+.sp-header-desc{font-size:11px;color:var(--sp-text-muted)}
 .sp-main{padding:1.5rem;font-family:var(--sp-font);font-size:14px;color:var(--sp-text-primary);line-height:1.6}
 
 /* ── Legend ── */
-.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center}
-.leg-it{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sp-text-secondary)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center}
+.leg-it{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sp-text-secondary);white-space:nowrap}
+.leg-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
 
 /* ── Summary cards ── */
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:1.5rem}
 .sum-card{background:var(--sp-bg-secondary);border-radius:var(--sp-radius);padding:10px 12px;text-align:center;border:1px solid var(--sp-border)}
 .sum-num{font-size:22px;font-weight:500;color:var(--sp-text-primary)}
 .sum-lbl{font-size:11px;color:var(--sp-text-muted);margin-top:2px}
-.sum-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 
-/* ── Track title & progress bar ── */
-.tk-title{font-size:15px;font-weight:500;color:var(--sp-text-primary)}
-.tk-pct{font-size:12px;color:var(--sp-text-muted)}
-.pb-bg{height:4px;background:var(--sp-border);border-radius:2px;margin-bottom:1.25rem;overflow:hidden}
-.pb-fill{height:100%;border-radius:2px;transition:width .4s}
-.hint{font-size:11px;color:var(--sp-text-muted);margin-bottom:1.25rem;margin-top:-.5rem}
-
-/* ── Tabs — underline style ── */
+/* ── Tabs ── */
 .tabs{display:flex;border-bottom:1px solid var(--sp-border-strong);margin-bottom:1.5rem;flex-wrap:wrap}
 .tab-btn{background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--sp-text-muted);font-family:var(--sp-font);transition:color .15s,border-color .15s;white-space:nowrap}
 .tab-btn:hover{color:var(--sp-text-secondary)}
 .tab-btn.active{color:var(--sp-accent);border-bottom-color:var(--sp-accent);font-weight:500}
+
+/* ── Category accordion ── */
+.cat-section{border:1px solid var(--sp-border);border-radius:var(--sp-radius);margin-bottom:8px;overflow:hidden}
+.cat-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--sp-bg-secondary);user-select:none;gap:8px}
+.cat-header:hover{background:var(--sp-bg-hover)}
+.cat-label{font-size:13px;font-weight:500;color:var(--sp-text-primary);flex:1}
+.cat-meta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.cat-score{font-size:12px;font-weight:500;color:var(--sp-text-secondary)}
+.cat-count{font-size:11px;color:var(--sp-text-muted)}
+.cat-chevron{font-size:10px;color:var(--sp-text-muted)}
+.cat-body{display:none;padding:10px 12px}
+.cat-body.open{display:block}
 
 /* ── Skill rows ── */
 .sk-row{display:flex;gap:10px;align-items:center;margin-bottom:6px}
@@ -84,15 +83,14 @@
 .dot:hover{transform:scale(1.5)}
 .sk-card{flex:1;background:var(--sp-bg-primary);border:1px solid var(--sp-border);border-radius:var(--sp-radius);padding:8px 12px;cursor:pointer;transition:background .15s,border-color .15s}
 .sk-card:hover{background:var(--sp-bg-secondary);border-color:var(--sp-border-mid)}
-.sk-card.rh{border-color:var(--sp-accent)}
 .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .sk-nm{font-size:13px;font-weight:400;color:var(--sp-text-primary);flex:1;line-height:1.5}
+.shared-tag{font-size:9px;color:var(--sp-accent);margin-left:6px;font-weight:500;letter-spacing:.03em;opacity:.8}
 .pill{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0;border:1px solid}
-.ov{font-size:10px;color:var(--sp-text-muted);margin-top:3px}
+.sk-sub{font-size:10px;color:var(--sp-text-muted);margin-top:3px;line-height:1.4}
+.sk-notes{font-size:10px;color:var(--sp-accent);margin-top:2px;font-style:italic}
 .bar-bg{height:2px;background:var(--sp-border);border-radius:2px;margin-top:7px}
 .bar-fill{height:2px;border-radius:2px;transition:width .3s}
-.rtag{font-size:10px;color:var(--sp-accent);margin-left:6px;font-weight:400}
-.done-msg{font-size:13px;color:var(--sp-text-secondary);text-align:center;padding:1rem;border:1px dashed var(--sp-border-strong);border-radius:var(--sp-radius);margin-top:4px}
 
 /* ── Reset button ── */
 .rst{background:none;border:none;cursor:pointer;font-size:11px;color:var(--sp-text-muted);text-decoration:underline;padding:0;font-family:var(--sp-font);margin-left:auto}
@@ -106,73 +104,62 @@
 /* ── Admin panel ── */
 .adm-wrap{padding:1rem 0}
 .adm-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--sp-border)}
-.adm-nav{display:flex;gap:6px}
-.adm-nav-btn{background:none;border:1px solid var(--sp-border);border-radius:var(--sp-radius-sm);padding:5px 12px;font-size:12px;cursor:pointer;color:var(--sp-text-secondary);font-family:var(--sp-font)}
-.adm-nav-btn:hover{border-color:var(--sp-border-strong)}
-.adm-nav-btn.active{border-color:var(--sp-accent);color:var(--sp-accent);background:var(--sp-accent-light);font-weight:500}
 .adm-back{font-size:11px;color:var(--sp-text-muted);cursor:pointer;background:none;border:none;padding:0;font-family:var(--sp-font)}
 .adm-back:hover{color:var(--sp-text-secondary)}
-.adm-sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
-.adm-sec-title{font-size:13px;font-weight:500;color:var(--sp-text-primary)}
-.adm-list-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--sp-border)}
-.adm-list-row:last-child{border-bottom:none}
-.adm-list-name{flex:1;font-size:13px;color:var(--sp-text-primary)}
-.adm-list-meta{font-size:11px;color:var(--sp-text-secondary);flex-shrink:0}
-.adm-btn{background:none;border:1px solid var(--sp-border-strong);border-radius:var(--sp-radius-sm);padding:3px 10px;font-size:11px;cursor:pointer;color:var(--sp-text-secondary);font-family:var(--sp-font);flex-shrink:0}
+.adm-sec-title{font-size:13px;font-weight:500;color:var(--sp-text-primary);margin-bottom:.75rem}
+.adm-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:1.25rem}
+.adm-stat-card{background:var(--sp-bg-secondary);border:1px solid var(--sp-border);border-radius:var(--sp-radius);padding:10px 12px;text-align:center}
+.adm-stat-num{font-size:20px;font-weight:500;color:var(--sp-text-primary)}
+.adm-stat-lbl{font-size:11px;color:var(--sp-text-muted);margin-top:2px}
+.adm-role-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--sp-border);font-size:12px}
+.adm-role-row:last-child{border-bottom:none}
+.adm-role-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.adm-role-name{flex:1;color:var(--sp-text-primary);font-weight:500}
+.adm-role-meta{color:var(--sp-text-muted)}
+.adm-btn{background:none;border:1px solid var(--sp-border-strong);border-radius:var(--sp-radius-sm);padding:3px 10px;font-size:11px;cursor:pointer;color:var(--sp-text-secondary);font-family:var(--sp-font)}
 .adm-btn:hover{border-color:var(--sp-text-secondary);color:var(--sp-text-primary)}
-.adm-btn-p{border-color:var(--sp-accent);color:var(--sp-accent);font-weight:500}
-.adm-btn-p:hover{background:var(--sp-accent-light)}
-.adm-btn-d{border-color:transparent;color:var(--sp-text-muted)}
-.adm-btn-d.conf{color:var(--sp-text-danger);border-color:var(--sp-text-danger)}
-.adm-form{background:var(--sp-bg-secondary);border-radius:var(--sp-radius);padding:14px;margin-top:.75rem}
-.adm-field{margin-bottom:.75rem}
-.adm-lbl{font-size:11px;color:var(--sp-text-secondary);display:block;margin-bottom:4px;font-weight:500}
-.adm-inp{width:100%;background:var(--sp-bg-primary);border:1px solid var(--sp-border-strong);border-radius:var(--sp-radius-sm);padding:6px 10px;font-size:12px;color:var(--sp-text-primary);font-family:var(--sp-font);outline:none;box-sizing:border-box}
+.adm-btn-d{border-color:var(--sp-text-danger);color:var(--sp-text-danger)}
+.adm-btn-d:hover{background:#fff0f0}
+.adm-inp{background:var(--sp-bg-primary);border:1px solid var(--sp-border-strong);border-radius:var(--sp-radius-sm);padding:6px 10px;font-size:12px;color:var(--sp-text-primary);font-family:var(--sp-font);outline:none;width:150px}
 .adm-inp:focus{border-color:var(--sp-accent);box-shadow:0 0 0 2px var(--sp-accent-light)}
-.adm-ta{height:72px;resize:vertical}
-.adm-clr-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.adm-sw{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s;flex-shrink:0}
-.adm-sw:hover{transform:scale(1.2)}
-.adm-sw.sel{border-color:var(--sp-text-primary);transform:scale(1.15)}
-.adm-row-btns{display:flex;gap:6px;justify-content:flex-end;margin-top:.5rem}
-.adm-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.adm-tag-chk{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--sp-text-secondary);cursor:pointer;user-select:none}
-.adm-res-hdr{display:grid;grid-template-columns:1fr 1fr 110px 28px;gap:6px;margin-bottom:4px}
-.adm-res-hdr span{font-size:10px;color:var(--sp-text-muted)}
-.adm-res-row{display:grid;grid-template-columns:1fr 1fr 110px 28px;gap:6px;align-items:center;margin-bottom:5px}
-.adm-p2{font-size:12px;color:var(--sp-text-muted);padding:.875rem;border:1px dashed var(--sp-border-strong);border-radius:var(--sp-radius);text-align:center;margin-bottom:.75rem}
 .adm-lnk{background:none;border:none;cursor:pointer;font-size:11px;color:var(--sp-text-muted);padding:0;font-family:var(--sp-font)}
 .adm-lnk:hover{color:var(--sp-text-secondary)}
+.adm-export-area{width:100%;height:80px;font-size:10px;font-family:monospace;resize:vertical;background:var(--sp-bg-secondary);border:1px solid var(--sp-border-strong);border-radius:var(--sp-radius-sm);padding:6px;color:var(--sp-text-secondary);margin-top:.5rem}
+
+/* ── Loading / error ── */
+.sp-loading{text-align:center;padding:3rem;color:var(--sp-text-muted);font-size:13px}
 </style>
 
 <div class="sp-page">
 <header class="sp-header">
   <div class="sp-logo"><span class="sp-logo-a">skill</span><span class="sp-logo-b">portal</span></div>
+  <span class="sp-header-desc">Engineering skill tracker — 2026 taxonomy</span>
 </header>
 <div class="sp-main">
 
 <div id="tracker-view">
 
 <div class="legend">
-  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;border:2px solid var(--sp-s-none);background:transparent;display:inline-block;flex-shrink:0"></span>Not started</span>
-  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:var(--sp-s-aware);display:inline-block"></span>Aware</span>
-  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:var(--sp-s-learning);display:inline-block"></span>Learning</span>
-  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:var(--sp-s-proficient);display:inline-block"></span>Proficient</span>
-  <span class="leg-it"><span style="width:9px;height:9px;border-radius:50%;background:var(--sp-s-expert);display:inline-block"></span>Expert</span>
+  <span class="leg-it"><span class="leg-dot" style="border:1.5px solid var(--sp-l0);background:transparent"></span>Not rated</span>
+  <span class="leg-it"><span class="leg-dot" style="background:var(--sp-l1)"></span>1 · Awareness</span>
+  <span class="leg-it"><span class="leg-dot" style="background:var(--sp-l2)"></span>2 · Foundational</span>
+  <span class="leg-it"><span class="leg-dot" style="background:var(--sp-l3)"></span>3 · Practitioner</span>
+  <span class="leg-it"><span class="leg-dot" style="background:var(--sp-l4)"></span>4 · Advanced</span>
+  <span class="leg-it"><span class="leg-dot" style="background:var(--sp-l5)"></span>5 · Expert</span>
   <button class="rst" id="rst-btn" onclick="doReset()">reset all</button>
 </div>
 
 <div class="summary-grid" id="sum-grid"></div>
 <div class="tabs" id="tabs"></div>
-<div id="view"></div>
+<div id="view"><div class="sp-loading">Loading taxonomy…</div></div>
 
 </div>
 
 <div id="adm-foot">
   <button class="adm-lnk" onclick="adminEntry()">Admin</button>
   <div class="adm-pw-wrap" id="adm-pw-wrap" style="display:none">
-    <input type="password" class="adm-inp" id="adm-pw-inp" placeholder="Passphrase" style="width:150px" onkeydown="if(event.key==='Enter')adminCheck()">
-    <button class="adm-btn adm-btn-p" onclick="adminCheck()">Enter</button>
+    <input type="password" class="adm-inp" id="adm-pw-inp" placeholder="Passphrase" onkeydown="if(event.key==='Enter')adminCheck()">
+    <button class="adm-btn" onclick="adminCheck()">Enter</button>
     <span class="adm-pw-err" id="adm-pw-err" style="display:none">Incorrect passphrase.</span>
   </div>
 </div>
@@ -180,457 +167,324 @@
 <div id="adm-panel" style="display:none">
   <div class="adm-wrap">
     <div class="adm-hdr">
-      <div class="adm-nav">
-        <button class="adm-nav-btn active" id="adm-n-tracks" onclick="admNav('tracks')">Tracks</button>
-        <button class="adm-nav-btn" id="adm-n-skills" onclick="admNav('skills')">Skills</button>
-        <button class="adm-nav-btn" id="adm-n-roles" onclick="admNav('roles')">Roles</button>
-      </div>
+      <span style="font-size:13px;font-weight:500;color:var(--sp-text-primary)">Admin</span>
       <button class="adm-back" onclick="adminExit()">← Back to tracker</button>
     </div>
     <div id="adm-content"></div>
   </div>
 </div>
 
-</div></div><!-- /sp-main /sp-page -->
+</div></div>
 
 <script>
-let T={
-  azure:{label:'Azure Cloud',color:'#378ADD',skills:[
-    {id:'az1',name:'Resource Model & Azure CLI',tags:[]},
-    {id:'az2',name:'Networking — VNets, NSGs, DNS',tags:[]},
-    {id:'az3',name:'Identity & Entra ID',tags:['Platform Eng']},
-    {id:'az4',name:'Key Vault & Secrets Mgmt',tags:['Platform Eng']},
-    {id:'az5',name:'Azure Functions',tags:[]},
-    {id:'az6',name:'Static Web Apps',tags:['Web Dev']},
-    {id:'az7',name:'Container Apps',tags:[]},
-    {id:'az8',name:'Bicep / Infrastructure as Code',tags:['Platform Eng']},
-    {id:'az9',name:'Monitor & Log Analytics',tags:['Platform Eng']},
-    {id:'az10',name:'Policy & Governance',tags:[]}
-  ]},
-  ai:{label:'AI Engineering',color:'#7F77DD',skills:[
-    {id:'ai1',name:'LLM Fundamentals',tags:[]},
-    {id:'ai2',name:'Prompt Engineering',tags:[]},
-    {id:'ai3',name:'Azure OpenAI Service',tags:['Azure']},
-    {id:'ai4',name:'RAG & Embeddings',tags:[]},
-    {id:'ai5',name:'Vector Databases',tags:[]},
-    {id:'ai6',name:'AI Agents & MCP',tags:[]},
-    {id:'ai7',name:'LLM Orchestration',tags:[]},
-    {id:'ai8',name:'Model Evaluation & Testing',tags:[]},
-    {id:'ai9',name:'Fine-tuning Concepts',tags:[]}
-  ]},
-  staff:{label:'Staff Engineering',color:'#1D9E75',skills:[
-    {id:'se1',name:'System Design',tags:[]},
-    {id:'se2',name:'Architecture Decision Records',tags:[]},
-    {id:'se3',name:'Technical Documentation',tags:[]},
-    {id:'se4',name:'Engineering Metrics & KPIs',tags:['Platform Eng']},
-    {id:'se5',name:'Mentoring & Coaching',tags:[]},
-    {id:'se6',name:'Cross-functional Communication',tags:[]},
-    {id:'se7',name:'Platform Strategy',tags:['Platform Eng']},
-    {id:'se8',name:'Tech Roadmapping',tags:[]}
-  ]},
-  web:{label:'Web Dev',color:'#D85A30',skills:[
-    {id:'wd1',name:'HTML & CSS Foundations',tags:[]},
-    {id:'wd2',name:'JavaScript & TypeScript',tags:[]},
-    {id:'wd3',name:'React',tags:[]},
-    {id:'wd4',name:'Next.js',tags:[]},
-    {id:'wd5',name:'REST API Design',tags:[]},
-    {id:'wd6',name:'Auth Patterns — OAuth/OIDC',tags:['Azure']},
-    {id:'wd7',name:'Performance & Core Web Vitals',tags:[]},
-    {id:'wd8',name:'Deployment & CI-CD',tags:['Platform Eng']}
-  ]},
-  platform:{label:'Platform Engineering',color:'#BA7517',skills:[
-    {id:'pe1',name:'Observability Strategy',tags:['Azure']},
-    {id:'pe2',name:'GitHub Actions & CI-CD',tags:['Web Dev']},
-    {id:'pe3',name:'Infrastructure as Code',tags:['Azure']},
-    {id:'pe4',name:'Zero Trust & Cloudflare',tags:[]},
-    {id:'pe5',name:'Platform Metrics & SLOs',tags:['Staff Eng']},
-    {id:'pe6',name:'Incident Management',tags:[]},
-    {id:'pe7',name:'Developer Experience (DevX)',tags:[]},
-    {id:'pe8',name:'Cloud Cost Management',tags:[]}
-  ]}
-};
-
 // PHASE 1 ONLY — replace with Entra auth in Phase 2
-const PASSPHRASE='portal2025';
-const TCOLORS=['#378ADD','#7F77DD','#1D9E75','#D85A30','#BA7517'];
-const RTYPES=['Official docs','Course','Video','Internal'];
-const ROLES=[
-  {name:'Junior Engineer',floors:{azure:25,web:25}},
-  {name:'Engineer',floors:{azure:50,web:50,staff:25,platform:25}},
-  {name:'Senior Engineer',floors:{azure:75,web:50,staff:50,platform:50,ai:25}},
-  {name:'Staff Engineer',floors:{azure:75,staff:75,platform:75,ai:50}}
+const PASSPHRASE = 'portal2025';
+const SCORES_KEY = 'sp-scores';
+
+const LEVELS = [
+  { level: 0, label: 'Not rated',    color: '#888780', fill: 'transparent', border: '#888780' },
+  { level: 1, label: 'Awareness',    color: '#EF9F27', fill: '#EF9F27',     border: '#EF9F27' },
+  { level: 2, label: 'Foundational', color: '#378ADD', fill: '#378ADD',     border: '#378ADD' },
+  { level: 3, label: 'Practitioner', color: '#1D9E75', fill: '#1D9E75',     border: '#1D9E75' },
+  { level: 4, label: 'Advanced',     color: '#639922', fill: '#639922',     border: '#639922' },
+  { level: 5, label: 'Expert',       color: '#2D5C0E', fill: '#2D5C0E',     border: '#2D5C0E' }
 ];
 
-const STS=['none','aware','learning','proficient','expert'];
-const SC={
-  none:{dot:'transparent',bdr:'#888780',txt:'#888780',lbl:'Not started',sc:0},
-  aware:{dot:'#EF9F27',bdr:'#EF9F27',txt:'#BA7517',lbl:'Aware',sc:.25},
-  learning:{dot:'#378ADD',bdr:'#378ADD',txt:'#185FA5',lbl:'Learning',sc:.5},
-  proficient:{dot:'#1D9E75',bdr:'#1D9E75',txt:'#0F6E56',lbl:'Proficient',sc:.75},
-  expert:{dot:'#639922',bdr:'#639922',txt:'#3B6D11',lbl:'Expert',sc:1}
-};
+let TAXONOMY = null;
+let scores = {};
+let activeRole = null;
+let openCats = new Set();
+let resetPending = false;
+let resetTimer = null;
 
-let st={},act='azure',sv,resetPending=false,resetTimer;
+// ── Persistence ────────────────────────────────────────────────────────────
 
-const gs=id=>st[id]||{status:'none'};
-
-function cycle(id){
-  const cur=gs(id).status;
-  st[id]={status:STS[(STS.indexOf(cur)+1)%STS.length]};
-  clearTimeout(sv);sv=setTimeout(save,700);
-  render(act);renderSummary();
+function loadScores() {
+  try { const r = localStorage.getItem(SCORES_KEY); scores = r ? JSON.parse(r) : {}; }
+  catch(e) { scores = {}; }
 }
 
-async function save(){try{await window.storage.set('skm3',JSON.stringify(st))}catch(e){}}
-
-async function loadData(){
-  try{const c=await window.storage.get('skm3-cfg');if(c&&c.value)T=JSON.parse(c.value)}catch(e){}
-  try{const r=await window.storage.get('skm3');if(r&&r.value)st=JSON.parse(r.value)}catch(e){st={}}
-  ra();
+function saveScores() {
+  try { localStorage.setItem(SCORES_KEY, JSON.stringify(scores)); } catch(e) {}
 }
 
-function doReset(){
-  const btn=document.getElementById('rst-btn');
-  if(!resetPending){
-    resetPending=true;
-    btn.textContent='confirm reset?';
-    btn.style.color='var(--color-text-danger,#A32D2D)';
-    resetTimer=setTimeout(()=>{
-      resetPending=false;
-      btn.textContent='reset all';
-      btn.style.color='';
-    },3000);
-    return;
+function getScore(id) { return scores[id] || 0; }
+
+// ── Scoring helpers ────────────────────────────────────────────────────────
+
+function categoryAvg(cat) {
+  const rated = cat.skills.filter(s => getScore(s.id) > 0);
+  if (!rated.length) return 0;
+  return rated.reduce((a, s) => a + getScore(s.id), 0) / rated.length;
+}
+
+function roleStats(role) {
+  const all = role.categories.flatMap(c => c.skills);
+  const rated = all.filter(s => getScore(s.id) > 0);
+  const avg = rated.length ? rated.reduce((a, s) => a + getScore(s.id), 0) / rated.length : 0;
+  return { total: all.length, rated: rated.length, avg };
+}
+
+// ── Unique skill count (deduplicate shared skills) ─────────────────────────
+
+function allUniqueSkills() {
+  if (!TAXONOMY) return [];
+  const seen = new Set();
+  const out = [];
+  TAXONOMY.roles.forEach(r => r.categories.forEach(c => c.skills.forEach(s => {
+    if (!seen.has(s.id)) { seen.add(s.id); out.push(s); }
+  })));
+  return out;
+}
+
+// ── Taxonomy load ──────────────────────────────────────────────────────────
+
+async function init() {
+  loadScores();
+  try {
+    const res = await fetch('taxonomy.json');
+    if (!res.ok) throw new Error(res.status);
+    TAXONOMY = await res.json();
+    activeRole = TAXONOMY.roles[0].id;
+    render();
+  } catch(e) {
+    document.getElementById('view').innerHTML =
+      '<div class="sp-loading">Could not load taxonomy.json — serve this folder from a web server (e.g. <code>npx serve src</code>).</div>';
   }
-  clearTimeout(resetTimer);resetPending=false;
-  btn.textContent='reset all';btn.style.color='';
-  st={};
-  try{window.storage.delete('skm3')}catch(e){}
-  ra();
 }
 
-function prog(k){
-  const sk=T[k].skills;
-  return Math.round(sk.reduce((a,s)=>a+SC[gs(s.id).status].sc,0)/sk.length*100);
+// ── Render ─────────────────────────────────────────────────────────────────
+
+function render() {
+  renderSummary();
+  renderTabs();
+  renderRole(activeRole);
 }
 
-function totalStats(){
-  let tot=0,done=0,inprog=0;
-  Object.values(T).forEach(t=>t.skills.forEach(s=>{
-    tot++;
-    const ss=gs(s.id).status;
-    if(ss==='proficient'||ss==='expert')done++;
-    else if(ss==='learning'||ss==='aware')inprog++;
-  }));
-  return{tot,done,inprog,notStarted:tot-done-inprog};
+function renderSummary() {
+  if (!TAXONOMY) return;
+  const unique = allUniqueSkills();
+  const total = unique.length;
+  const rated = unique.filter(s => getScore(s.id) > 0).length;
+  const allScored = unique.map(s => getScore(s.id)).filter(v => v > 0);
+  const avg = allScored.length ? (allScored.reduce((a, v) => a + v, 0) / allScored.length).toFixed(1) : '—';
+  const byLevel = [1,2,3,4,5].map(l => unique.filter(s => getScore(s.id) === l).length);
+
+  document.getElementById('sum-grid').innerHTML = `
+    <div class="sum-card"><div class="sum-num">${avg}</div><div class="sum-lbl">avg score / 5</div></div>
+    <div class="sum-card"><div class="sum-num">${rated}</div><div class="sum-lbl">of ${total} rated</div></div>
+    <div class="sum-card"><div class="sum-num" style="color:var(--sp-l3)">${byLevel[2] + byLevel[3] + byLevel[4]}</div><div class="sum-lbl">practitioner+</div></div>
+    <div class="sum-card"><div class="sum-num" style="color:var(--sp-text-muted)">${total - rated}</div><div class="sum-lbl">not started</div></div>`;
 }
 
-function ri(k){
-  const sk=T[k].skills;
-  for(let i=0;i<sk.length;i++){const s=gs(sk[i].id).status;if(s==='none'||s==='aware'||s==='learning')return i;}
-  return -1;
+function renderTabs() {
+  if (!TAXONOMY) return;
+  document.getElementById('tabs').innerHTML = TAXONOMY.roles.map(role => {
+    const { avg, rated } = roleStats(role);
+    const scoreStr = rated > 0 ? avg.toFixed(1) : '';
+    return `<button class="tab-btn${role.id === activeRole ? ' active' : ''}" onclick="sw('${role.id}')">
+      ${role.label}${scoreStr ? ` <span style="font-size:10px;opacity:.6">${scoreStr}/5</span>` : ''}
+    </button>`;
+  }).join('');
 }
 
-function renderSummary(){
-  const {tot,done,inprog,notStarted}=totalStats();
-  const overall=Math.round(Object.keys(T).reduce((a,k)=>a+prog(k),0)/Object.keys(T).length);
-  document.getElementById('sum-grid').innerHTML=`
-    <div class="sum-card"><div class="sum-num">${overall}%</div><div class="sum-lbl">overall progress</div></div>
-    <div class="sum-card"><div class="sum-num" style="color:#639922">${done}</div><div class="sum-lbl">mastered</div></div>
-    <div class="sum-card"><div class="sum-num" style="color:#378ADD">${inprog}</div><div class="sum-lbl">in progress</div></div>
-    <div class="sum-card"><div class="sum-num" style="color:var(--color-text-tertiary)">${notStarted}</div><div class="sum-lbl">not started</div></div>`;
-}
+function renderRole(roleId) {
+  if (!TAXONOMY) return;
+  activeRole = roleId;
+  const role = TAXONOMY.roles.find(r => r.id === roleId);
+  if (!role) return;
 
-function renderTabs(){
-  document.getElementById('tabs').innerHTML=Object.entries(T).map(([k,t])=>`
-    <button class="tab-btn${k===act?' active':''}" onclick="sw('${k}')">${t.label} <span style="font-size:10px;opacity:.6">${prog(k)}%</span></button>`
-  ).join('');
-}
+  const { avg, rated, total } = roleStats(role);
+  let h = '';
 
-function render(k){
-  const t=T[k],p=prog(k),r=ri(k);
-  let h=`<div class="sum-row"><span class="tk-title">${t.label}</span><span class="tk-pct">${p}% mastered</span></div>
-<div class="pb-bg"><div class="pb-fill" style="width:${p}%;background:${t.color}"></div></div>
-<p class="hint">Click a skill to cycle status. Tags show where skills cross into other tracks.</p>`;
-  t.skills.forEach((s,i)=>{
-    const ss=gs(s.id).status,sc=SC[ss],res=i===r;
-    const ov=s.tags.length?`<div class="ov">also in: ${s.tags.join(', ')}</div>`:'';
-    h+=`<div class="sk-row">
-<div class="dot" style="background:${sc.dot};border-color:${sc.bdr}" onclick="cycle('${s.id}')"></div>
-<div class="sk-card${res?' rh':''}" onclick="cycle('${s.id}')">
-  <div class="card-top">
-    <span class="sk-nm">${s.name}${res?'<span class="rtag">↑ continue here</span>':''}</span>
-    <span class="pill" style="color:${sc.txt};border-color:${sc.bdr};background:transparent">${sc.lbl}</span>
-  </div>${ov}
-  <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(sc.sc*100)}%;background:${t.color}"></div></div>
-</div></div>`;
+  role.categories.forEach(cat => {
+    const catAvg = categoryAvg(cat);
+    const catRated = cat.skills.filter(s => getScore(s.id) > 0).length;
+    const isOpen = openCats.has(cat.id);
+    const scoreStr = catAvg > 0 ? `<span class="cat-score">${catAvg.toFixed(1)}/5</span>` : '';
+
+    h += `<div class="cat-section">
+      <div class="cat-header" onclick="toggleCat('${cat.id}')">
+        <span class="cat-label">${cat.label}</span>
+        <div class="cat-meta">
+          ${scoreStr}
+          <span class="cat-count">${catRated}/${cat.skills.length} rated</span>
+          <span class="cat-chevron">${isOpen ? '▲' : '▼'}</span>
+        </div>
+      </div>
+      <div class="cat-body${isOpen ? ' open' : ''}">`;
+
+    cat.skills.forEach(skill => {
+      const sc = getScore(skill.id);
+      const lv = LEVELS[sc];
+      const subText = skill.subSkills && skill.subSkills.length
+        ? (skill.subSkills.length > 6
+            ? skill.subSkills.slice(0, 6).join(' · ') + ` · +${skill.subSkills.length - 6} more`
+            : skill.subSkills.join(' · '))
+        : '';
+
+      h += `<div class="sk-row">
+        <div class="dot" style="background:${sc > 0 ? lv.fill : 'transparent'};border-color:${lv.border}" onclick="cycleScore('${skill.id}')"></div>
+        <div class="sk-card" onclick="cycleScore('${skill.id}')">
+          <div class="card-top">
+            <span class="sk-nm">${skill.label}${skill.shared ? '<span class="shared-tag">shared</span>' : ''}</span>
+            <span class="pill" style="color:${lv.color};border-color:${sc > 0 ? lv.border : 'var(--sp-border-mid)'}">${lv.label}</span>
+          </div>
+          ${subText ? `<div class="sk-sub">${subText}</div>` : ''}
+          ${skill.notes ? `<div class="sk-notes">${skill.notes}</div>` : ''}
+          <div class="bar-bg"><div class="bar-fill" style="width:${sc / 5 * 100}%;background:${role.color}"></div></div>
+        </div>
+      </div>`;
+    });
+
+    h += `</div></div>`;
   });
-  if(r===-1&&p>0)h+=`<div class="done-msg">All skills at proficient or expert — track complete.</div>`;
-  document.getElementById('view').innerHTML=h;
+
+  document.getElementById('view').innerHTML = h;
   renderTabs();
 }
 
-function sw(k){act=k;render(k)}
-function ra(){renderSummary();renderTabs();render(act)}
-loadData();
+function sw(roleId) { activeRole = roleId; renderRole(roleId); renderSummary(); }
 
-// ── Admin ──────────────────────────────────────────────────────────────────
-let admSec='tracks',admEditTk=null,admEditSk=null,admSkRmPend={},admTkFilter='all';
-
-function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-
-async function admSaveConfig(){try{await window.storage.set('skm3-cfg',JSON.stringify(T))}catch(e){}}
-
-function adminEntry(){
-  if(sessionStorage.getItem('adm-auth')==='1'){adminShow();return;}
-  const w=document.getElementById('adm-pw-wrap');
-  w.style.display=w.style.display==='none'?'flex':'none';
-  if(w.style.display==='flex')setTimeout(()=>document.getElementById('adm-pw-inp').focus(),50);
+function toggleCat(catId) {
+  openCats.has(catId) ? openCats.delete(catId) : openCats.add(catId);
+  renderRole(activeRole);
 }
 
-function adminCheck(){
-  const v=document.getElementById('adm-pw-inp').value;
-  const err=document.getElementById('adm-pw-err');
-  if(v===PASSPHRASE){
-    sessionStorage.setItem('adm-auth','1');
-    document.getElementById('adm-pw-wrap').style.display='none';
-    document.getElementById('adm-pw-inp').value='';
-    err.style.display='none';
+function cycleScore(skillId) {
+  scores[skillId] = (getScore(skillId) + 1) % 6;
+  saveScores();
+  renderRole(activeRole);
+  renderSummary();
+}
+
+function doReset() {
+  const btn = document.getElementById('rst-btn');
+  if (!resetPending) {
+    resetPending = true;
+    btn.textContent = 'confirm reset?';
+    btn.style.color = 'var(--sp-text-danger)';
+    resetTimer = setTimeout(() => {
+      resetPending = false;
+      btn.textContent = 'reset all';
+      btn.style.color = '';
+    }, 3000);
+    return;
+  }
+  clearTimeout(resetTimer);
+  resetPending = false;
+  btn.textContent = 'reset all';
+  btn.style.color = '';
+  scores = {};
+  try { localStorage.removeItem(SCORES_KEY); } catch(e) {}
+  render();
+}
+
+// ── Admin ──────────────────────────────────────────────────────────────────
+
+function adminEntry() {
+  if (sessionStorage.getItem('adm-auth') === '1') { adminShow(); return; }
+  const w = document.getElementById('adm-pw-wrap');
+  w.style.display = w.style.display === 'none' ? 'flex' : 'none';
+  if (w.style.display === 'flex') setTimeout(() => document.getElementById('adm-pw-inp').focus(), 50);
+}
+
+function adminCheck() {
+  const v = document.getElementById('adm-pw-inp').value;
+  const err = document.getElementById('adm-pw-err');
+  if (v === PASSPHRASE) {
+    sessionStorage.setItem('adm-auth', '1');
+    document.getElementById('adm-pw-wrap').style.display = 'none';
+    document.getElementById('adm-pw-inp').value = '';
+    err.style.display = 'none';
     adminShow();
   } else {
-    err.style.display='block';
-    document.getElementById('adm-pw-inp').value='';
+    err.style.display = 'block';
+    document.getElementById('adm-pw-inp').value = '';
     document.getElementById('adm-pw-inp').focus();
   }
 }
 
-function adminShow(){
-  document.getElementById('tracker-view').style.display='none';
-  document.getElementById('adm-foot').style.display='none';
-  document.getElementById('adm-panel').style.display='';
-  admNav(admSec);
+function adminShow() {
+  document.getElementById('tracker-view').style.display = 'none';
+  document.getElementById('adm-foot').style.display = 'none';
+  document.getElementById('adm-panel').style.display = '';
+  renderAdmin();
 }
 
-function adminExit(){
-  document.getElementById('adm-panel').style.display='none';
-  document.getElementById('tracker-view').style.display='';
-  document.getElementById('adm-foot').style.display='';
-  ra();
+function adminExit() {
+  document.getElementById('adm-panel').style.display = 'none';
+  document.getElementById('tracker-view').style.display = '';
+  document.getElementById('adm-foot').style.display = '';
+  render();
 }
 
-function admNav(sec){
-  admSec=sec;
-  ['tracks','skills','roles'].forEach(s=>document.getElementById('adm-n-'+s).classList.toggle('active',s===sec));
-  if(sec==='tracks')admRenderTracks();
-  else if(sec==='skills')admRenderSkills();
-  else admRenderRoles();
-}
+function renderAdmin() {
+  if (!TAXONOMY) { document.getElementById('adm-content').innerHTML = '<p>Taxonomy not loaded.</p>'; return; }
 
-// ── Tracks ─────────────────────────────────────────────────────────────────
+  const unique = allUniqueSkills();
+  const total = unique.length;
+  const rated = unique.filter(s => getScore(s.id) > 0).length;
+  const cats = TAXONOMY.roles.reduce((a, r) => a + r.categories.length, 0);
+  const shared = unique.filter(s => s.shared).length;
 
-function admRenderTracks(){
-  admEditTk=null;
-  let h=`<div class="adm-sec-hdr"><span class="adm-sec-title">Tracks</span><button class="adm-btn adm-btn-p" onclick="admNewTrack()">+ Add track</button></div><div id="adm-tk-list">`;
-  Object.entries(T).forEach(([k,t])=>{
-    h+=`<div class="adm-list-row">
-<span style="width:10px;height:10px;border-radius:50%;background:${t.color};display:inline-block;flex-shrink:0"></span>
-<span class="adm-list-name">${esc(t.label)}</span>
-<span class="adm-list-meta">${t.skills.length} skill${t.skills.length===1?'':'s'}</span>
-<button class="adm-btn" onclick="admEditTrack('${k}')">Edit</button>
-</div>`;
-  });
-  h+=`</div><div id="adm-tk-form"></div>`;
-  document.getElementById('adm-content').innerHTML=h;
-}
-
-function admEditTrack(k){admShowTrackForm(k,T[k].label,T[k].color);}
-function admNewTrack(){admShowTrackForm(null,'',TCOLORS[0]);}
-
-function admShowTrackForm(k,label,color){
-  admEditTk=k;
-  const isNew=!k;
-  const swatches=TCOLORS.map(c=>`<span class="adm-sw${c===color?' sel':''}" style="background:${c}" onclick="admSelColor('${c}')" data-c="${c}"></span>`).join('');
-  document.getElementById('adm-tk-form').innerHTML=`
-<div class="adm-form">
-  <div class="adm-field"><label class="adm-lbl">Track name</label><input class="adm-inp" id="tf-name" value="${esc(label)}"></div>
-  <div class="adm-field"><label class="adm-lbl">ID (no spaces${!isNew?' — fixed after creation':''})</label><input class="adm-inp" id="tf-id" value="${esc(k||'')}"${!isNew?' disabled':''}></div>
-  <div class="adm-field"><label class="adm-lbl">Color</label><div class="adm-clr-row" id="tf-colors">${swatches}</div><input type="hidden" id="tf-color" value="${color}"></div>
-  <div class="adm-row-btns">
-    <button class="adm-btn" onclick="admCancelTk()">Cancel</button>
-    <button class="adm-btn adm-btn-p" onclick="admSaveTk()">Save track</button>
-  </div>
-</div>`;
-}
-
-function admSelColor(c){
-  document.getElementById('tf-color').value=c;
-  document.querySelectorAll('#tf-colors .adm-sw').forEach(s=>s.classList.toggle('sel',s.dataset.c===c));
-}
-
-function admCancelTk(){document.getElementById('adm-tk-form').innerHTML='';admEditTk=null;}
-
-async function admSaveTk(){
-  const name=document.getElementById('tf-name').value.trim();
-  const id=(admEditTk||document.getElementById('tf-id').value.trim().replace(/\s+/g,'_').toLowerCase());
-  const color=document.getElementById('tf-color').value;
-  if(!name||!id)return;
-  if(!admEditTk){
-    if(T[id])return; // ID already exists
-    T[id]={label:name,color,skills:[]};
-  } else {
-    T[admEditTk].label=name;
-    T[admEditTk].color=color;
-  }
-  await admSaveConfig();
-  ra();
-  admRenderTracks();
-}
-
-// ── Skills ─────────────────────────────────────────────────────────────────
-
-function admRenderSkills(){
-  admEditSk=null;
-  const opts=Object.entries(T).map(([k,t])=>`<option value="${k}"${k===admTkFilter?' selected':''}>${esc(t.label)}</option>`).join('');
-  let h=`<div class="adm-sec-hdr">
-<div style="display:flex;align-items:center;gap:8px">
-  <span class="adm-sec-title">Skills</span>
-  <select class="adm-inp" style="width:auto;font-size:11px;padding:3px 7px" onchange="admTkFilter=this.value;admRenderSkills()"><option value="all">All tracks</option>${opts}</select>
-</div>
-<button class="adm-btn adm-btn-p" onclick="admNewSkill()">+ Add skill</button></div>
-<div id="adm-sk-list">`;
-  let found=false;
-  Object.entries(T).forEach(([k,t])=>{
-    if(admTkFilter!=='all'&&k!==admTkFilter)return;
-    t.skills.forEach(s=>{
-      found=true;
-      h+=`<div class="adm-list-row" id="row-${s.id}">
-<span style="width:8px;height:8px;border-radius:50%;background:${t.color};display:inline-block;flex-shrink:0"></span>
-<span class="adm-list-name">${esc(s.name)}</span>
-<span class="adm-list-meta">${esc(t.label)}</span>
-<button class="adm-btn" onclick="admEditSkill('${k}','${s.id}')">Edit</button>
-<button class="adm-btn adm-btn-d" id="rm-${s.id}" onclick="admRemSkill('${k}','${s.id}')">Remove</button>
-</div>`;
-    });
-  });
-  if(!found)h+=`<p style="font-size:12px;color:var(--color-text-tertiary);margin:.5rem 0">No skills yet.</p>`;
-  h+=`</div><div id="adm-sk-form"></div>`;
-  document.getElementById('adm-content').innerHTML=h;
-}
-
-function admRemSkill(tk,sid){
-  const btn=document.getElementById('rm-'+sid);
-  if(admSkRmPend[sid]){
-    T[tk].skills=T[tk].skills.filter(s=>s.id!==sid);
-    delete admSkRmPend[sid];
-    admSaveConfig();
-    ra();
-    admRenderSkills();
-  } else {
-    admSkRmPend[sid]=true;
-    btn.textContent='Confirm remove';
-    btn.classList.add('conf');
-    setTimeout(()=>{
-      if(admSkRmPend[sid]){delete admSkRmPend[sid];if(btn){btn.textContent='Remove';btn.classList.remove('conf');}}
-    },3000);
-  }
-}
-
-function admEditSkill(tk,sid){admShowSkillForm(tk,T[tk].skills.find(x=>x.id===sid));}
-function admNewSkill(){admShowSkillForm(admTkFilter!=='all'?admTkFilter:Object.keys(T)[0],null);}
-
-function admShowSkillForm(tk,s){
-  admEditSk={tk,sid:s?.id};
-  const tkOpts=Object.entries(T).map(([k,t])=>`<option value="${k}"${k===tk?' selected':''}>${esc(t.label)}</option>`).join('');
-  const tagChecks=Object.entries(T).map(([k,t])=>{
-    const chk=s?.tags?.includes(t.label)?'checked':'';
-    return `<label class="adm-tag-chk"><input type="checkbox" value="${esc(t.label)}" ${chk}> ${esc(t.label)}</label>`;
+  let roleRows = TAXONOMY.roles.map(r => {
+    const { avg, rated: rRated, total: rTotal } = roleStats(r);
+    const meta = rRated > 0 ? `${rRated}/${rTotal} rated · avg ${avg.toFixed(1)}/5` : `${rTotal} skills · not started`;
+    return `<div class="adm-role-row">
+      <span class="adm-role-dot" style="background:${r.color}"></span>
+      <span class="adm-role-name">${r.label}</span>
+      <span class="adm-role-meta">${meta}</span>
+    </div>`;
   }).join('');
-  const typeOpts=tk=>RTYPES.map(t=>`<option${t===tk?' selected':''}>${t}</option>`).join('');
-  const resRows=(s?.resources||[]).map(r=>`<div class="adm-res-row">
-<input class="adm-inp" placeholder="Title" value="${esc(r.title)}">
-<input class="adm-inp" placeholder="URL" value="${esc(r.url)}">
-<select class="adm-inp">${typeOpts(r.type)}</select>
-<button class="adm-btn adm-btn-d" style="padding:2px 6px" onclick="this.closest('.adm-res-row').remove()">×</button>
-</div>`).join('');
-  document.getElementById('adm-sk-form').innerHTML=`
-<div class="adm-form">
-  <div class="adm-field"><label class="adm-lbl">Skill name</label><input class="adm-inp" id="sf-name" value="${esc(s?.name||'')}"></div>
-  <div class="adm-field"><label class="adm-lbl">Track</label><select class="adm-inp" id="sf-tk">${tkOpts}</select></div>
-  <div class="adm-field"><label class="adm-lbl">Summary</label><textarea class="adm-inp adm-ta" id="sf-summary">${esc(s?.summary||'')}</textarea></div>
-  <div class="adm-field"><label class="adm-lbl">Cheat sheet URL</label><input class="adm-inp" id="sf-cs" value="${esc(s?.cheatSheets?.[0]||'')}"></div>
-  <div class="adm-field"><label class="adm-lbl">Cross-track tags</label><div class="adm-tags" id="sf-tags">${tagChecks}</div></div>
-  <div class="adm-field"><label class="adm-lbl">Resources</label>
-    <div class="adm-res-hdr"><span>Title</span><span>URL</span><span>Type</span><span></span></div>
-    <div id="sf-res-list">${resRows}</div>
-    <button class="adm-btn" style="margin-top:4px" onclick="admAddRes()">+ Add resource</button>
-  </div>
-  <div class="adm-row-btns">
-    <button class="adm-btn" onclick="admCancelSk()">Cancel</button>
-    <button class="adm-btn adm-btn-p" onclick="admSaveSk()">Save skill</button>
-  </div>
-</div>`;
-  document.getElementById('adm-sk-form').scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  const exportVal = JSON.stringify(scores, null, 2);
+
+  document.getElementById('adm-content').innerHTML = `
+    <div class="adm-stat-grid">
+      <div class="adm-stat-card"><div class="adm-stat-num">${TAXONOMY.roles.length}</div><div class="adm-stat-lbl">roles</div></div>
+      <div class="adm-stat-card"><div class="adm-stat-num">${cats}</div><div class="adm-stat-lbl">categories</div></div>
+      <div class="adm-stat-card"><div class="adm-stat-num">${total}</div><div class="adm-stat-lbl">unique skills</div></div>
+      <div class="adm-stat-card"><div class="adm-stat-num">${shared}</div><div class="adm-stat-lbl">shared skills</div></div>
+      <div class="adm-stat-card"><div class="adm-stat-num">${rated}</div><div class="adm-stat-lbl">skills rated</div></div>
+    </div>
+
+    <div class="adm-sec-title">Role progress</div>
+    ${roleRows}
+
+    <div style="margin-top:1.25rem">
+      <div class="adm-sec-title">Score data (localStorage)</div>
+      <p style="font-size:11px;color:var(--sp-text-muted);margin-bottom:.5rem">Edit taxonomy.json to modify roles, categories, and skills. Scores are stored separately in your browser.</p>
+      <textarea class="adm-export-area" readonly>${exportVal}</textarea>
+    </div>
+
+    <div style="margin-top:1rem;display:flex;gap:8px;align-items:center">
+      <button class="adm-btn adm-btn-d" onclick="adminReset()">Reset all scores</button>
+    </div>`;
 }
 
-function admAddRes(){
-  const typeOpts=RTYPES.map(t=>`<option>${t}</option>`).join('');
-  const row=document.createElement('div');
-  row.className='adm-res-row';
-  row.innerHTML=`<input class="adm-inp" placeholder="Title"><input class="adm-inp" placeholder="URL"><select class="adm-inp">${typeOpts}</select><button class="adm-btn adm-btn-d" style="padding:2px 6px" onclick="this.closest('.adm-res-row').remove()">×</button>`;
-  document.getElementById('sf-res-list').appendChild(row);
-}
+let adminResetPending = false;
+let adminResetTimer = null;
 
-function admGetRes(){
-  return Array.from(document.querySelectorAll('#sf-res-list .adm-res-row')).map(row=>{
-    const inp=row.querySelectorAll('input');
-    return{title:inp[0].value.trim(),url:inp[1].value.trim(),type:row.querySelector('select').value};
-  }).filter(r=>r.title||r.url);
-}
-
-function admCancelSk(){document.getElementById('adm-sk-form').innerHTML='';admEditSk=null;}
-
-async function admSaveSk(){
-  const name=document.getElementById('sf-name').value.trim();
-  const newTk=document.getElementById('sf-tk').value;
-  if(!name)return;
-  const summary=document.getElementById('sf-summary').value.trim();
-  const cs=document.getElementById('sf-cs').value.trim();
-  const tags=Array.from(document.querySelectorAll('#sf-tags input:checked')).map(x=>x.value);
-  const resources=admGetRes();
-  if(admEditSk?.sid){
-    const oldTk=admEditSk.tk;
-    const idx=T[oldTk].skills.findIndex(x=>x.id===admEditSk.sid);
-    if(idx>-1){
-      const updated={...T[oldTk].skills[idx],name,summary,cheatSheets:cs?[cs]:[],tags,resources};
-      if(oldTk===newTk){
-        T[oldTk].skills[idx]=updated;
-      } else {
-        T[oldTk].skills.splice(idx,1);
-        T[newTk].skills.push(updated);
-      }
-    }
-  } else {
-    const id=newTk.slice(0,2)+Date.now().toString().slice(-5);
-    T[newTk].skills.push({id,name,summary,cheatSheets:cs?[cs]:[],tags,resources:resources});
+function adminReset() {
+  const btn = event.target;
+  if (!adminResetPending) {
+    adminResetPending = true;
+    btn.textContent = 'Confirm reset?';
+    adminResetTimer = setTimeout(() => {
+      adminResetPending = false;
+      btn.textContent = 'Reset all scores';
+    }, 3000);
+    return;
   }
-  await admSaveConfig();
-  admEditSk=null;
-  admTkFilter=newTk;
-  ra();
-  admRenderSkills();
+  clearTimeout(adminResetTimer);
+  adminResetPending = false;
+  scores = {};
+  try { localStorage.removeItem(SCORES_KEY); } catch(e) {}
+  renderAdmin();
 }
 
-// ── Roles ──────────────────────────────────────────────────────────────────
-
-function admRenderRoles(){
-  let h=`<div class="adm-sec-hdr"><span class="adm-sec-title">Roles</span></div>
-<div class="adm-p2">Role editing is available in Phase 2.</div>`;
-  ROLES.forEach(r=>{
-    const floors=Object.entries(r.floors).map(([k,v])=>`${T[k]?.label||k}: ${v}%`).join(' · ');
-    h+=`<div class="adm-list-row"><span class="adm-list-name">${esc(r.name)}</span><span class="adm-list-meta">${floors}</span></div>`;
-  });
-  document.getElementById('adm-content').innerHTML=h;
-}
+init();
 </script>
 </body>
 </html>

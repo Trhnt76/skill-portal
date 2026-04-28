@@ -1,0 +1,593 @@
+{
+  "proficiencyScale": [
+    { "level": 1, "label": "Awareness",     "description": "Knows the concept exists; can describe it at a high level" },
+    { "level": 2, "label": "Foundational",  "description": "Can execute with guidance; has applied it in limited scope" },
+    { "level": 3, "label": "Practitioner",  "description": "Works independently; applies in real environments regularly" },
+    { "level": 4, "label": "Advanced",      "description": "Deep working knowledge; can design, troubleshoot, and guide others" },
+    { "level": 5, "label": "Expert",        "description": "Authoritative; designs systems, sets standards, mentors others at this skill" }
+  ],
+
+  "roles": [
+
+    {
+      "id": "azure-cloud",
+      "label": "Azure Cloud Engineer",
+      "color": "#0078d4",
+      "categories": [
+        {
+          "id": "azure-cloud-identity",
+          "label": "Identity & Security",
+          "skills": [
+            { "id": "shared-entra-id",      "label": "Microsoft Entra ID",            "shared": true,  "notes": "Core to every Azure deployment", "subSkills": ["User/Group Management", "RBAC", "Conditional Access", "MFA", "SSO/SAML/OIDC", "Managed Identities", "App Registrations", "B2C vs B2B"] },
+            { "id": "shared-azure-key-vault","label": "Azure Key Vault",              "shared": true,  "notes": "",                               "subSkills": ["Secrets Management", "Certificate Management", "Key Rotation", "Access Policies vs RBAC", "Private Link Integration"] },
+            { "id": "azure-cloud-policy",   "label": "Azure Policy",                  "shared": false, "notes": "Governance critical",            "subSkills": ["Policy Definitions", "Initiatives", "Compliance Reporting", "Remediation Tasks", "Policy-as-Code"] },
+            { "id": "azure-cloud-defender", "label": "Microsoft Defender for Cloud",  "shared": false, "notes": "",                               "subSkills": ["Security Posture (CSPM)", "Workload Protection (CWPP)", "Threat Detection", "Regulatory Compliance Dashboards"] },
+            { "id": "azure-cloud-blueprints","label": "Azure Blueprints / Landing Zones","shared": false,"notes": "",                             "subSkills": ["Blueprint Definitions", "Landing Zone Architecture", "Management Group Structure", "Policy Inheritance"] },
+            { "id": "shared-zero-trust",    "label": "Zero Trust Architecture",       "shared": true,  "notes": "2026 market expectation",        "subSkills": ["Identity Verification", "Least Privilege", "Network Micro-segmentation", "Continuous Validation"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-network",
+          "label": "Networking",
+          "skills": [
+            { "id": "shared-vnet",                  "label": "Virtual Network (VNet)",         "shared": true,  "notes": "",                              "subSkills": ["Address Space Design", "Subnetting", "Peering (VNet-to-VNet)", "Hub-Spoke Topology", "Service Endpoints"] },
+            { "id": "azure-cloud-firewall",         "label": "Azure Firewall",                 "shared": false, "notes": "",                              "subSkills": ["Firewall Policy", "DNAT/SNAT Rules", "Threat Intelligence", "Premium SKU (IDPS)"] },
+            { "id": "azure-cloud-app-gateway",      "label": "Azure Application Gateway",      "shared": false, "notes": "",                              "subSkills": ["WAF v2", "URL-Based Routing", "SSL Termination", "Autoscaling"] },
+            { "id": "azure-cloud-front-door",       "label": "Azure Front Door",               "shared": false, "notes": "",                              "subSkills": ["Global Routing", "CDN Integration", "WAF Policies", "Health Probes", "Custom Domains"] },
+            { "id": "azure-cloud-private-link",     "label": "Private Link / Private Endpoints","shared": false,"notes": "Critical for enterprise security","subSkills": ["PaaS Service Isolation", "DNS Private Zones", "Network Security Groups"] },
+            { "id": "azure-cloud-vpn-expressroute", "label": "VPN Gateway / ExpressRoute",     "shared": false, "notes": "",                              "subSkills": ["Site-to-Site VPN", "Point-to-Site VPN", "ExpressRoute Circuit", "Hybrid Connectivity"] },
+            { "id": "azure-cloud-dns",              "label": "Azure DNS",                      "shared": false, "notes": "",                              "subSkills": ["Public Zones", "Private Zones", "DNS Resolver", "Split-Horizon DNS"] },
+            { "id": "azure-cloud-ddos",             "label": "Azure DDoS Protection",          "shared": false, "notes": "",                              "subSkills": ["Standard Plan", "Diagnostic Logs", "Alert Configuration"] },
+            { "id": "azure-cloud-nsg",              "label": "Network Security Groups (NSG)",  "shared": false, "notes": "",                              "subSkills": ["Inbound/Outbound Rules", "Flow Logs", "Application Security Groups"] },
+            { "id": "azure-cloud-load-balancer",    "label": "Azure Load Balancer",            "shared": false, "notes": "",                              "subSkills": ["Internal vs Public", "Backend Pools", "Health Probes", "SKU Selection (Standard)"] },
+            { "id": "azure-cloud-nat-gateway",      "label": "Azure NAT Gateway",              "shared": false, "notes": "",                              "subSkills": ["Outbound SNAT", "Availability Zones", "Integration with Subnets"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-compute",
+          "label": "Compute",
+          "skills": [
+            { "id": "shared-azure-vm",          "label": "Azure Virtual Machines",         "shared": true,  "notes": "",                  "subSkills": ["VM Sizing", "Availability Sets", "Availability Zones", "Extensions", "Custom Images", "Scale Sets", "Spot VMs"] },
+            { "id": "azure-cloud-vmss",         "label": "Azure VM Scale Sets (VMSS)",     "shared": false, "notes": "",                  "subSkills": ["Autoscale Profiles", "Custom Scripts", "Rolling Upgrades", "Flexible Orchestration"] },
+            { "id": "shared-aks",               "label": "Azure Kubernetes Service (AKS)", "shared": true,  "notes": "Deep skill",         "subSkills": ["Cluster Provisioning", "Node Pools", "Ingress Controllers", "RBAC", "Workload Identity", "AKS Networking (CNI/Overlay)", "Cluster Upgrades", "Monitoring Integration"] },
+            { "id": "azure-cloud-container-apps","label": "Azure Container Apps",          "shared": false, "notes": "",                  "subSkills": ["Environment Setup", "Dapr Integration", "Scale-to-Zero", "Ingress", "Managed Certificates"] },
+            { "id": "azure-cloud-aci",          "label": "Azure Container Instances",      "shared": false, "notes": "",                  "subSkills": ["Sidecar Patterns", "Init Containers", "Private Registry Pull"] },
+            { "id": "shared-azure-app-service", "label": "Azure App Service",              "shared": true,  "notes": "",                  "subSkills": ["Web Apps", "API Apps", "Deployment Slots", "Custom Domains/TLS", "Scaling Plans", "VNet Integration"] },
+            { "id": "shared-azure-functions",   "label": "Azure Functions",                "shared": true,  "notes": "",                  "subSkills": ["Trigger Types", "Durable Functions", "Consumption vs Premium Plan", "Cold Start Optimization"] },
+            { "id": "azure-cloud-avd",          "label": "Azure Virtual Desktop (AVD)",    "shared": false, "notes": "",                  "subSkills": ["Host Pool Types", "FSLogix", "Image Management", "RDP Shortpath"] },
+            { "id": "azure-cloud-batch",        "label": "Azure Batch",                    "shared": false, "notes": "",                  "subSkills": ["Pool Configuration", "Task Scheduling", "Integration with Storage"] },
+            { "id": "azure-cloud-arc",          "label": "Azure Arc",                      "shared": false, "notes": "Hybrid-critical",    "subSkills": ["Arc-Enabled Servers", "Arc-Enabled Kubernetes", "GitOps with Arc", "Policy at Arc Scale"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-storage",
+          "label": "Storage & Data",
+          "skills": [
+            { "id": "shared-azure-blob",        "label": "Azure Blob Storage",         "shared": true,  "notes": "",  "subSkills": ["Access Tiers (Hot/Cool/Archive)", "Lifecycle Policies", "Versioning", "Soft Delete", "Static Website Hosting", "SAS Tokens"] },
+            { "id": "azure-cloud-azure-files",  "label": "Azure Files",                "shared": false, "notes": "",  "subSkills": ["SMB/NFS Shares", "Azure File Sync", "Premium vs Standard"] },
+            { "id": "azure-cloud-sql-db",       "label": "Azure SQL Database",         "shared": false, "notes": "",  "subSkills": ["Service Tiers", "Elastic Pools", "Geo-Replication", "Backup/PITR", "Private Endpoint"] },
+            { "id": "azure-cloud-cosmos-db",    "label": "Azure Cosmos DB",            "shared": false, "notes": "",  "subSkills": ["API Selection (SQL/Mongo/Gremlin)", "Consistency Levels", "Partitioning", "Change Feed"] },
+            { "id": "azure-cloud-adls-gen2",    "label": "Azure Data Lake Storage Gen2","shared": false,"notes": "",  "subSkills": ["ABFS", "ACL vs RBAC", "Integration with Synapse/Databricks"] },
+            { "id": "azure-cloud-redis",        "label": "Azure Cache for Redis",      "shared": false, "notes": "",  "subSkills": ["Cache Patterns", "Clustering", "Persistence", "TLS"] },
+            { "id": "azure-cloud-service-bus",  "label": "Azure Service Bus",          "shared": false, "notes": "",  "subSkills": ["Queues vs Topics", "Message Sessions", "Dead-Letter Queue", "Premium SKU"] },
+            { "id": "shared-azure-eventhubs",   "label": "Azure Event Hubs",           "shared": true,  "notes": "",  "subSkills": ["Partitions", "Consumer Groups", "Capture", "Kafka Protocol Compatibility"] },
+            { "id": "azure-cloud-event-grid",   "label": "Azure Event Grid",           "shared": false, "notes": "",  "subSkills": ["Event Subscriptions", "Custom Topics", "Dead-Letter", "Filtering"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-integration",
+          "label": "App Services & Integration",
+          "skills": [
+            { "id": "shared-azure-apim",       "label": "Azure API Management (APIM)", "shared": true,  "notes": "",  "subSkills": ["Policies", "Developer Portal", "Rate Limiting", "OAuth/JWT Validation", "Versioning", "Self-Hosted Gateway"] },
+            { "id": "azure-cloud-logic-apps",  "label": "Azure Logic Apps",            "shared": false, "notes": "",  "subSkills": ["Standard vs Consumption", "Connectors", "Stateful vs Stateless"] },
+            { "id": "shared-azure-app-config", "label": "Azure App Configuration",     "shared": true,  "notes": "",  "subSkills": ["Feature Flags", "Key-Value Store", "Sentinel Keys", "Integration with App Service/AKS"] },
+            { "id": "shared-azure-swa",        "label": "Azure Static Web Apps",       "shared": true,  "notes": "",  "subSkills": ["GitHub/ADO Integration", "Managed Functions Backend", "Custom Auth"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-iac",
+          "label": "Infrastructure as Code & Automation",
+          "skills": [
+            { "id": "shared-bicep",                       "label": "Azure Bicep",              "shared": true,  "notes": "Primary IaC for Azure",  "subSkills": ["Module Design", "Parameter Files", "Deployment Stacks", "What-If", "Registry"] },
+            { "id": "azure-cloud-arm",                    "label": "Azure Resource Manager (ARM)","shared": false,"notes": "Legacy but relevant", "subSkills": ["Template Structure", "Linked Templates", "Deployment Modes"] },
+            { "id": "shared-terraform",                   "label": "Terraform",                "shared": true,  "notes": "",                       "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"] },
+            { "id": "shared-azure-cli",                   "label": "Azure CLI",                "shared": true,  "notes": "",                       "subSkills": ["Resource Management", "Scripting", "JMESPath Queries"] },
+            { "id": "shared-powershell",                  "label": "PowerShell / Az Module",   "shared": true,  "notes": "",                       "subSkills": ["Az PowerShell", "DSC", "Runbooks"] },
+            { "id": "shared-azure-devops-pipelines",      "label": "Azure DevOps Pipelines",   "shared": true,  "notes": "",                       "subSkills": ["YAML Pipelines", "Service Connections", "Library Groups", "Environments", "Approvals"] },
+            { "id": "shared-github-actions",              "label": "GitHub Actions",           "shared": true,  "notes": "",                       "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-monitoring",
+          "label": "Monitoring & Observability",
+          "skills": [
+            { "id": "shared-azure-monitor",    "label": "Azure Monitor",                    "shared": true,  "notes": "",                 "subSkills": ["Metrics", "Alerts", "Action Groups", "Diagnostic Settings", "Activity Log"] },
+            { "id": "shared-log-analytics",    "label": "Log Analytics Workspace",          "shared": true,  "notes": "",                 "subSkills": ["KQL Queries", "Table Schema", "Workspace Design", "Data Retention", "Cost Management"] },
+            { "id": "shared-app-insights",     "label": "Application Insights",             "shared": true,  "notes": "",                 "subSkills": ["SDK Integration", "Live Metrics", "Distributed Tracing", "Dependency Tracking", "Availability Tests"] },
+            { "id": "azure-cloud-ama-dcr",     "label": "Azure Monitor Agent & DCRs",       "shared": false, "notes": "",                 "subSkills": ["Data Collection Rules", "DCR Association", "Migration from MMA/OMS"] },
+            { "id": "shared-azure-workbooks",  "label": "Azure Workbooks",                  "shared": true,  "notes": "",                 "subSkills": ["Template Design", "Parameters", "Linked Resources", "Sharing"] },
+            { "id": "shared-grafana",          "label": "Grafana",                          "shared": true,  "notes": "",                 "subSkills": ["Dashboard Design", "Data Source Config", "Alerting", "Templating Variables", "RBAC"] },
+            { "id": "shared-kql",              "label": "KQL (Kusto Query Language)",        "shared": true,  "notes": "Deep skill",        "subSkills": ["Basic Queries", "Joins", "Aggregations", "Time Series", "Rendering", "Performance Optimization"] },
+            { "id": "azure-cloud-advisor",     "label": "Azure Advisor",                    "shared": false, "notes": "",                 "subSkills": ["Recommendations Review", "Score Improvement", "Cost Optimization"] },
+            { "id": "azure-cloud-svc-health",  "label": "Azure Service Health",             "shared": false, "notes": "",                 "subSkills": ["Service Issues", "Planned Maintenance", "Health Alerts"] },
+            { "id": "shared-finops",           "label": "Cost Management & FinOps",         "shared": true,  "notes": "",                 "subSkills": ["Budgets", "Alerts", "Cost Analysis", "Tagging Strategy", "Reservations vs PAYG"] }
+          ]
+        },
+        {
+          "id": "azure-cloud-governance",
+          "label": "Governance & Operations",
+          "skills": [
+            { "id": "azure-cloud-mgmt-groups",   "label": "Management Groups & Subscriptions","shared": false,"notes": "",  "subSkills": ["Hierarchy Design", "Policy Inheritance", "RBAC Inheritance"] },
+            { "id": "azure-cloud-lighthouse",    "label": "Azure Lighthouse",                 "shared": false,"notes": "",  "subSkills": ["Delegated Resource Management", "Partner Center", "Cross-Tenant Monitoring"] },
+            { "id": "azure-cloud-update-manager","label": "Azure Update Manager",             "shared": false,"notes": "",  "subSkills": ["Update Assessments", "Maintenance Configurations", "Patch Orchestration"] },
+            { "id": "azure-cloud-backup",        "label": "Azure Backup",                     "shared": false,"notes": "",  "subSkills": ["Recovery Services Vault", "Backup Policies", "MARS Agent", "Cross-Region Restore"] },
+            { "id": "azure-cloud-asr",           "label": "Azure Site Recovery (ASR)",        "shared": false,"notes": "",  "subSkills": ["Replication", "Failover / Failback", "DR Planning"] },
+            { "id": "azure-cloud-migrate",       "label": "Azure Migrate",                    "shared": false,"notes": "",  "subSkills": ["Discovery", "Assessment", "Server Migration", "Database Migration Service"] },
+            { "id": "azure-cloud-landing-zone",  "label": "Azure Landing Zone Design",        "shared": false,"notes": "",  "subSkills": ["CAF (Cloud Adoption Framework)", "Management", "Connectivity", "Identity Subscriptions"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "aws-cloud",
+      "label": "AWS Cloud Engineer",
+      "color": "#FF9900",
+      "categories": [
+        {
+          "id": "aws-cloud-identity",
+          "label": "Identity & Security",
+          "skills": [
+            { "id": "aws-iam",            "label": "AWS IAM",                    "shared": false, "notes": "Core",                 "subSkills": ["Users/Groups/Roles", "Policies (Managed vs Inline)", "Permission Boundaries", "SCP (Service Control Policies)", "IAM Conditions"] },
+            { "id": "aws-organizations",  "label": "AWS Organizations & SCPs",   "shared": false, "notes": "",                     "subSkills": ["Organizational Units", "Policy Inheritance", "Consolidated Billing"] },
+            { "id": "aws-secrets-manager","label": "AWS Secrets Manager",        "shared": false, "notes": "",                     "subSkills": ["Secret Rotation", "Cross-Account Access", "Lambda Integration"] },
+            { "id": "aws-kms",            "label": "AWS Key Management Service", "shared": false, "notes": "",                     "subSkills": ["CMKs", "Key Policies", "Envelope Encryption", "Multi-Region Keys"] },
+            { "id": "aws-security-hub",   "label": "AWS Security Hub",           "shared": false, "notes": "",                     "subSkills": ["Findings Aggregation", "CIS Benchmark", "Standards Compliance"] },
+            { "id": "aws-guardduty",      "label": "Amazon GuardDuty",           "shared": false, "notes": "",                     "subSkills": ["Threat Detection", "Finding Types", "Integration with Security Hub"] },
+            { "id": "aws-shield-waf",     "label": "AWS Shield / WAF",           "shared": false, "notes": "",                     "subSkills": ["Shield Standard vs Advanced", "WAF Rules", "Managed Rule Groups", "Rate Limiting"] },
+            { "id": "aws-config",         "label": "AWS Config",                 "shared": false, "notes": "",                     "subSkills": ["Config Rules", "Conformance Packs", "Remediation Actions"] },
+            { "id": "shared-zero-trust",  "label": "Zero Trust Architecture",    "shared": true,  "notes": "2026 expectation",     "subSkills": ["Identity Verification", "Least Privilege", "Network Micro-segmentation", "Continuous Validation"] }
+          ]
+        },
+        {
+          "id": "aws-cloud-network",
+          "label": "Networking",
+          "skills": [
+            { "id": "aws-vpc",               "label": "Amazon VPC",              "shared": false, "notes": "Core",  "subSkills": ["CIDR Design", "Subnets (Public/Private/Isolated)", "Route Tables", "NAT Gateway", "Internet Gateway"] },
+            { "id": "aws-tgw",               "label": "AWS Transit Gateway",     "shared": false, "notes": "",      "subSkills": ["TGW Attachments", "Route Tables", "VPN Integration", "Multi-Account Hub-Spoke"] },
+            { "id": "aws-direct-connect",    "label": "AWS Direct Connect",      "shared": false, "notes": "",      "subSkills": ["Virtual Interfaces", "LAGs", "Resiliency Patterns"] },
+            { "id": "aws-cloudfront",        "label": "Amazon CloudFront",       "shared": false, "notes": "",      "subSkills": ["Distributions", "Behaviors", "Origin Groups", "Lambda@Edge", "Cache Policies"] },
+            { "id": "aws-global-accelerator","label": "AWS Global Accelerator",  "shared": false, "notes": "",      "subSkills": ["Endpoint Groups", "Traffic Dials", "Health Checks"] },
+            { "id": "aws-elb",               "label": "Elastic Load Balancing",  "shared": false, "notes": "",      "subSkills": ["ALB (Application)", "NLB (Network)", "GLB (Gateway)", "Target Groups", "Listener Rules"] },
+            { "id": "aws-route53",           "label": "Amazon Route 53",         "shared": false, "notes": "",      "subSkills": ["Hosted Zones", "Routing Policies", "Health Checks", "Private DNS"] },
+            { "id": "aws-vpc-endpoints",     "label": "VPC Endpoints",           "shared": false, "notes": "",      "subSkills": ["Interface Endpoints", "Gateway Endpoints", "PrivateLink"] },
+            { "id": "aws-network-firewall",  "label": "AWS Network Firewall",    "shared": false, "notes": "",      "subSkills": ["Stateful/Stateless Rules", "Suricata Rules", "Centralized Deployment"] },
+            { "id": "aws-sg-nacls",          "label": "Security Groups & NACLs", "shared": false, "notes": "",      "subSkills": ["Stateful vs Stateless", "Rule Evaluation", "VPC Flow Logs"] }
+          ]
+        },
+        {
+          "id": "aws-cloud-compute",
+          "label": "Compute",
+          "skills": [
+            { "id": "aws-ec2",          "label": "Amazon EC2",                           "shared": false, "notes": "Core",              "subSkills": ["Instance Types", "AMIs", "Launch Templates", "Auto Scaling Groups", "Spot/Reserved/Savings Plans", "Placement Groups"] },
+            { "id": "aws-lambda",       "label": "AWS Lambda",                           "shared": false, "notes": "",                  "subSkills": ["Trigger Types", "Layers", "Container Images", "Provisioned Concurrency", "SnapStart", "Power Tuning"] },
+            { "id": "aws-ecs",          "label": "Amazon ECS",                           "shared": false, "notes": "",                  "subSkills": ["Task Definitions", "Fargate vs EC2", "Service Discovery", "Capacity Providers"] },
+            { "id": "aws-eks",          "label": "Amazon EKS",                           "shared": false, "notes": "Deep skill",         "subSkills": ["Managed Node Groups", "Fargate Profiles", "EKS Add-ons", "IRSA", "Karpenter", "Managed Add-ons"] },
+            { "id": "aws-app-runner",   "label": "AWS App Runner",                       "shared": false, "notes": "",                  "subSkills": ["Service Configuration", "Deployment Pipelines", "VPC Connector"] },
+            { "id": "aws-batch",        "label": "AWS Batch",                            "shared": false, "notes": "",                  "subSkills": ["Compute Environments", "Job Queues", "Multi-Node Jobs"] },
+            { "id": "aws-lightsail",    "label": "Amazon Lightsail",                     "shared": false, "notes": "Awareness level",   "subSkills": ["VPS Management", "Blueprints", "Managed Databases"] },
+            { "id": "aws-beanstalk",    "label": "AWS Elastic Beanstalk",                "shared": false, "notes": "Legacy awareness",   "subSkills": ["Environment Types", "Platform Versions", "Rolling Deployments"] }
+          ]
+        },
+        {
+          "id": "aws-cloud-storage",
+          "label": "Storage & Data",
+          "skills": [
+            { "id": "aws-s3",          "label": "Amazon S3",         "shared": false, "notes": "Core",  "subSkills": ["Bucket Policies", "Versioning", "Lifecycle Rules", "Object Lock", "Replication", "Intelligent-Tiering", "S3 Select"] },
+            { "id": "aws-ebs",         "label": "Amazon EBS",        "shared": false, "notes": "",      "subSkills": ["Volume Types (gp3/io2)", "Snapshots", "Encryption", "Multi-Attach"] },
+            { "id": "aws-efs",         "label": "Amazon EFS",        "shared": false, "notes": "",      "subSkills": ["Access Points", "Performance Modes", "Throughput Modes", "Cross-AZ"] },
+            { "id": "aws-rds",         "label": "Amazon RDS",        "shared": false, "notes": "",      "subSkills": ["Engine Selection", "Multi-AZ", "Read Replicas", "Parameter Groups", "RDS Proxy"] },
+            { "id": "aws-aurora",      "label": "Amazon Aurora",     "shared": false, "notes": "",      "subSkills": ["Serverless v2", "Global Database", "Cluster Endpoints", "Backtrack"] },
+            { "id": "aws-dynamodb",    "label": "Amazon DynamoDB",   "shared": false, "notes": "",      "subSkills": ["Table Design", "GSI/LSI", "Streams", "DAX", "On-Demand vs Provisioned"] },
+            { "id": "aws-elasticache", "label": "Amazon ElastiCache","shared": false, "notes": "",      "subSkills": ["Redis vs Memcached", "Cluster Mode", "Replication Groups"] },
+            { "id": "aws-sqs",         "label": "Amazon SQS",        "shared": false, "notes": "",      "subSkills": ["Standard vs FIFO", "Visibility Timeout", "DLQ", "Long Polling"] },
+            { "id": "aws-sns",         "label": "Amazon SNS",        "shared": false, "notes": "",      "subSkills": ["Topics", "Subscriptions", "Message Filtering", "FIFO Topics"] },
+            { "id": "aws-kinesis",     "label": "Amazon Kinesis",    "shared": false, "notes": "",      "subSkills": ["Data Streams", "Firehose", "Analytics", "Video Streams"] }
+          ]
+        },
+        {
+          "id": "aws-cloud-iac",
+          "label": "Infrastructure as Code & Automation",
+          "skills": [
+            { "id": "aws-cloudformation",    "label": "AWS CloudFormation",               "shared": false, "notes": "",                       "subSkills": ["Template Structure", "Stacks", "StackSets", "Change Sets", "Drift Detection"] },
+            { "id": "aws-cdk",               "label": "AWS CDK",                          "shared": false, "notes": "Growing 2026 relevance",  "subSkills": ["Constructs (L1/L2/L3)", "App Structure", "Synthesis", "CDK Pipelines"] },
+            { "id": "shared-terraform",      "label": "Terraform",                        "shared": true,  "notes": "",                       "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"] },
+            { "id": "aws-cli",               "label": "AWS CLI",                          "shared": false, "notes": "",                       "subSkills": ["Resource Management", "Profiles", "Output Formatting"] },
+            { "id": "aws-systems-manager",   "label": "AWS Systems Manager",              "shared": false, "notes": "",                       "subSkills": ["Parameter Store", "Session Manager", "Run Command", "Patch Manager", "Automation Documents"] },
+            { "id": "aws-codepipeline",      "label": "AWS CodePipeline / CodeBuild / CodeDeploy","shared": false,"notes": "",              "subSkills": ["Pipeline Structure", "Build Specs", "Deployment Strategies"] },
+            { "id": "shared-github-actions", "label": "GitHub Actions",                  "shared": true,  "notes": "",                       "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management"] }
+          ]
+        },
+        {
+          "id": "aws-cloud-monitoring",
+          "label": "Monitoring & Observability",
+          "skills": [
+            { "id": "aws-cloudwatch",      "label": "Amazon CloudWatch",       "shared": false, "notes": "Core",  "subSkills": ["Metrics", "Alarms", "Log Groups", "Insights (Logs/Container/Lambda)", "Dashboards", "Composite Alarms"] },
+            { "id": "aws-xray",            "label": "AWS X-Ray",               "shared": false, "notes": "",      "subSkills": ["Traces", "Service Maps", "Annotations", "Integration with Lambda/ECS"] },
+            { "id": "shared-grafana",      "label": "Grafana",                 "shared": true,  "notes": "",      "subSkills": ["Dashboard Design", "Data Source Config", "Alerting", "Templating Variables"] },
+            { "id": "aws-cloudtrail",      "label": "AWS CloudTrail",          "shared": false, "notes": "",      "subSkills": ["Event History", "Data Events", "Insights", "Multi-Region", "S3 Integration"] },
+            { "id": "aws-cost-explorer",   "label": "AWS Cost Explorer",       "shared": false, "notes": "",      "subSkills": ["Cost Allocation Tags", "Savings Plans", "Rightsizing", "Budgets"] },
+            { "id": "aws-trusted-advisor", "label": "AWS Trusted Advisor",     "shared": false, "notes": "",      "subSkills": ["Category Checks", "Priority Recommendations"] }
+          ]
+        },
+        {
+          "id": "aws-cloud-governance",
+          "label": "Governance & Multi-Account",
+          "skills": [
+            { "id": "aws-control-tower",    "label": "AWS Control Tower",                "shared": false, "notes": "",  "subSkills": ["Landing Zone", "Account Factory", "Guardrails", "AFT (Account Factory for Terraform)"] },
+            { "id": "aws-org-governance",   "label": "AWS Organizations (Governance)",   "shared": false, "notes": "",  "subSkills": ["OU Structure", "SCPs", "Tag Policies", "Delegated Administrator"] },
+            { "id": "aws-service-catalog",  "label": "AWS Service Catalog",              "shared": false, "notes": "",  "subSkills": ["Portfolio", "Products", "Constraints", "Self-Service"] },
+            { "id": "aws-backup",           "label": "AWS Backup",                       "shared": false, "notes": "",  "subSkills": ["Backup Plans", "Vaults", "Cross-Account", "Cross-Region"] },
+            { "id": "shared-aws-well-arch", "label": "AWS Well-Architected Framework",   "shared": true,  "notes": "",  "subSkills": ["Operational Excellence", "Security", "Reliability", "Performance", "Cost", "Sustainability", "Lens Reviews"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "staff",
+      "label": "Staff Engineer",
+      "color": "#1D9E75",
+      "categories": [
+        {
+          "id": "staff-systems-thinking",
+          "label": "Systems Thinking & Architecture",
+          "skills": [
+            { "id": "staff-distributed-systems",  "label": "Distributed Systems Design",     "shared": false, "notes": "Separator between Senior and Staff", "subSkills": ["CAP Theorem", "Consistency Models", "Event-Driven Architecture", "CQRS", "Saga Pattern", "Idempotency", "Backpressure", "Circuit Breaker"] },
+            { "id": "staff-adr",                  "label": "Architecture Decision Making",   "shared": false, "notes": "Core Staff skill",                  "subSkills": ["ADR (Architecture Decision Records)", "Options Analysis", "Tradeoff Framing", "Reversibility Assessment", "Blast Radius Thinking"] },
+            { "id": "staff-system-design",        "label": "System Design (Large Scale)",    "shared": false, "notes": "",                                  "subSkills": ["Capacity Planning", "Load Estimation", "Bottleneck Identification", "Horizontal vs Vertical Scaling", "Multi-Region Design"] },
+            { "id": "shared-api-design",          "label": "API Design",                     "shared": true,  "notes": "",                                  "subSkills": ["REST Principles", "GraphQL", "gRPC", "Versioning Strategies", "Contract-First Design", "API Gateway Patterns"] },
+            { "id": "staff-enterprise-arch",      "label": "Enterprise Architecture",        "shared": false, "notes": "",                                  "subSkills": ["Domain-Driven Design (DDD)", "Bounded Contexts", "Event Storming", "TOGAF ADM (lite)", "C4 Model"] },
+            { "id": "staff-reliability",          "label": "Reliability Engineering",        "shared": false, "notes": "",                                  "subSkills": ["SLI/SLO/SLA Design", "Error Budgets", "Chaos Engineering Concepts", "Blast Radius", "Toil Reduction"] },
+            { "id": "shared-security-arch",       "label": "Security Architecture",          "shared": true,  "notes": "",                                  "subSkills": ["Defense in Depth", "Threat Modeling (STRIDE)", "Zero Trust Principles", "Least Privilege Design"] }
+          ]
+        },
+        {
+          "id": "staff-communication",
+          "label": "Technical Communication & Documentation",
+          "skills": [
+            { "id": "staff-rfc",                  "label": "RFC / Technical Proposal Writing","shared": false, "notes": "High-leverage Staff skill",  "subSkills": ["Problem Statement", "Option Analysis", "Recommendation", "Implementation Plan", "Success Criteria"] },
+            { "id": "shared-arch-docs",           "label": "Architecture Documentation",     "shared": true,  "notes": "",                           "subSkills": ["C4 Model Diagrams", "ADRs", "Runbooks", "Sequence Diagrams", "Data Flow Diagrams"] },
+            { "id": "staff-technical-storytelling","label": "Technical Storytelling",         "shared": false, "notes": "Differentiator",             "subSkills": ["Translating Complexity for Executives", "Outcome-Based Framing", "Risk-Cost-Time Language"] },
+            { "id": "staff-design-review",        "label": "Design Review Facilitation",     "shared": false, "notes": "",                           "subSkills": ["Pre-read Templates", "Decision Recording", "Consensus Building", "Async Review Patterns"] },
+            { "id": "shared-docs-as-code",        "label": "Docs-as-Code",                   "shared": true,  "notes": "",                           "subSkills": ["Markdown", "Git-backed Docs", "Static Site Generators", "Versioning", "Auto-generation"] },
+            { "id": "staff-presentation",         "label": "Presentation Design",            "shared": false, "notes": "",                           "subSkills": ["Stakeholder Deck Structure", "Executive Summary", "Narrative Arc", "Data Visualization"] }
+          ]
+        },
+        {
+          "id": "staff-leadership",
+          "label": "Cross-Team Leadership & Influence",
+          "skills": [
+            { "id": "shared-stakeholder-mgmt",   "label": "Stakeholder Management",       "shared": true,  "notes": "Core Staff competency",  "subSkills": ["Stakeholder Mapping", "Communication Cadence", "Expectation Setting", "No-Surprise Principle", "Disagreement Protocols"] },
+            { "id": "staff-consensus",           "label": "Technical Consensus Building", "shared": false, "notes": "",                       "subSkills": ["Pre-alignment", "Running Design Reviews", "Handling Objections", "Decision Escalation", "Public Alignment"] },
+            { "id": "staff-culture",             "label": "Engineering Culture & Standards","shared": false,"notes": "",                       "subSkills": ["Coding/Architecture Standards", "Golden Paths", "Internal Developer Portal Advocacy", "Tech Radar"] },
+            { "id": "staff-mentorship",          "label": "Mentorship & Technical Development","shared": false,"notes": "",                    "subSkills": ["Senior Engineer Development", "Code/Design Review Quality", "Knowledge Sharing (Brown Bags, RFCs)"] },
+            { "id": "staff-cross-functional",    "label": "Cross-Functional Collaboration","shared": false, "notes": "",                       "subSkills": ["Working with Product/Security/Legal/Finance", "Technical Translation", "Dependency Management"] }
+          ]
+        },
+        {
+          "id": "staff-execution",
+          "label": "Execution & Delivery Oversight",
+          "skills": [
+            { "id": "staff-initiative-framing",  "label": "Initiative Framing & Scoping",  "shared": false, "notes": "",  "subSkills": ["Problem Decomposition", "MVP Definition", "Milestone Design", "Definition of Done", "Success Metrics"] },
+            { "id": "staff-tech-risk",           "label": "Technical Risk Management",     "shared": false, "notes": "",  "subSkills": ["Risk Identification", "Mitigation vs Acceptance", "Rollback Planning", "Dependency Mapping"] },
+            { "id": "staff-delivery-guardrails", "label": "Delivery Guardrails",           "shared": false, "notes": "",  "subSkills": ["Definition of Ready", "Architectural Governance", "Implementation Review"] },
+            { "id": "staff-tech-debt",           "label": "Technical Debt Management",     "shared": false, "notes": "",  "subSkills": ["Debt Classification", "Payback Strategy", "Refactoring Patterns", "Negotiating with Product"] },
+            { "id": "staff-incident-leadership", "label": "Incident Leadership",           "shared": false, "notes": "",  "subSkills": ["Incident Commander Role", "Blameless Post-Mortems", "RCA Facilitation", "Corrective Action Ownership"] }
+          ]
+        },
+        {
+          "id": "staff-fluency",
+          "label": "Broad Technical Fluency",
+          "skills": [
+            { "id": "shared-cloud-arch",               "label": "Cloud Architecture (Multi-Cloud)",   "shared": true,  "notes": "",  "subSkills": ["Azure", "AWS", "GCP Basics", "Cloud-Agnostic Patterns"] },
+            { "id": "shared-platform-concepts",        "label": "Platform & Infrastructure Concepts", "shared": true,  "notes": "",  "subSkills": ["IDP Concepts", "Golden Paths", "Service Mesh Basics", "GitOps", "FinOps"] },
+            { "id": "shared-observability",            "label": "Observability & Monitoring",         "shared": true,  "notes": "",  "subSkills": ["MELT (Metrics/Events/Logs/Traces)", "SLO Design", "Dashboard Strategy", "On-Call Design"] },
+            { "id": "shared-networking-fundamentals",  "label": "Networking Fundamentals",            "shared": true,  "notes": "",  "subSkills": ["TCP/IP", "DNS", "TLS/mTLS", "Load Balancing", "CDN", "BGP Basics"] },
+            { "id": "staff-db-patterns",               "label": "Database & Storage Patterns",        "shared": false, "notes": "",  "subSkills": ["OLTP vs OLAP", "Relational vs Document vs Graph vs Time-Series", "Caching Patterns", "Eventual Consistency"] },
+            { "id": "shared-sdlc",                     "label": "Software Development Lifecycle",     "shared": true,  "notes": "",  "subSkills": ["Git Workflows", "CI/CD Pipeline Design", "Testing Strategies", "Feature Flags", "Deployment Patterns (Blue/Green, Canary)"] },
+            { "id": "shared-ai-ml-awareness",          "label": "AI/ML Integration Awareness",        "shared": true,  "notes": "",  "subSkills": ["LLM Integration Patterns", "RAG Concepts", "AI Governance", "Cost/Security Tradeoffs"] }
+          ]
+        },
+        {
+          "id": "staff-strategy",
+          "label": "Strategic & Organizational Thinking",
+          "skills": [
+            { "id": "staff-tech-roadmap",  "label": "Technical Roadmap Development",   "shared": false, "notes": "",  "subSkills": ["Quarterly/Annual Planning", "Capability Mapping", "Dependency Sequencing", "Make vs Buy Analysis"] },
+            { "id": "shared-finops",       "label": "FinOps / Cloud Economics",        "shared": true,  "notes": "",  "subSkills": ["Cost Attribution", "Tagging Strategy", "Reservation Planning", "Unit Economics"] },
+            { "id": "staff-build-buy",     "label": "Build vs Buy vs Integrate",       "shared": false, "notes": "",  "subSkills": ["Vendor Evaluation", "OSS Assessment", "Total Cost Modeling", "Lock-in Analysis"] },
+            { "id": "staff-org-design",    "label": "Organizational Design Awareness", "shared": false, "notes": "",  "subSkills": ["Conway's Law", "Team Topologies", "API-first Team Design"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "platform",
+      "label": "Platform Engineer",
+      "color": "#BA7517",
+      "categories": [
+        {
+          "id": "platform-idp",
+          "label": "Internal Developer Platform (IDP)",
+          "skills": [
+            { "id": "platform-idp-concepts",      "label": "IDP Concepts & Architecture",  "shared": false, "notes": "2026 core concept",         "subSkills": ["Platform as a Product", "Golden Paths", "Paved Roads", "Self-Service Portals", "Developer Cognitive Load Reduction"] },
+            { "id": "platform-backstage",         "label": "Backstage (Spotify)",          "shared": false, "notes": "Leading IDP framework",      "subSkills": ["Software Catalog", "TechDocs", "Scaffolder Templates", "Plugins", "Kubernetes Plugin"] },
+            { "id": "platform-service-catalog",   "label": "Service Catalog Design",       "shared": false, "notes": "",                           "subSkills": ["Service Ownership", "Dependency Mapping", "Maturity Scores", "SLO Publication"] },
+            { "id": "platform-dev-portal",        "label": "Developer Portal Strategy",    "shared": false, "notes": "",                           "subSkills": ["Portal Architecture", "Content Taxonomy", "Discoverability", "Adoption Metrics"] },
+            { "id": "platform-team-topologies",   "label": "Platform Team Topologies",     "shared": false, "notes": "",                           "subSkills": ["Platform-as-a-Product Model", "Platform Roadmap", "Internal Customer Interviews", "Feedback Loops"] }
+          ]
+        },
+        {
+          "id": "platform-cicd",
+          "label": "CI/CD & GitOps",
+          "skills": [
+            { "id": "shared-github",                      "label": "GitHub (Core)",                  "shared": true,  "notes": "",  "subSkills": ["Repository Management", "Branch Strategy", "PR Reviews", "Code Owners"] },
+            { "id": "shared-github-actions",              "label": "GitHub Actions",                 "shared": true,  "notes": "",  "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management", "Self-Hosted Runners"] },
+            { "id": "shared-github-advanced-security",    "label": "GitHub Advanced Security",       "shared": true,  "notes": "",  "subSkills": ["Code Scanning (CodeQL)", "Secret Scanning", "Dependabot", "Security Overview"] },
+            { "id": "platform-github-projects",           "label": "GitHub Projects",                "shared": false, "notes": "",  "subSkills": ["Kanban Boards", "Automation", "Roadmap Views", "Status Fields"] },
+            { "id": "platform-github-packages",           "label": "GitHub Packages",                "shared": false, "notes": "",  "subSkills": ["Container Registry", "npm/Maven/NuGet Packages", "Package Visibility"] },
+            { "id": "shared-azure-devops-pipelines",      "label": "Azure DevOps Pipelines",        "shared": true,  "notes": "",  "subSkills": ["YAML Pipelines", "Classic Pipelines", "Multi-Stage", "Service Connections", "Environments", "Deployment Gates"] },
+            { "id": "platform-azure-devops-repos",        "label": "Azure DevOps: Repos",           "shared": false, "notes": "",  "subSkills": ["Branch Policies", "Pull Request Templates", "Protected Branches"] },
+            { "id": "platform-azure-devops-artifacts",    "label": "Azure DevOps: Artifacts",       "shared": false, "notes": "",  "subSkills": ["Feed Management", "Upstream Sources", "Retention Policies"] },
+            { "id": "shared-azure-devops-boards",         "label": "Azure DevOps: Boards",          "shared": true,  "notes": "",  "subSkills": ["Backlogs", "Sprint Planning", "Queries", "Reporting"] },
+            { "id": "platform-gitops",                    "label": "GitOps (Flux / ArgoCD)",        "shared": false, "notes": "",  "subSkills": ["Reconciliation Loop", "Kustomize", "Helm Integration", "Multi-Cluster", "RBAC"] },
+            { "id": "shared-cicd-patterns",               "label": "Pipeline Design Patterns",      "shared": true,  "notes": "",  "subSkills": ["Shift-Left Testing", "Gates & Approvals", "Feature Branch Deploys", "Trunk-Based Development"] },
+            { "id": "platform-release-mgmt",              "label": "Release Management",            "shared": false, "notes": "",  "subSkills": ["Blue/Green", "Canary", "Ring Deployments", "Feature Flags", "Rollback Design"] }
+          ]
+        },
+        {
+          "id": "platform-iac",
+          "label": "Infrastructure as Code",
+          "skills": [
+            { "id": "shared-terraform",          "label": "Terraform",          "shared": true,  "notes": "Deep skill",     "subSkills": ["Provider Configuration", "Resource Lifecycle", "State Management (Remote)", "Modules", "Workspaces", "Terragrunt", "Drift Detection"] },
+            { "id": "platform-terraform-testing","label": "Terraform: Testing", "shared": false, "notes": "",              "subSkills": ["Terratest", "Checkov", "tflint", "Pre-commit Hooks"] },
+            { "id": "shared-bicep",              "label": "Azure Bicep",        "shared": true,  "notes": "",              "subSkills": ["Module Registry", "Deployment Stacks", "What-If", "Scope (Subscription/RG/Tenant)"] },
+            { "id": "platform-pulumi",           "label": "Pulumi",             "shared": false, "notes": "Growing relevance","subSkills": ["TypeScript/Python SDKs", "State Management"] },
+            { "id": "platform-ansible",          "label": "Ansible",            "shared": false, "notes": "Hybrid infra critical","subSkills": ["Playbooks", "Roles", "Inventory", "Vault", "Dynamic Inventory", "AWX/AAP"] },
+            { "id": "platform-crossplane",       "label": "Crossplane",         "shared": false, "notes": "Emerging 2026", "subSkills": ["Composite Resources", "Providers", "Managed Resources", "GitOps Integration"] },
+            { "id": "platform-policy-as-code",   "label": "Policy as Code",     "shared": false, "notes": "",              "subSkills": ["OPA (Open Policy Agent)", "Rego Language", "Conftest", "Azure Policy", "Sentinel"] }
+          ]
+        },
+        {
+          "id": "platform-containers",
+          "label": "Container & Kubernetes Platform",
+          "skills": [
+            { "id": "shared-docker",              "label": "Docker",                        "shared": true,  "notes": "",                        "subSkills": ["Dockerfile Authoring", "Multi-Stage Builds", "Image Optimization", "Compose", "Security Scanning"] },
+            { "id": "shared-k8s-core",            "label": "Kubernetes: Core",              "shared": true,  "notes": "",                        "subSkills": ["Pod/Deployment/Service/Ingress", "ConfigMaps", "Secrets", "Namespaces", "RBAC", "Resource Quotas", "LimitRanges"] },
+            { "id": "platform-k8s-workloads",     "label": "Kubernetes: Workloads",         "shared": false, "notes": "",                        "subSkills": ["StatefulSets", "DaemonSets", "Jobs/CronJobs", "HPA/VPA", "PodDisruptionBudgets"] },
+            { "id": "platform-k8s-networking",    "label": "Kubernetes: Networking",        "shared": false, "notes": "",                        "subSkills": ["CNI Plugins", "Network Policies", "Service Types", "DNS", "Ingress Controllers (NGINX/Traefik)"] },
+            { "id": "platform-k8s-storage",       "label": "Kubernetes: Storage",           "shared": false, "notes": "",                        "subSkills": ["PV/PVC", "StorageClasses", "CSI Drivers", "Volume Snapshots"] },
+            { "id": "platform-k8s-security",      "label": "Kubernetes: Security",          "shared": false, "notes": "",                        "subSkills": ["PodSecurity Admission", "OPA Gatekeeper", "Falco", "Secrets Encryption at Rest", "Workload Identity"] },
+            { "id": "platform-k8s-operations",    "label": "Kubernetes: Operations",        "shared": false, "notes": "",                        "subSkills": ["Cluster Upgrades", "Node Pool Management", "Debugging (kubectl exec/logs/describe)", "Resource Tuning"] },
+            { "id": "shared-helm",                "label": "Helm",                          "shared": true,  "notes": "",                        "subSkills": ["Chart Authoring", "Values Design", "Repository Management", "Helm Hooks", "Library Charts"] },
+            { "id": "platform-kustomize",         "label": "Kustomize",                     "shared": false, "notes": "",                        "subSkills": ["Overlays", "Bases", "Patches", "ConfigMap Generator"] },
+            { "id": "platform-service-mesh",      "label": "Service Mesh (Istio / Linkerd)","shared": false, "notes": "Awareness→Practitioner",  "subSkills": ["Traffic Management", "mTLS", "Observability Integration", "Circuit Breaking"] },
+            { "id": "platform-container-security","label": "Container Security",            "shared": false, "notes": "",                        "subSkills": ["Image Scanning (Trivy/Snyk)", "SBOM Generation", "Distroless Images", "Non-Root Containers"] },
+            { "id": "platform-aks-platform",      "label": "Platform Engineering on AKS",  "shared": false, "notes": "",                        "subSkills": ["Workload Identity", "AAD Pod Identity", "CNI Overlay", "Azure Policy for AKS"] }
+          ]
+        },
+        {
+          "id": "platform-observability",
+          "label": "Observability Platform Engineering",
+          "skills": [
+            { "id": "platform-observability-strategy","label": "Observability Strategy",       "shared": false, "notes": "",              "subSkills": ["MELT Framework", "SLI/SLO/SLA Design", "Error Budget Policy", "Observability-as-Code"] },
+            { "id": "platform-prometheus",           "label": "Prometheus & Alertmanager",     "shared": false, "notes": "",              "subSkills": ["Scrape Configuration", "PromQL", "Recording Rules", "Alerting Rules", "Remote Write"] },
+            { "id": "shared-grafana",                "label": "Grafana",                       "shared": true,  "notes": "",              "subSkills": ["Dashboard Design", "Data Sources", "Alerting", "Templating Variables", "Annotations", "Provisioning"] },
+            { "id": "platform-otel",                 "label": "OpenTelemetry (OTel)",          "shared": false, "notes": "2026 standard",  "subSkills": ["Instrumentation (Auto/Manual)", "Collector Config", "OTLP Protocol", "Trace/Metric/Log Correlation"] },
+            { "id": "shared-azure-monitor",          "label": "Azure Monitor (Platform Layer)","shared": true,  "notes": "",              "subSkills": ["Log Analytics Workspace Architecture", "DCR Design", "Diagnostic Settings at Scale", "Alert Rule Governance"] },
+            { "id": "shared-kql",                    "label": "KQL",                           "shared": true,  "notes": "",              "subSkills": ["Query Patterns", "Joins", "Summarize", "Time Series", "Anomaly Detection"] },
+            { "id": "platform-distributed-tracing",  "label": "Distributed Tracing",           "shared": false, "notes": "",              "subSkills": ["Trace Context Propagation", "Sampling Strategies", "Jaeger/Zipkin/Tempo"] },
+            { "id": "platform-log-management",       "label": "Log Management",                "shared": false, "notes": "",              "subSkills": ["Log Aggregation Design", "Structured Logging Standards", "Retention Strategy", "Cost Management"] },
+            { "id": "platform-oncall-runbooks",      "label": "On-Call & Runbook Design",      "shared": false, "notes": "",              "subSkills": ["Runbook Templates", "Alert Routing", "Escalation Policies", "PagerDuty/OpsGenie Integration"] }
+          ]
+        },
+        {
+          "id": "platform-devex",
+          "label": "Developer Experience (DevEx)",
+          "skills": [
+            { "id": "platform-dora-metrics",       "label": "DORA Metrics",                  "shared": false, "notes": "",  "subSkills": ["Deployment Frequency", "Lead Time for Changes", "Change Failure Rate", "Mean Time to Restore"] },
+            { "id": "platform-dev-productivity",   "label": "Developer Productivity Tooling", "shared": false, "notes": "",  "subSkills": ["Local Dev Environments (devcontainers)", "CLI Tooling", "Scaffolding", "Automation"] },
+            { "id": "platform-self-service-infra", "label": "Self-Service Infrastructure",    "shared": false, "notes": "",  "subSkills": ["Infrastructure Vending", "Account/Subscription Vending", "Cost Guardrails", "Quota Management"] },
+            { "id": "platform-api-design",         "label": "Platform API Design",            "shared": false, "notes": "",  "subSkills": ["Internal API Standards", "Platform Contracts", "Versioning", "Deprecation Policy"] },
+            { "id": "shared-finops",               "label": "FinOps & Cost Visibility",       "shared": true,  "notes": "",  "subSkills": ["Showback/Chargeback Models", "Cost Allocation Tags", "Budget Alerts", "Right-Sizing Tooling"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ai",
+      "label": "AI Engineer",
+      "color": "#7F77DD",
+      "categories": [
+        {
+          "id": "ai-llm-fundamentals",
+          "label": "LLM Fundamentals",
+          "skills": [
+            { "id": "ai-llm-concepts",      "label": "Large Language Model Concepts", "shared": false, "notes": "Foundation",                    "subSkills": ["Transformer Architecture (Awareness)", "Tokenization", "Context Window", "Temperature/Top-P", "Fine-tuning vs In-Context Learning", "Hallucination Patterns"] },
+            { "id": "ai-prompt-engineering","label": "Prompt Engineering",           "shared": false, "notes": "Practitioner-level expectation",  "subSkills": ["Zero/One/Few-Shot Prompting", "Chain-of-Thought", "System Prompt Design", "Prompt Injection Defense", "Output Structuring"] },
+            { "id": "ai-rag",               "label": "Retrieval-Augmented Generation (RAG)","shared": false,"notes": "Core 2026 skill",          "subSkills": ["Chunking Strategies", "Embedding Models", "Vector Search", "Re-ranking", "Hybrid Search", "Context Window Management", "Evals"] },
+            { "id": "ai-llm-eval",          "label": "LLM Evaluation",               "shared": false, "notes": "Growing importance",             "subSkills": ["Promptfoo", "LangSmith Evals", "RAGAS", "Custom Eval Harnesses", "Benchmark Design"] },
+            { "id": "ai-model-selection",   "label": "Model Selection",              "shared": false, "notes": "",                               "subSkills": ["GPT-4o", "Claude Sonnet/Opus", "Mistral", "Llama 3", "Gemini", "Cost/Latency/Quality Tradeoffs", "On-Prem vs Cloud"] },
+            { "id": "ai-token-economics",   "label": "Token Economics",              "shared": false, "notes": "",                               "subSkills": ["Token Counting", "Cost Modeling", "Latency Optimization", "Streaming", "Batching"] }
+          ]
+        },
+        {
+          "id": "ai-azure-platform",
+          "label": "Azure AI Platform",
+          "skills": [
+            { "id": "ai-azure-openai",     "label": "Azure OpenAI Service",              "shared": false, "notes": "Core",                   "subSkills": ["Deployment Types", "API Usage", "Rate Limit Management", "PTU vs Consumption", "Model Versioning"] },
+            { "id": "ai-azure-foundry",    "label": "Azure AI Foundry",                  "shared": false, "notes": "2026 primary platform",   "subSkills": ["Project Setup", "Model Catalog", "Prompt Flow", "Evaluation", "Deployment", "Safety Filters"] },
+            { "id": "shared-azure-ai-search","label": "Azure AI Search",                 "shared": true,  "notes": "",                       "subSkills": ["Indexer Design", "Semantic Ranking", "Vector Search", "Hybrid Search", "Skillsets", "Integrated Vectorization"] },
+            { "id": "ai-doc-intelligence", "label": "Azure Document Intelligence",       "shared": false, "notes": "",                       "subSkills": ["Prebuilt Models", "Custom Models", "Layout API", "Integration Patterns"] },
+            { "id": "ai-azure-language",   "label": "Azure AI Language",                 "shared": false, "notes": "",                       "subSkills": ["NER", "Sentiment", "Summarization", "Custom Classification", "CLU"] },
+            { "id": "ai-azure-vision",     "label": "Azure AI Vision",                   "shared": false, "notes": "",                       "subSkills": ["Image Analysis", "OCR", "Face API", "Custom Vision"] },
+            { "id": "ai-azure-ml",         "label": "Azure Machine Learning",            "shared": false, "notes": "",                       "subSkills": ["Workspace", "Compute Clusters", "Pipelines", "Automated ML", "Model Registry", "Managed Online Endpoints"] },
+            { "id": "shared-copilot-studio","label": "Microsoft Copilot Studio",         "shared": true,  "notes": "",                       "subSkills": ["Topic Design", "Custom Actions", "Power Platform Connectors", "Teams Integration", "Generative Answers"] },
+            { "id": "ai-m365-copilot",     "label": "Microsoft 365 Copilot Extensibility","shared": false,"notes": "",                      "subSkills": ["Graph Connectors", "Copilot Agents (Teams Toolkit)", "Plugin Design"] }
+          ]
+        },
+        {
+          "id": "ai-frameworks",
+          "label": "AI Development Frameworks & Tooling",
+          "skills": [
+            { "id": "ai-langchain",         "label": "LangChain / LangGraph",     "shared": false, "notes": "",              "subSkills": ["Chain Design", "LCEL", "Agent Graphs", "Memory Patterns", "Tool Calling"] },
+            { "id": "shared-llamaindex",    "label": "LlamaIndex",                "shared": true,  "notes": "",              "subSkills": ["Data Connectors", "Index Types", "Query Engines", "Agents", "Observability"] },
+            { "id": "ai-semantic-kernel",   "label": "Semantic Kernel",           "shared": false, "notes": "Microsoft ecosystem", "subSkills": ["Kernel Setup", "Plugins", "Planners", "Memory", ".NET and Python SDK"] },
+            { "id": "ai-openai-sdk",        "label": "OpenAI SDK (Python/JS)",    "shared": false, "notes": "",              "subSkills": ["Chat Completions", "Function Calling", "Assistants API", "Streaming", "Embeddings API"] },
+            { "id": "shared-promptfoo",     "label": "Promptfoo",                 "shared": true,  "notes": "",              "subSkills": ["Test Case Design", "Provider Config", "Assertion Types", "CI Integration"] },
+            { "id": "shared-langsmith",     "label": "LangSmith",                 "shared": true,  "notes": "",              "subSkills": ["Tracing", "Dataset Management", "Evals", "Monitoring", "Feedback Collection"] },
+            { "id": "shared-n8n",           "label": "N8N / Workflow Automation", "shared": true,  "notes": "",              "subSkills": ["AI Node Integration", "Webhook Triggers", "Data Transformation", "Credential Management"] },
+            { "id": "ai-vector-dbs",        "label": "Vector Databases",          "shared": false, "notes": "",              "subSkills": ["Pinecone", "Qdrant", "Weaviate", "pgvector", "Chroma", "Index Design", "Metadata Filtering"] }
+          ]
+        },
+        {
+          "id": "ai-agentic",
+          "label": "Agentic AI & Multi-Agent Systems",
+          "skills": [
+            { "id": "ai-agent-arch",           "label": "Agent Architecture Design",     "shared": false, "notes": "2026 leading skill",  "subSkills": ["ReAct Pattern", "Plan-and-Execute", "Tool Use Design", "Agent State Management", "Memory (Short/Long-Term)"] },
+            { "id": "ai-multi-agent",          "label": "Multi-Agent Orchestration",     "shared": false, "notes": "",                   "subSkills": ["AutoGen", "CrewAI", "LangGraph Multi-Agent", "Agent Handoff", "Supervisory Agents"] },
+            { "id": "ai-tool-calling",         "label": "Tool / Function Calling",       "shared": false, "notes": "",                   "subSkills": ["Schema Design", "Input Validation", "Error Handling", "Tool Selection Strategy"] },
+            { "id": "ai-agent-observability",  "label": "Agent Observability",           "shared": false, "notes": "",                   "subSkills": ["Trace Capture", "Step-Level Logging", "Failure Analysis", "Cost Per Run"] },
+            { "id": "ai-mcp",                  "label": "Model Context Protocol (MCP)",  "shared": false, "notes": "Emerging 2026 standard","subSkills": ["MCP Server Design", "Tool Exposure", "Resource Definitions", "Integration Patterns"] }
+          ]
+        },
+        {
+          "id": "ai-security-governance",
+          "label": "AI Security, Governance & Ethics",
+          "skills": [
+            { "id": "ai-security",        "label": "AI Security",          "shared": false, "notes": "Critical enterprise skill",  "subSkills": ["Prompt Injection Defense", "Jailbreak Mitigation", "Input/Output Validation", "PII Detection", "Data Exfiltration Prevention"] },
+            { "id": "ai-responsible",     "label": "Responsible AI",       "shared": false, "notes": "",                           "subSkills": ["Bias Awareness", "Fairness Evaluation", "Transparency", "Human-in-the-Loop Design", "AI Impact Assessment"] },
+            { "id": "ai-content-safety",  "label": "Content Safety",       "shared": false, "notes": "",                           "subSkills": ["Azure Content Safety API", "Harm Categories", "Safety Filters", "Custom Blocklists"] },
+            { "id": "ai-governance",      "label": "AI Governance",        "shared": false, "notes": "",                           "subSkills": ["Model Versioning", "Audit Trails", "Access Control for AI Services", "Usage Monitoring", "Cost Guardrails"] },
+            { "id": "ai-data-privacy",    "label": "Data Privacy in AI",   "shared": false, "notes": "",                           "subSkills": ["PII Handling", "Data Residency", "Anonymization", "GDPR/HIPAA Considerations"] },
+            { "id": "ai-system-testing",  "label": "AI System Testing",    "shared": false, "notes": "",                           "subSkills": ["Adversarial Testing", "Red-Teaming", "Regression Evals", "A/B Testing Models"] }
+          ]
+        },
+        {
+          "id": "ai-mlops",
+          "label": "MLOps & AI Infrastructure",
+          "skills": [
+            { "id": "ai-mlops-concepts",   "label": "MLOps Concepts",                 "shared": false, "notes": "",              "subSkills": ["Model Versioning", "Feature Stores", "Data Lineage", "Model Drift", "Retraining Pipelines"] },
+            { "id": "ai-ml-pipelines",     "label": "AI/ML Pipelines",                "shared": false, "notes": "",              "subSkills": ["Azure ML Pipelines", "Kubeflow", "MLflow", "Experiment Tracking"] },
+            { "id": "ai-model-deployment", "label": "Model Deployment Patterns",      "shared": false, "notes": "",              "subSkills": ["Online Endpoints", "Batch Inference", "A/B Deployment", "Shadow Mode", "Canary Releases"] },
+            { "id": "ai-embedding-mgmt",   "label": "Embedding & Vector Management",  "shared": false, "notes": "",              "subSkills": ["Embedding Model Selection", "Chunking Strategy", "Index Refresh", "Incremental Updates"] },
+            { "id": "ai-llmops",           "label": "LLMOps",                         "shared": false, "notes": "Emerging 2026",  "subSkills": ["Prompt Versioning", "Model Swap Strategy", "Cost Monitoring", "Latency SLOs", "Feedback Loops"] }
+          ]
+        },
+        {
+          "id": "ai-app-dev",
+          "label": "AI Application Development",
+          "skills": [
+            { "id": "shared-python-ai",        "label": "Python for AI",                    "shared": true,  "notes": "",  "subSkills": ["Core Libraries (pandas, numpy)", "Async Patterns", "API Wrappers", "FastAPI", "Jupyter"] },
+            { "id": "shared-ts-ai",            "label": "TypeScript / JavaScript for AI",   "shared": true,  "notes": "",  "subSkills": ["Node.js AI SDKs", "Streaming Responses", "React AI Components", "Vercel AI SDK"] },
+            { "id": "ai-api-patterns",         "label": "API Integration Patterns",         "shared": false, "notes": "",  "subSkills": ["Webhook Ingestion", "Event-Driven AI", "Background Processing", "Queue-Based Inference"] },
+            { "id": "ai-doc-processing",       "label": "Document Processing",              "shared": false, "notes": "",  "subSkills": ["PDF Extraction", "OCR Pipelines", "HTML Parsing", "Chunking Strategies", "Metadata Enrichment"] },
+            { "id": "ai-search-knowledge",     "label": "Search & Knowledge Architecture",  "shared": false, "notes": "",  "subSkills": ["Hybrid Search Design", "Knowledge Graph Basics", "Ontology Design", "Taxonomy Management"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "pm",
+      "label": "Project Management",
+      "color": "#D85A30",
+      "categories": [
+        {
+          "id": "pm-frameworks",
+          "label": "Frameworks & Methodologies",
+          "skills": [
+            { "id": "pm-pmbok",        "label": "PMBOK / PMP",                   "shared": false, "notes": "Based on PMBOK 7th Ed",   "subSkills": ["Project Charter", "Scope Management", "Schedule Management", "Cost Management", "Quality Management", "Resource Management", "Risk Management", "Stakeholder Management", "Procurement"] },
+            { "id": "pm-pmbok7",       "label": "PMBOK 7 Principles",            "shared": false, "notes": "Principle-based shift",   "subSkills": ["Stewardship", "Team", "Stakeholders", "Value", "Systems Thinking", "Leadership", "Tailoring", "Quality", "Complexity", "Risk", "Adaptability", "Change"] },
+            { "id": "pm-agile-overview","label": "Agile Frameworks Overview",    "shared": false, "notes": "",                       "subSkills": ["Scrum", "Kanban", "SAFe", "LeSS", "Disciplined Agile (DA)", "Nexus"] },
+            { "id": "shared-scrum",    "label": "Scrum",                         "shared": true,  "notes": "",                       "subSkills": ["Roles (PO/SM/Dev Team)", "Events (Sprint/Planning/Daily/Review/Retro)", "Artifacts (PB/SB/Increment)", "DoD", "DoR"] },
+            { "id": "pm-kanban",       "label": "Kanban",                        "shared": false, "notes": "",                       "subSkills": ["WIP Limits", "Flow Metrics", "Service Classes", "Replenishment", "Throughput"] },
+            { "id": "pm-safe",         "label": "SAFe (Scaled Agile Framework)", "shared": false, "notes": "Awareness for large orgs","subSkills": ["PI Planning", "ART", "Program Increment", "Lean Portfolio Management"] },
+            { "id": "pm-hybrid",       "label": "Hybrid Project Delivery",       "shared": false, "notes": "",                       "subSkills": ["Agile-Waterfall Hybrid", "Phase Gates with Sprints", "Tailoring Approach"] }
+          ]
+        },
+        {
+          "id": "pm-scope",
+          "label": "Scope & Requirements Management",
+          "skills": [
+            { "id": "pm-scope-def",    "label": "Scope Definition",          "shared": false, "notes": "",  "subSkills": ["Project Charter", "Statement of Work", "WBS (Work Breakdown Structure)", "Scope Baseline"] },
+            { "id": "pm-requirements", "label": "Requirements Elicitation",  "shared": false, "notes": "",  "subSkills": ["Stakeholder Interviews", "User Stories", "Acceptance Criteria", "Functional vs Non-Functional Req."] },
+            { "id": "pm-change-control","label": "Change Control",           "shared": false, "notes": "",  "subSkills": ["Change Request Process", "Impact Assessment", "CCB (Change Control Board)", "Change Log"] },
+            { "id": "pm-backlog",      "label": "Backlog Management",        "shared": false, "notes": "",  "subSkills": ["Epic/Feature/Story Hierarchy", "Prioritization (MoSCoW, WSJF)", "Backlog Refinement", "Story Splitting"] }
+          ]
+        },
+        {
+          "id": "pm-schedule-cost",
+          "label": "Schedule & Cost Management",
+          "skills": [
+            { "id": "pm-scheduling",      "label": "Project Scheduling",        "shared": false, "notes": "",  "subSkills": ["Critical Path Method", "Network Diagrams", "Milestone Planning", "Schedule Compression (Crashing/Fast-Tracking)"] },
+            { "id": "pm-estimation",      "label": "Estimation",                "shared": false, "notes": "",  "subSkills": ["Story Points", "T-Shirt Sizing", "Planning Poker", "Analogous", "Parametric", "Bottom-Up"] },
+            { "id": "pm-evm",             "label": "Earned Value Management",   "shared": false, "notes": "",  "subSkills": ["CPI", "SPI", "EAC", "VAC", "TCPI"] },
+            { "id": "pm-resource-plan",   "label": "Resource Planning",         "shared": false, "notes": "",  "subSkills": ["RACI Matrix", "Resource Leveling", "Availability Matrix"] },
+            { "id": "pm-budget",          "label": "Budget Management",         "shared": false, "notes": "",  "subSkills": ["Cost Baseline", "Contingency Reserve", "Management Reserve", "Variance Analysis"] }
+          ]
+        },
+        {
+          "id": "pm-risk",
+          "label": "Risk Management",
+          "skills": [
+            { "id": "pm-risk-identification","label": "Risk Identification",      "shared": false, "notes": "",  "subSkills": ["Risk Register", "Brainstorming", "Checklists", "Expert Judgment", "Assumption Analysis"] },
+            { "id": "pm-risk-analysis",      "label": "Risk Analysis",            "shared": false, "notes": "",  "subSkills": ["Probability-Impact Matrix", "Qualitative vs Quantitative Analysis", "Monte Carlo (Awareness)"] },
+            { "id": "pm-risk-response",      "label": "Risk Response Planning",   "shared": false, "notes": "",  "subSkills": ["Avoid", "Mitigate", "Transfer", "Accept", "Escalate", "Contingency Plans"] },
+            { "id": "pm-issues",             "label": "Issue Management",         "shared": false, "notes": "",  "subSkills": ["Issue Log", "Escalation Path", "Resolution Tracking"] },
+            { "id": "pm-dependencies",       "label": "Dependencies Management",  "shared": false, "notes": "",  "subSkills": ["Dependency Map", "FS/FF/SS/SF Relationships", "External Dependency Tracking"] }
+          ]
+        },
+        {
+          "id": "pm-stakeholders",
+          "label": "Stakeholder & Communication Management",
+          "skills": [
+            { "id": "shared-stakeholder-analysis","label": "Stakeholder Analysis",    "shared": true,  "notes": "",  "subSkills": ["Stakeholder Register", "Power/Interest Grid", "Influence Mapping", "Engagement Assessment"] },
+            { "id": "pm-comms-planning",           "label": "Communication Planning",  "shared": false, "notes": "",  "subSkills": ["Comms Matrix", "Meeting Cadence", "Status Report Templates", "Escalation Protocol"] },
+            { "id": "pm-status-reporting",         "label": "Status Reporting",        "shared": false, "notes": "",  "subSkills": ["RAG Status", "Executive Summary", "Milestone Tracker", "Variance Explanation"] },
+            { "id": "pm-meeting-facilitation",     "label": "Meeting Facilitation",    "shared": false, "notes": "",  "subSkills": ["Agenda Design", "Decision Logging", "Action Item Tracking", "Time Management"] },
+            { "id": "pm-conflict",                 "label": "Conflict Resolution",     "shared": false, "notes": "",  "subSkills": ["Conflict Sources", "Collaborate", "Compromise", "Force", "Withdraw"] }
+          ]
+        },
+        {
+          "id": "pm-quality",
+          "label": "Quality & Governance",
+          "skills": [
+            { "id": "pm-quality-mgmt",         "label": "Quality Management",            "shared": false, "notes": "",  "subSkills": ["Quality Planning", "QA vs QC", "Inspection", "Lessons Learned", "Retrospectives"] },
+            { "id": "shared-definition-of-done","label": "Definition of Done / Ready",   "shared": true,  "notes": "",  "subSkills": ["DoD Criteria", "Acceptance Testing", "Sign-Off Process"] },
+            { "id": "pm-governance",            "label": "Project Governance",           "shared": false, "notes": "",  "subSkills": ["Steering Committee", "Decision Rights", "RACI", "Project Charter Approval"] },
+            { "id": "pm-lessons-learned",       "label": "Lessons Learned & Retrospectives","shared": false,"notes": "", "subSkills": ["Retro Formats", "Action Items", "Knowledge Base", "Improvement Cycles"] },
+            { "id": "pm-pmo",                   "label": "PMO Integration",              "shared": false, "notes": "",  "subSkills": ["PMO Types (Supportive/Controlling/Directive)", "Templates", "Portfolio Reporting"] }
+          ]
+        },
+        {
+          "id": "pm-tooling",
+          "label": "Project Management Tooling",
+          "skills": [
+            { "id": "pm-ms-project",           "label": "Microsoft Project",          "shared": false, "notes": "",  "subSkills": ["Gantt Charts", "Baseline", "Resource Assignment", "Critical Path View"] },
+            { "id": "shared-azure-devops-boards","label": "Azure DevOps Boards",       "shared": true,  "notes": "",  "subSkills": ["Epic/Feature/Story/Task", "Sprint Planning", "Capacity Planning", "Velocity", "Queries"] },
+            { "id": "pm-jira",                 "label": "Jira",                       "shared": false, "notes": "",  "subSkills": ["Project Types", "Backlog", "Sprint Boards", "Roadmap", "Automation", "Dashboards"] },
+            { "id": "pm-servicenow",           "label": "ServiceNow / ITSM",          "shared": false, "notes": "",  "subSkills": ["Change Management", "Incident Management", "Problem Management", "CMDB"] },
+            { "id": "shared-freshservice",     "label": "FreshService",               "shared": true,  "notes": "",  "subSkills": ["Ticket Management", "Service Catalog", "Change Advisory", "Asset Management"] },
+            { "id": "pm-planner",              "label": "Microsoft Planner / To-Do",  "shared": false, "notes": "",  "subSkills": ["Task Assignment", "Buckets", "Progress Tracking"] },
+            { "id": "pm-smartsheet",           "label": "Smartsheet",                 "shared": false, "notes": "",  "subSkills": ["Grid/Gantt/Card Views", "Automation", "Dashboards", "Forms"] },
+            { "id": "shared-confluence",       "label": "Confluence / Notion",        "shared": true,  "notes": "",  "subSkills": ["Documentation", "Meeting Notes", "Decision Logs", "Project Wikis"] }
+          ]
+        }
+      ]
+    }
+
+  ]
+}
