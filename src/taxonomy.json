@@ -18,12 +18,48 @@
           "id": "azure-cloud-identity",
           "label": "Identity & Security",
           "skills": [
-            { "id": "shared-entra-id",      "label": "Microsoft Entra ID",            "shared": true,  "notes": "Core to every Azure deployment", "subSkills": ["User/Group Management", "RBAC", "Conditional Access", "MFA", "SSO/SAML/OIDC", "Managed Identities", "App Registrations", "B2C vs B2B"] },
+            { "id": "shared-entra-id",
+              "label": "Microsoft Entra ID",
+              "shared": true,
+              "notes": "Core to every Azure deployment",
+              "subSkills": ["User/Group Management", "RBAC", "Conditional Access", "MFA", "SSO/SAML/OIDC", "Managed Identities", "App Registrations", "B2C vs B2B"],
+              "masteryLevels": [
+                "Can describe what Entra ID is and explain the difference between cloud-only and hybrid identity models to a colleague.",
+                "Creates users and groups, assigns RBAC roles, and configures a basic Conditional Access policy in a test tenant following documentation.",
+                "Manages Managed Identities for Azure workloads, configures SSO for SaaS applications, and enforces MFA via Conditional Access policies in production.",
+                "Designs multi-tenant identity architectures, implements Privileged Identity Management for just-in-time access, and diagnoses complex token flows and claims-mapping failures.",
+                "Defines the organisation's identity governance strategy; architects cross-tenant, B2B/B2C, and hybrid AD DS integration patterns; advises engineering teams on regulatory compliance requirements."
+              ],
+              "resources": [
+                { "title": "Microsoft Entra ID documentation", "url": "https://learn.microsoft.com/en-us/entra/identity/", "type": "Official docs" },
+                { "title": "What is Microsoft Entra ID?", "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whatis", "type": "Official docs" },
+                { "title": "Implement Microsoft Entra identity management — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/implement-identity-management-solution/", "type": "Course" }
+              ],
+              "cheatSheets": []
+            },
             { "id": "shared-azure-key-vault","label": "Azure Key Vault",              "shared": true,  "notes": "",                               "subSkills": ["Secrets Management", "Certificate Management", "Key Rotation", "Access Policies vs RBAC", "Private Link Integration"] },
             { "id": "azure-cloud-policy",   "label": "Azure Policy",                  "shared": false, "notes": "Governance critical",            "subSkills": ["Policy Definitions", "Initiatives", "Compliance Reporting", "Remediation Tasks", "Policy-as-Code"] },
             { "id": "azure-cloud-defender", "label": "Microsoft Defender for Cloud",  "shared": false, "notes": "",                               "subSkills": ["Security Posture (CSPM)", "Workload Protection (CWPP)", "Threat Detection", "Regulatory Compliance Dashboards"] },
             { "id": "azure-cloud-blueprints","label": "Azure Blueprints / Landing Zones","shared": false,"notes": "",                             "subSkills": ["Blueprint Definitions", "Landing Zone Architecture", "Management Group Structure", "Policy Inheritance"] },
-            { "id": "shared-zero-trust",    "label": "Zero Trust Architecture",       "shared": true,  "notes": "2026 market expectation",        "subSkills": ["Identity Verification", "Least Privilege", "Network Micro-segmentation", "Continuous Validation"] }
+            { "id": "shared-zero-trust",
+              "label": "Zero Trust Architecture",
+              "shared": true,
+              "notes": "2026 market expectation",
+              "subSkills": ["Identity Verification", "Least Privilege", "Network Micro-segmentation", "Continuous Validation"],
+              "masteryLevels": [
+                "Can describe the Zero Trust principle of 'never trust, always verify' and contrast it with traditional perimeter-based security to a non-technical audience.",
+                "Maps an organisation's existing controls against the NIST Zero Trust Architecture pillars and produces a gap analysis identifying the highest-priority remediation actions.",
+                "Implements Conditional Access policies, enforces least-privilege access via PIM and RBAC, and configures network micro-segmentation using NSGs and Private Endpoints to eliminate implicit trust from workloads.",
+                "Designs a Zero Trust architecture spanning identity, devices, applications, network, and data planes; integrates telemetry across all planes into a SIEM for continuous validation and automated response.",
+                "Leads an organisation's Zero Trust transformation programme; evaluates vendor solutions across all pillars, defines the multi-year target-state architecture, and presents strategy and measurable progress to executive stakeholders."
+              ],
+              "resources": [
+                { "title": "Microsoft Zero Trust guidance centre", "url": "https://learn.microsoft.com/en-us/security/zero-trust/", "type": "Official docs" },
+                { "title": "NIST SP 800-207: Zero Trust Architecture", "url": "https://csrc.nist.gov/publications/detail/sp/800/207/final", "type": "Official docs" },
+                { "title": "Zero Trust adoption framework — Microsoft", "url": "https://learn.microsoft.com/en-us/security/zero-trust/adopt/zero-trust-adoption-overview", "type": "Official docs" }
+              ],
+              "cheatSheets": []
+            }
           ]
         },
         {
@@ -88,13 +124,49 @@
           "id": "azure-cloud-iac",
           "label": "Infrastructure as Code & Automation",
           "skills": [
-            { "id": "shared-bicep",                       "label": "Azure Bicep",              "shared": true,  "notes": "Primary IaC for Azure",  "subSkills": ["Module Design", "Parameter Files", "Deployment Stacks", "What-If", "Registry"] },
+            { "id": "shared-bicep",
+              "label": "Azure Bicep",
+              "shared": true,
+              "notes": "Primary IaC for Azure",
+              "subSkills": ["Module Design", "Parameter Files", "Deployment Stacks", "What-If", "Registry"],
+              "masteryLevels": [
+                "Can read a Bicep file and explain what each resource declaration, parameter, and variable does without writing one independently.",
+                "Deploys a single Azure resource end-to-end by authoring a Bicep file with parameters, outputs, and a parameter file using the official documentation.",
+                "Authors multi-file Bicep deployments with reusable child modules, runs what-if before every production change, and integrates Bicep linting into a CI pipeline.",
+                "Designs and publishes a versioned module registry consumed across teams, implements deployment stacks for lifecycle-managed resource groups, and enforces tagging and policy compliance at the module layer.",
+                "Architects the organisation's entire IaC estate in Bicep; defines module versioning and governance strategy; evaluates new Bicep features to steer tooling decisions; mentors engineers on complex patterns including subscription and management-group scoped deployments."
+              ],
+              "resources": [
+                { "title": "Azure Bicep documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview", "type": "Official docs" },
+                { "title": "Fundamentals of Bicep — Microsoft Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/", "type": "Course" },
+                { "title": "Bicep best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices", "type": "Official docs" }
+              ],
+              "cheatSheets": []
+            },
             { "id": "azure-cloud-arm",                    "label": "Azure Resource Manager (ARM)","shared": false,"notes": "Legacy but relevant", "subSkills": ["Template Structure", "Linked Templates", "Deployment Modes"] },
             { "id": "shared-terraform",                   "label": "Terraform",                "shared": true,  "notes": "",                       "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"] },
             { "id": "shared-azure-cli",                   "label": "Azure CLI",                "shared": true,  "notes": "",                       "subSkills": ["Resource Management", "Scripting", "JMESPath Queries"] },
             { "id": "shared-powershell",                  "label": "PowerShell / Az Module",   "shared": true,  "notes": "",                       "subSkills": ["Az PowerShell", "DSC", "Runbooks"] },
             { "id": "shared-azure-devops-pipelines",      "label": "Azure DevOps Pipelines",   "shared": true,  "notes": "",                       "subSkills": ["YAML Pipelines", "Service Connections", "Library Groups", "Environments", "Approvals"] },
-            { "id": "shared-github-actions",              "label": "GitHub Actions",           "shared": true,  "notes": "",                       "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management"] }
+            { "id": "shared-github-actions",
+              "label": "GitHub Actions",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management"],
+              "masteryLevels": [
+                "Can explain how a GitHub Actions workflow is triggered, identify jobs and steps in an existing YAML file, and describe the event-driven execution model.",
+                "Writes a workflow from a template that runs on push events, calls marketplace actions, and builds and tests a simple project without manual guidance.",
+                "Authors reusable workflows, configures OIDC-based authentication to Azure or AWS without long-lived secrets, manages environment-specific variables, and implements matrix builds for multi-platform CI.",
+                "Designs multi-stage deployment pipelines with environment protection rules, self-hosted runners, composite actions, and caching strategies that materially reduce pipeline duration.",
+                "Architects the CI/CD platform across an organisation using GitHub Actions; defines reusable workflow libraries, enforces security posture via required workflows, and optimises runner cost and performance at scale."
+              ],
+              "resources": [
+                { "title": "GitHub Actions documentation", "url": "https://docs.github.com/en/actions", "type": "Official docs" },
+                { "title": "Configuring OIDC in Azure — GitHub Docs", "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-azure", "type": "Official docs" },
+                { "title": "GitHub Skills — GitHub Actions courses", "url": "https://skills.github.com/", "type": "Course" }
+              ],
+              "cheatSheets": []
+            }
           ]
         },
         {
@@ -146,7 +218,25 @@
             { "id": "aws-guardduty",      "label": "Amazon GuardDuty",           "shared": false, "notes": "",                     "subSkills": ["Threat Detection", "Finding Types", "Integration with Security Hub"] },
             { "id": "aws-shield-waf",     "label": "AWS Shield / WAF",           "shared": false, "notes": "",                     "subSkills": ["Shield Standard vs Advanced", "WAF Rules", "Managed Rule Groups", "Rate Limiting"] },
             { "id": "aws-config",         "label": "AWS Config",                 "shared": false, "notes": "",                     "subSkills": ["Config Rules", "Conformance Packs", "Remediation Actions"] },
-            { "id": "shared-zero-trust",  "label": "Zero Trust Architecture",    "shared": true,  "notes": "2026 expectation",     "subSkills": ["Identity Verification", "Least Privilege", "Network Micro-segmentation", "Continuous Validation"] }
+            { "id": "shared-zero-trust",
+              "label": "Zero Trust Architecture",
+              "shared": true,
+              "notes": "2026 expectation",
+              "subSkills": ["Identity Verification", "Least Privilege", "Network Micro-segmentation", "Continuous Validation"],
+              "masteryLevels": [
+                "Can describe the Zero Trust principle of 'never trust, always verify' and contrast it with traditional perimeter-based security to a non-technical audience.",
+                "Maps an organisation's existing controls against the NIST Zero Trust Architecture pillars and produces a gap analysis identifying the highest-priority remediation actions.",
+                "Implements Conditional Access policies, enforces least-privilege access via PIM and RBAC, and configures network micro-segmentation using NSGs and Private Endpoints to eliminate implicit trust from workloads.",
+                "Designs a Zero Trust architecture spanning identity, devices, applications, network, and data planes; integrates telemetry across all planes into a SIEM for continuous validation and automated response.",
+                "Leads an organisation's Zero Trust transformation programme; evaluates vendor solutions across all pillars, defines the multi-year target-state architecture, and presents strategy and measurable progress to executive stakeholders."
+              ],
+              "resources": [
+                { "title": "Microsoft Zero Trust guidance centre", "url": "https://learn.microsoft.com/en-us/security/zero-trust/", "type": "Official docs" },
+                { "title": "NIST SP 800-207: Zero Trust Architecture", "url": "https://csrc.nist.gov/publications/detail/sp/800/207/final", "type": "Official docs" },
+                { "title": "Zero Trust adoption framework — Microsoft", "url": "https://learn.microsoft.com/en-us/security/zero-trust/adopt/zero-trust-adoption-overview", "type": "Official docs" }
+              ],
+              "cheatSheets": []
+            }
           ]
         },
         {
@@ -205,7 +295,25 @@
             { "id": "aws-cli",               "label": "AWS CLI",                          "shared": false, "notes": "",                       "subSkills": ["Resource Management", "Profiles", "Output Formatting"] },
             { "id": "aws-systems-manager",   "label": "AWS Systems Manager",              "shared": false, "notes": "",                       "subSkills": ["Parameter Store", "Session Manager", "Run Command", "Patch Manager", "Automation Documents"] },
             { "id": "aws-codepipeline",      "label": "AWS CodePipeline / CodeBuild / CodeDeploy","shared": false,"notes": "",              "subSkills": ["Pipeline Structure", "Build Specs", "Deployment Strategies"] },
-            { "id": "shared-github-actions", "label": "GitHub Actions",                  "shared": true,  "notes": "",                       "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management"] }
+            { "id": "shared-github-actions",
+              "label": "GitHub Actions",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management"],
+              "masteryLevels": [
+                "Can explain how a GitHub Actions workflow is triggered, identify jobs and steps in an existing YAML file, and describe the event-driven execution model.",
+                "Writes a workflow from a template that runs on push events, calls marketplace actions, and builds and tests a simple project without manual guidance.",
+                "Authors reusable workflows, configures OIDC-based authentication to Azure or AWS without long-lived secrets, manages environment-specific variables, and implements matrix builds for multi-platform CI.",
+                "Designs multi-stage deployment pipelines with environment protection rules, self-hosted runners, composite actions, and caching strategies that materially reduce pipeline duration.",
+                "Architects the CI/CD platform across an organisation using GitHub Actions; defines reusable workflow libraries, enforces security posture via required workflows, and optimises runner cost and performance at scale."
+              ],
+              "resources": [
+                { "title": "GitHub Actions documentation", "url": "https://docs.github.com/en/actions", "type": "Official docs" },
+                { "title": "Configuring OIDC in Azure — GitHub Docs", "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-azure", "type": "Official docs" },
+                { "title": "GitHub Skills — GitHub Actions courses", "url": "https://skills.github.com/", "type": "Course" }
+              ],
+              "cheatSheets": []
+            }
           ]
         },
         {
@@ -333,7 +441,25 @@
           "label": "CI/CD & GitOps",
           "skills": [
             { "id": "shared-github",                      "label": "GitHub (Core)",                  "shared": true,  "notes": "",  "subSkills": ["Repository Management", "Branch Strategy", "PR Reviews", "Code Owners"] },
-            { "id": "shared-github-actions",              "label": "GitHub Actions",                 "shared": true,  "notes": "",  "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management", "Self-Hosted Runners"] },
+            { "id": "shared-github-actions",
+              "label": "GitHub Actions",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["OIDC Authentication", "Workflow Design", "Reusable Workflows", "Matrix Builds", "Secrets Management", "Self-Hosted Runners"],
+              "masteryLevels": [
+                "Can explain how a GitHub Actions workflow is triggered, identify jobs and steps in an existing YAML file, and describe the event-driven execution model.",
+                "Writes a workflow from a template that runs on push events, calls marketplace actions, and builds and tests a simple project without manual guidance.",
+                "Authors reusable workflows, configures OIDC-based authentication to Azure or AWS without long-lived secrets, manages environment-specific variables, and implements matrix builds for multi-platform CI.",
+                "Designs multi-stage deployment pipelines with environment protection rules, self-hosted runners, composite actions, and caching strategies that materially reduce pipeline duration.",
+                "Architects the CI/CD platform across an organisation using GitHub Actions; defines reusable workflow libraries, enforces security posture via required workflows, and optimises runner cost and performance at scale."
+              ],
+              "resources": [
+                { "title": "GitHub Actions documentation", "url": "https://docs.github.com/en/actions", "type": "Official docs" },
+                { "title": "Configuring OIDC in Azure — GitHub Docs", "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-azure", "type": "Official docs" },
+                { "title": "GitHub Skills — GitHub Actions courses", "url": "https://skills.github.com/", "type": "Course" }
+              ],
+              "cheatSheets": []
+            },
             { "id": "shared-github-advanced-security",    "label": "GitHub Advanced Security",       "shared": true,  "notes": "",  "subSkills": ["Code Scanning (CodeQL)", "Secret Scanning", "Dependabot", "Security Overview"] },
             { "id": "platform-github-projects",           "label": "GitHub Projects",                "shared": false, "notes": "",  "subSkills": ["Kanban Boards", "Automation", "Roadmap Views", "Status Fields"] },
             { "id": "platform-github-packages",           "label": "GitHub Packages",                "shared": false, "notes": "",  "subSkills": ["Container Registry", "npm/Maven/NuGet Packages", "Package Visibility"] },
@@ -352,7 +478,25 @@
           "skills": [
             { "id": "shared-terraform",          "label": "Terraform",          "shared": true,  "notes": "Deep skill",     "subSkills": ["Provider Configuration", "Resource Lifecycle", "State Management (Remote)", "Modules", "Workspaces", "Terragrunt", "Drift Detection"] },
             { "id": "platform-terraform-testing","label": "Terraform: Testing", "shared": false, "notes": "",              "subSkills": ["Terratest", "Checkov", "tflint", "Pre-commit Hooks"] },
-            { "id": "shared-bicep",              "label": "Azure Bicep",        "shared": true,  "notes": "",              "subSkills": ["Module Registry", "Deployment Stacks", "What-If", "Scope (Subscription/RG/Tenant)"] },
+            { "id": "shared-bicep",
+              "label": "Azure Bicep",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Module Registry", "Deployment Stacks", "What-If", "Scope (Subscription/RG/Tenant)"],
+              "masteryLevels": [
+                "Can read a Bicep file and explain what each resource declaration, parameter, and variable does without writing one independently.",
+                "Deploys a single Azure resource end-to-end by authoring a Bicep file with parameters, outputs, and a parameter file using the official documentation.",
+                "Authors multi-file Bicep deployments with reusable child modules, runs what-if before every production change, and integrates Bicep linting into a CI pipeline.",
+                "Designs and publishes a versioned module registry consumed across teams, implements deployment stacks for lifecycle-managed resource groups, and enforces tagging and policy compliance at the module layer.",
+                "Architects the organisation's entire IaC estate in Bicep; defines module versioning and governance strategy; evaluates new Bicep features to steer tooling decisions; mentors engineers on complex patterns including subscription and management-group scoped deployments."
+              ],
+              "resources": [
+                { "title": "Azure Bicep documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview", "type": "Official docs" },
+                { "title": "Fundamentals of Bicep — Microsoft Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/", "type": "Course" },
+                { "title": "Bicep best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices", "type": "Official docs" }
+              ],
+              "cheatSheets": []
+            },
             { "id": "platform-pulumi",           "label": "Pulumi",             "shared": false, "notes": "Growing relevance","subSkills": ["TypeScript/Python SDKs", "State Management"] },
             { "id": "platform-ansible",          "label": "Ansible",            "shared": false, "notes": "Hybrid infra critical","subSkills": ["Playbooks", "Roles", "Inventory", "Vault", "Dynamic Inventory", "AWX/AAP"] },
             { "id": "platform-crossplane",       "label": "Crossplane",         "shared": false, "notes": "Emerging 2026", "subSkills": ["Composite Resources", "Providers", "Managed Resources", "GitOps Integration"] },
@@ -415,7 +559,25 @@
           "id": "ai-llm-fundamentals",
           "label": "LLM Fundamentals",
           "skills": [
-            { "id": "ai-llm-concepts",      "label": "Large Language Model Concepts", "shared": false, "notes": "Foundation",                    "subSkills": ["Transformer Architecture (Awareness)", "Tokenization", "Context Window", "Temperature/Top-P", "Fine-tuning vs In-Context Learning", "Hallucination Patterns"] },
+            { "id": "ai-llm-concepts",
+              "label": "Large Language Model Concepts",
+              "shared": false,
+              "notes": "Foundation",
+              "subSkills": ["Transformer Architecture (Awareness)", "Tokenization", "Context Window", "Temperature/Top-P", "Fine-tuning vs In-Context Learning", "Hallucination Patterns"],
+              "masteryLevels": [
+                "Can explain what a large language model is, describe its input-output behaviour, and articulate common use cases without needing to understand the underlying mechanics.",
+                "Calls an LLM API with a system and user prompt, adjusts temperature and max tokens to change output style, and identifies hallucinations by cross-checking model output against known facts.",
+                "Designs effective system prompts for production use cases, applies chain-of-thought prompting to improve reasoning quality, and makes informed model selection decisions based on cost, latency, and capability tradeoffs.",
+                "Evaluates model outputs against custom benchmarks, mitigates prompt injection and hallucination at the system level, and optimises context window usage to balance quality and cost in high-volume applications.",
+                "Defines the organisation's LLM integration strategy; evaluates new model releases against production requirements; sets standards for responsible AI use, evaluation frameworks, and cost governance across engineering teams."
+              ],
+              "resources": [
+                { "title": "Anthropic prompt engineering overview", "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview", "type": "Official docs" },
+                { "title": "OpenAI developer platform documentation", "url": "https://platform.openai.com/docs/introduction", "type": "Official docs" },
+                { "title": "Andrej Karpathy — Intro to Large Language Models (YouTube)", "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g", "type": "Video" }
+              ],
+              "cheatSheets": []
+            },
             { "id": "ai-prompt-engineering","label": "Prompt Engineering",           "shared": false, "notes": "Practitioner-level expectation",  "subSkills": ["Zero/One/Few-Shot Prompting", "Chain-of-Thought", "System Prompt Design", "Prompt Injection Defense", "Output Structuring"] },
             { "id": "ai-rag",               "label": "Retrieval-Augmented Generation (RAG)","shared": false,"notes": "Core 2026 skill",          "subSkills": ["Chunking Strategies", "Embedding Models", "Vector Search", "Re-ranking", "Hybrid Search", "Context Window Management", "Evals"] },
             { "id": "ai-llm-eval",          "label": "LLM Evaluation",               "shared": false, "notes": "Growing importance",             "subSkills": ["Promptfoo", "LangSmith Evals", "RAGAS", "Custom Eval Harnesses", "Benchmark Design"] },
