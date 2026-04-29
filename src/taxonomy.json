@@ -576,13 +576,109 @@
                 { "title": "OpenAI developer platform documentation", "url": "https://platform.openai.com/docs/introduction", "type": "Official docs" },
                 { "title": "Andrej Karpathy — Intro to Large Language Models (YouTube)", "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g", "type": "Video" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             },
-            { "id": "ai-prompt-engineering","label": "Prompt Engineering",           "shared": false, "notes": "Practitioner-level expectation",  "subSkills": ["Zero/One/Few-Shot Prompting", "Chain-of-Thought", "System Prompt Design", "Prompt Injection Defense", "Output Structuring"] },
-            { "id": "ai-rag",               "label": "Retrieval-Augmented Generation (RAG)","shared": false,"notes": "Core 2026 skill",          "subSkills": ["Chunking Strategies", "Embedding Models", "Vector Search", "Re-ranking", "Hybrid Search", "Context Window Management", "Evals"] },
-            { "id": "ai-llm-eval",          "label": "LLM Evaluation",               "shared": false, "notes": "Growing importance",             "subSkills": ["Promptfoo", "LangSmith Evals", "RAGAS", "Custom Eval Harnesses", "Benchmark Design"] },
-            { "id": "ai-model-selection",   "label": "Model Selection",              "shared": false, "notes": "",                               "subSkills": ["GPT-4o", "Claude Sonnet/Opus", "Mistral", "Llama 3", "Gemini", "Cost/Latency/Quality Tradeoffs", "On-Prem vs Cloud"] },
-            { "id": "ai-token-economics",   "label": "Token Economics",              "shared": false, "notes": "",                               "subSkills": ["Token Counting", "Cost Modeling", "Latency Optimization", "Streaming", "Batching"] }
+            { "id": "ai-prompt-engineering",
+              "label": "Prompt Engineering",
+              "shared": false,
+              "notes": "Practitioner-level expectation",
+              "subSkills": ["Zero/One/Few-Shot Prompting", "Chain-of-Thought", "System Prompt Design", "Prompt Injection Defense", "Output Structuring"],
+              "masteryLevels": [
+                "Can describe the difference between zero-shot, few-shot, and chain-of-thought prompting and explain when each approach is most appropriate.",
+                "Writes basic system and user prompts that reliably produce structured outputs from an LLM, and iterates on failures using a test environment without manual guidance.",
+                "Designs and versions production system prompts for specific use cases, applies chain-of-thought reasoning to improve multi-step accuracy, and identifies and defends against prompt injection in user-facing inputs.",
+                "Systematically evaluates prompt performance across model versions using a test harness, implements self-consistency and meta-prompting patterns, and maintains prompt quality and safety at high request volumes.",
+                "Defines the organisation's prompt engineering standards and review cadence; publishes reusable prompt libraries consumed across teams; advises on model-specific prompting strategies as new frontier models are released."
+              ],
+              "resources": [
+                { "title": "Anthropic prompt engineering guide", "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview", "type": "Official docs" },
+                { "title": "OpenAI prompt engineering guide", "url": "https://platform.openai.com/docs/guides/prompt-engineering", "type": "Official docs" },
+                { "title": "Prompt Engineering Guide — DAIR.AI", "url": "https://www.promptingguide.ai/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-rag",
+              "label": "Retrieval-Augmented Generation (RAG)",
+              "shared": false,
+              "notes": "Core 2026 skill",
+              "subSkills": ["Chunking Strategies", "Embedding Models", "Vector Search", "Re-ranking", "Hybrid Search", "Context Window Management", "Evals"],
+              "masteryLevels": [
+                "Can explain what RAG is, why it reduces hallucinations compared to relying on model knowledge alone, and how it differs from fine-tuning as an approach.",
+                "Builds a basic RAG pipeline that chunks source documents, generates embeddings, stores them in a vector database, and retrieves relevant chunks to answer questions.",
+                "Implements hybrid search combining dense and sparse retrieval, applies re-ranking to improve retrieval precision, tunes chunk size and overlap for different document types, and measures end-to-end quality using RAGAS.",
+                "Designs production RAG systems over millions of documents, implements advanced retrieval strategies such as HyDE, multi-query retrieval, and contextual compression, and builds independent evaluation pipelines for retrieval and generation quality separately.",
+                "Architects the organisation's knowledge retrieval platform; defines embedding model selection criteria and chunking standards; evaluates retrieval architecture tradeoffs at scale; mentors engineers on domain-specific RAG design patterns."
+              ],
+              "resources": [
+                { "title": "LangChain RAG tutorial", "url": "https://python.langchain.com/docs/tutorials/rag/", "type": "Official docs" },
+                { "title": "RAGAS — RAG evaluation framework", "url": "https://docs.ragas.io/en/latest/", "type": "Official docs" },
+                { "title": "Anthropic — Contextual Retrieval", "url": "https://www.anthropic.com/news/contextual-retrieval", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-llm-eval",
+              "label": "LLM Evaluation",
+              "shared": false,
+              "notes": "Growing importance",
+              "subSkills": ["Promptfoo", "LangSmith Evals", "RAGAS", "Custom Eval Harnesses", "Benchmark Design"],
+              "masteryLevels": [
+                "Can explain why LLM evaluation is necessary, describe the difference between automated and human evaluation, and name at least two frameworks used in the field.",
+                "Runs an evaluation suite against a prompt using Promptfoo or LangSmith Evals, interprets pass/fail results, and uses findings to improve prompt quality.",
+                "Designs a custom evaluation harness with task-specific assertions, integrates eval runs into a CI pipeline to catch prompt regressions before deployment, and measures RAG quality with RAGAS metrics.",
+                "Builds and curates a benchmark dataset representative of production traffic, tracks model and prompt quality across releases over time, and implements LLM-as-judge evaluation for complex qualitative outputs.",
+                "Defines the organisation's evaluation philosophy and toolchain; designs evaluation frameworks for novel task types with no existing benchmarks; presents evaluation evidence to leadership to inform model selection and deployment decisions."
+              ],
+              "resources": [
+                { "title": "Promptfoo documentation", "url": "https://www.promptfoo.dev/docs/intro/", "type": "Official docs" },
+                { "title": "LangSmith evaluation documentation", "url": "https://docs.smith.langchain.com/evaluation", "type": "Official docs" },
+                { "title": "RAGAS documentation", "url": "https://docs.ragas.io/en/latest/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-model-selection",
+              "label": "Model Selection",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["GPT-4o", "Claude Sonnet/Opus", "Mistral", "Llama 3", "Gemini", "Cost/Latency/Quality Tradeoffs", "On-Prem vs Cloud"],
+              "masteryLevels": [
+                "Can name the leading frontier model families and their providers, and explain that model selection involves tradeoffs between cost, latency, capability, context window size, and data residency requirements.",
+                "Evaluates two or three candidate models on a specific task using a benchmark leaderboard and manual testing, and documents a justified selection recommendation based on measured tradeoffs.",
+                "Selects the appropriate model tier for each component of an application, benchmarks candidates against real production prompts, and accounts for pricing and context window limits when planning for scale.",
+                "Designs a model routing strategy that dispatches tasks to different models based on complexity and cost budget, evaluates fine-tuned and on-premises options, and maintains an evaluation registry tracking model performance across versions over time.",
+                "Defines the organisation's model strategy; tracks the frontier landscape and translates capability announcements into actionable engineering guidance; leads model migration projects when better options emerge; negotiates enterprise agreements with model providers."
+              ],
+              "resources": [
+                { "title": "Artificial Analysis LLM benchmark leaderboard", "url": "https://artificialanalysis.ai/", "type": "Official docs" },
+                { "title": "LMSYS Chatbot Arena leaderboard", "url": "https://lmarena.ai/", "type": "Official docs" },
+                { "title": "OpenRouter — model pricing and specs", "url": "https://openrouter.ai/models", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-token-economics",
+              "label": "Token Economics",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Token Counting", "Cost Modeling", "Latency Optimization", "Streaming", "Batching"],
+              "masteryLevels": [
+                "Can explain what tokens are, how they determine API cost and response latency, and why token count matters when designing prompts or choosing a model.",
+                "Uses a tokenizer library to count tokens before sending requests, calculates estimated monthly API cost for a given usage pattern, and identifies the most token-expensive components of a prompt.",
+                "Implements streaming responses to improve perceived latency, uses batch inference APIs for async workloads to reduce cost, and compresses prompt templates to cut token consumption without degrading output quality.",
+                "Designs a cost attribution system tracking LLM spend per feature or user, implements prompt caching and semantic caching to eliminate redundant token usage, and models cost at scale to inform product pricing and margin decisions.",
+                "Defines the organisation's LLM cost governance framework; implements showback and chargeback for API usage across teams; sets cost-per-query SLOs for production services; advises on reserved capacity and committed-use agreements with model providers."
+              ],
+              "resources": [
+                { "title": "OpenAI Tiktoken tokenizer library", "url": "https://github.com/openai/tiktoken", "type": "Official docs" },
+                { "title": "Anthropic prompt caching documentation", "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching", "type": "Official docs" },
+                { "title": "Anthropic model pricing", "url": "https://www.anthropic.com/pricing", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
@@ -604,37 +700,398 @@
           "id": "ai-frameworks",
           "label": "AI Development Frameworks & Tooling",
           "skills": [
-            { "id": "ai-langchain",         "label": "LangChain / LangGraph",     "shared": false, "notes": "",              "subSkills": ["Chain Design", "LCEL", "Agent Graphs", "Memory Patterns", "Tool Calling"] },
-            { "id": "shared-llamaindex",    "label": "LlamaIndex",                "shared": true,  "notes": "",              "subSkills": ["Data Connectors", "Index Types", "Query Engines", "Agents", "Observability"] },
-            { "id": "ai-semantic-kernel",   "label": "Semantic Kernel",           "shared": false, "notes": "Microsoft ecosystem", "subSkills": ["Kernel Setup", "Plugins", "Planners", "Memory", ".NET and Python SDK"] },
-            { "id": "ai-openai-sdk",        "label": "OpenAI SDK (Python/JS)",    "shared": false, "notes": "",              "subSkills": ["Chat Completions", "Function Calling", "Assistants API", "Streaming", "Embeddings API"] },
-            { "id": "shared-promptfoo",     "label": "Promptfoo",                 "shared": true,  "notes": "",              "subSkills": ["Test Case Design", "Provider Config", "Assertion Types", "CI Integration"] },
-            { "id": "shared-langsmith",     "label": "LangSmith",                 "shared": true,  "notes": "",              "subSkills": ["Tracing", "Dataset Management", "Evals", "Monitoring", "Feedback Collection"] },
-            { "id": "shared-n8n",           "label": "N8N / Workflow Automation", "shared": true,  "notes": "",              "subSkills": ["AI Node Integration", "Webhook Triggers", "Data Transformation", "Credential Management"] },
-            { "id": "ai-vector-dbs",        "label": "Vector Databases",          "shared": false, "notes": "",              "subSkills": ["Pinecone", "Qdrant", "Weaviate", "pgvector", "Chroma", "Index Design", "Metadata Filtering"] }
+            { "id": "ai-langchain",
+              "label": "LangChain / LangGraph",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Chain Design", "LCEL", "Agent Graphs", "Memory Patterns", "Tool Calling"],
+              "masteryLevels": [
+                "Can explain what LangChain is, describe the difference between a chain and an agent, and identify when LangGraph would be chosen over a simple LangChain sequence.",
+                "Builds a basic LCEL chain that retrieves documents, formats them into a prompt, and streams a response to a user following the LangChain documentation.",
+                "Designs stateful agent graphs in LangGraph with conditional routing between nodes, implements both in-context and persistent memory patterns, and integrates tool calling to handle multi-step tasks.",
+                "Architects production LangGraph applications with human-in-the-loop interruption points, optimises token usage across graph nodes, and instruments the application with LangSmith for trace-level debugging of complex graph executions.",
+                "Defines the organisation's LangChain and LangGraph architecture patterns; evaluates new framework releases and breaking changes; makes the build-versus-framework call for complex orchestration; mentors engineers on graph design tradeoffs."
+              ],
+              "resources": [
+                { "title": "LangChain documentation", "url": "https://python.langchain.com/docs/introduction/", "type": "Official docs" },
+                { "title": "LangGraph documentation", "url": "https://langchain-ai.github.io/langgraph/", "type": "Official docs" },
+                { "title": "LangChain Academy — Introduction to LangGraph", "url": "https://academy.langchain.com/courses/intro-to-langgraph", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-llamaindex",
+              "label": "LlamaIndex",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Data Connectors", "Index Types", "Query Engines", "Agents", "Observability"],
+              "masteryLevels": [
+                "Can explain what LlamaIndex does, describe how its emphasis on data indexing differs from LangChain, and identify the three core abstractions: data connectors, indexes, and query engines.",
+                "Builds a LlamaIndex application that ingests documents using a built-in data connector, creates a vector index, and answers questions over the indexed data following the quickstart guide.",
+                "Configures custom data connectors for structured and unstructured sources, selects the appropriate index type for the retrieval task, and builds a query engine with response synthesis tuned to the content domain.",
+                "Designs a LlamaIndex agentic application using function-calling patterns over multiple data sources, implements observability with LlamaTrace, and optimises the retrieval-to-response pipeline for both latency and cost.",
+                "Architects the organisation's data indexing and retrieval layer using LlamaIndex; defines connector and index design standards; evaluates LlamaIndex's workflow capabilities against production requirements; leads framework migration decisions as the API evolves."
+              ],
+              "resources": [
+                { "title": "LlamaIndex documentation", "url": "https://docs.llamaindex.ai/", "type": "Official docs" },
+                { "title": "LlamaIndex starter tutorial", "url": "https://docs.llamaindex.ai/en/stable/getting_started/starter_example/", "type": "Official docs" },
+                { "title": "LlamaIndex GitHub — examples and community", "url": "https://github.com/run-llama/llama_index", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-semantic-kernel",
+              "label": "Semantic Kernel",
+              "shared": false,
+              "notes": "Microsoft ecosystem",
+              "subSkills": ["Kernel Setup", "Plugins", "Planners", "Memory", ".NET and Python SDK"],
+              "masteryLevels": [
+                "Can explain what Semantic Kernel is, describe its role in the Microsoft AI ecosystem alongside Azure OpenAI, and identify the three core abstractions: the kernel, plugins, and planners.",
+                "Sets up a Semantic Kernel kernel in Python or C#, registers a native function as a plugin, and invokes it from a prompt template following the Microsoft documentation.",
+                "Builds an AI application using Semantic Kernel that orchestrates multiple plugins, configures a planner to auto-select tools for a given user goal, and integrates memory for conversation history persistence.",
+                "Architects a production Semantic Kernel application with custom plugin libraries, implements function calling patterns that chain LLM reasoning with business logic, and authenticates to Azure OpenAI Service using managed identity.",
+                "Defines the organisation's Semantic Kernel integration standards; evaluates new SDK releases for breaking changes and new capabilities; designs plugin libraries that expose internal business capabilities to AI systems; leads migration planning across major versions."
+              ],
+              "resources": [
+                { "title": "Semantic Kernel documentation — Microsoft Learn", "url": "https://learn.microsoft.com/en-us/semantic-kernel/overview/", "type": "Official docs" },
+                { "title": "Semantic Kernel GitHub repository", "url": "https://github.com/microsoft/semantic-kernel", "type": "Official docs" },
+                { "title": "Develop AI agents with Semantic Kernel — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure-open-ai-semantic-kernel-sdk/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-openai-sdk",
+              "label": "OpenAI SDK (Python/JS)",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Chat Completions", "Function Calling", "Assistants API", "Streaming", "Embeddings API"],
+              "masteryLevels": [
+                "Can describe the structure of a Chat Completions API request, explain the role of system, user, and assistant message types, and identify the main OpenAI API endpoints and their purposes.",
+                "Makes authenticated API calls using the OpenAI Python or JavaScript SDK, constructs a multi-turn conversation by maintaining a message history array, and handles common API errors with basic retry logic.",
+                "Implements function calling to extend model responses with live data, streams completions to reduce perceived latency, and generates embeddings for semantic search or text classification use cases.",
+                "Builds production applications using the Assistants API with persistent threads and file attachments, implements token-efficient conversation management strategies, and routes simpler sub-tasks to cheaper models to manage cost.",
+                "Defines the organisation's OpenAI SDK usage patterns, error handling standards, and retry strategies; evaluates new API capabilities for production adoption; mentors engineers on cost optimisation and responsible API usage at scale."
+              ],
+              "resources": [
+                { "title": "OpenAI API reference", "url": "https://platform.openai.com/docs/api-reference", "type": "Official docs" },
+                { "title": "OpenAI Python SDK", "url": "https://github.com/openai/openai-python", "type": "Official docs" },
+                { "title": "OpenAI cookbook", "url": "https://cookbook.openai.com/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-promptfoo",
+              "label": "Promptfoo",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Test Case Design", "Provider Config", "Assertion Types", "CI Integration"],
+              "masteryLevels": [
+                "Can explain what Promptfoo does, describe how it differs from manual prompt testing, and identify the main output dimensions it evaluates — factual accuracy, safety, format compliance, and latency.",
+                "Installs Promptfoo, configures a provider connection to an LLM API, and runs a basic eval suite with at least two test cases and pass/fail assertions against expected outputs.",
+                "Designs a comprehensive test suite using varied assertion types (contains, similarity, LLM-as-judge, regex), configures multiple providers to compare model outputs side by side, and integrates Promptfoo runs into a CI pipeline to catch regressions on every commit.",
+                "Builds a red-team evaluation using Promptfoo's adversarial test generation, maintains a versioned test dataset that grows with discovered failure modes, and sets quality gate thresholds that block deployment when pass rates fall below defined minimums.",
+                "Defines the organisation's prompt evaluation standards using Promptfoo; designs the eval harness framework consumed across teams; advises on assertion strategy for complex qualitative outputs; uses evaluation evidence to drive model selection and prompt library decisions."
+              ],
+              "resources": [
+                { "title": "Promptfoo documentation", "url": "https://www.promptfoo.dev/docs/intro/", "type": "Official docs" },
+                { "title": "Promptfoo red team guide", "url": "https://www.promptfoo.dev/docs/red-team/", "type": "Official docs" },
+                { "title": "Promptfoo GitHub repository", "url": "https://github.com/promptfoo/promptfoo", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-langsmith",
+              "label": "LangSmith",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Tracing", "Dataset Management", "Evals", "Monitoring", "Feedback Collection"],
+              "masteryLevels": [
+                "Can explain what LangSmith is, describe the difference between a trace and a run, and articulate why LLM application debugging without tracing is significantly harder than debugging traditional software.",
+                "Connects a LangChain or LangGraph application to LangSmith, navigates the trace viewer to follow a single run through all its steps, and identifies where an incorrect output originated in the execution chain.",
+                "Creates evaluation datasets from curated or production traces, runs automated evaluations using LangSmith's eval framework, configures monitoring dashboards for latency and error rates, and uses feedback annotation to label production runs for dataset curation.",
+                "Designs a continuous evaluation pipeline that tests prompt and model changes against curated datasets before deployment, implements custom evaluators for domain-specific quality criteria, and tracks quality trends over time to inform optimisation decisions.",
+                "Defines the organisation's LLM observability and evaluation strategy using LangSmith; sets standards for trace schema, dataset curation, and eval coverage; uses monitoring data to drive prompt engineering and model selection decisions at the engineering leadership level."
+              ],
+              "resources": [
+                { "title": "LangSmith documentation", "url": "https://docs.smith.langchain.com/", "type": "Official docs" },
+                { "title": "LangSmith evaluation guide", "url": "https://docs.smith.langchain.com/evaluation", "type": "Official docs" },
+                { "title": "LangSmith monitoring documentation", "url": "https://docs.smith.langchain.com/monitoring", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-n8n",
+              "label": "N8N / Workflow Automation",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["AI Node Integration", "Webhook Triggers", "Data Transformation", "Credential Management"],
+              "masteryLevels": [
+                "Can describe what N8N is, explain how it differs from code-first automation approaches, and identify the use cases where a visual workflow tool is more appropriate than a custom application.",
+                "Builds a simple N8N workflow triggered by a webhook that calls an LLM API, transforms the response using built-in data nodes, and writes the result to a target system such as a spreadsheet or database.",
+                "Designs multi-step N8N workflows that chain LLM calls with external APIs, implements error handling with retry logic and failure notifications, and manages credentials securely using N8N's built-in credential store.",
+                "Builds production N8N workflows with AI agent nodes, conditional branching based on LLM classification outputs, and sub-workflow composition for reusability; deploys N8N in a self-hosted configuration to satisfy data residency requirements.",
+                "Defines the organisation's workflow automation standards and tool selection criteria; architects the self-hosted N8N deployment for reliability and security; designs reusable workflow templates and shared credentials for team-wide use; evaluates N8N against other platforms for enterprise suitability."
+              ],
+              "resources": [
+                { "title": "N8N documentation", "url": "https://docs.n8n.io/", "type": "Official docs" },
+                { "title": "N8N advanced AI integration guide", "url": "https://docs.n8n.io/advanced-ai/", "type": "Official docs" },
+                { "title": "N8N workflow templates", "url": "https://n8n.io/workflows/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-vector-dbs",
+              "label": "Vector Databases",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Pinecone", "Qdrant", "Weaviate", "pgvector", "Chroma", "Index Design", "Metadata Filtering"],
+              "masteryLevels": [
+                "Can explain what a vector embedding is, why vectors enable semantic similarity search, and describe the core purpose of a vector database — storing and querying high-dimensional embeddings by distance.",
+                "Creates a vector collection in a managed service such as Pinecone or a local Chroma instance, inserts embedded documents, and queries for semantically similar results using cosine or dot-product distance.",
+                "Selects the appropriate vector database for a use case based on scalability, cost, and hosting requirements; configures metadata filtering to combine vector similarity with structured attribute constraints; integrates the database into a production RAG pipeline.",
+                "Designs a vector database architecture with index partitioning for query performance, implements incremental embedding update strategies to avoid full re-indexing, and benchmarks ANN algorithm options against recall and latency requirements for the specific use case.",
+                "Defines the organisation's vector storage strategy; evaluates managed versus self-hosted options against cost, compliance, and operational overhead; architects multi-tenancy patterns for shared vector infrastructure; advises teams on embedding model selection and index design tradeoffs."
+              ],
+              "resources": [
+                { "title": "Pinecone learning centre", "url": "https://www.pinecone.io/learn/", "type": "Course" },
+                { "title": "Qdrant documentation", "url": "https://qdrant.tech/documentation/", "type": "Official docs" },
+                { "title": "pgvector — open-source vector extension for Postgres", "url": "https://github.com/pgvector/pgvector", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
           "id": "ai-agentic",
           "label": "Agentic AI & Multi-Agent Systems",
           "skills": [
-            { "id": "ai-agent-arch",           "label": "Agent Architecture Design",     "shared": false, "notes": "2026 leading skill",  "subSkills": ["ReAct Pattern", "Plan-and-Execute", "Tool Use Design", "Agent State Management", "Memory (Short/Long-Term)"] },
-            { "id": "ai-multi-agent",          "label": "Multi-Agent Orchestration",     "shared": false, "notes": "",                   "subSkills": ["AutoGen", "CrewAI", "LangGraph Multi-Agent", "Agent Handoff", "Supervisory Agents"] },
-            { "id": "ai-tool-calling",         "label": "Tool / Function Calling",       "shared": false, "notes": "",                   "subSkills": ["Schema Design", "Input Validation", "Error Handling", "Tool Selection Strategy"] },
-            { "id": "ai-agent-observability",  "label": "Agent Observability",           "shared": false, "notes": "",                   "subSkills": ["Trace Capture", "Step-Level Logging", "Failure Analysis", "Cost Per Run"] },
-            { "id": "ai-mcp",                  "label": "Model Context Protocol (MCP)",  "shared": false, "notes": "Emerging 2026 standard","subSkills": ["MCP Server Design", "Tool Exposure", "Resource Definitions", "Integration Patterns"] }
+            { "id": "ai-agent-arch",
+              "label": "Agent Architecture Design",
+              "shared": false,
+              "notes": "2026 leading skill",
+              "subSkills": ["ReAct Pattern", "Plan-and-Execute", "Tool Use Design", "Agent State Management", "Memory (Short/Long-Term)"],
+              "masteryLevels": [
+                "Can explain what an AI agent is, describe the basic ReAct (Reason + Act) loop, and articulate how agents differ from single-shot LLM calls.",
+                "Builds a simple single-agent system using a framework such as LangGraph that reasons over a set of tools and produces a final answer, following documentation.",
+                "Designs agents with well-defined tool sets, implements both short-term working memory and long-term memory retrieval, and chooses between ReAct and Plan-and-Execute patterns based on task complexity.",
+                "Architects multi-step stateful agents with robust error recovery, interruption handling, and human-in-the-loop checkpoints; evaluates execution traces to diagnose failure modes and optimise token usage per run.",
+                "Defines the organisation's agent architecture standards; evaluates emerging agentic frameworks against production reliability and cost requirements; designs agent systems that are safe, auditable, and cost-predictable at scale."
+              ],
+              "resources": [
+                { "title": "LangGraph documentation", "url": "https://langchain-ai.github.io/langgraph/", "type": "Official docs" },
+                { "title": "Anthropic — Building effective agents", "url": "https://www.anthropic.com/research/building-effective-agents", "type": "Official docs" },
+                { "title": "ReAct: Synergizing Reasoning and Acting in LLMs (arXiv)", "url": "https://arxiv.org/abs/2210.03629", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-multi-agent",
+              "label": "Multi-Agent Orchestration",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["AutoGen", "CrewAI", "LangGraph Multi-Agent", "Agent Handoff", "Supervisory Agents"],
+              "masteryLevels": [
+                "Can describe why multi-agent systems are used, explain the difference between sequential and parallel agent orchestration, and name at least two multi-agent frameworks.",
+                "Wires together two specialised agents in a simple pipeline using LangGraph or AutoGen, passing outputs from one agent as inputs to the next following documentation.",
+                "Designs workflows with a supervisor agent that routes tasks to specialised sub-agents, implements handoff protocols, and handles partial failures so the pipeline recovers without restarting from scratch.",
+                "Architects parallel multi-agent systems with dynamic task decomposition, implements human-in-the-loop intervention points, and evaluates traces across all agents to diagnose coordination failures and reduce cost per completed task.",
+                "Defines the organisation's multi-agent architecture patterns and guardrails; evaluates competing orchestration frameworks against production reliability and cost requirements; leads the design of complex long-running agentic workflows used across business domains."
+              ],
+              "resources": [
+                { "title": "LangGraph multi-agent concepts", "url": "https://langchain-ai.github.io/langgraph/concepts/multi_agent/", "type": "Official docs" },
+                { "title": "Microsoft AutoGen documentation", "url": "https://microsoft.github.io/autogen/", "type": "Official docs" },
+                { "title": "CrewAI documentation", "url": "https://docs.crewai.com/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-tool-calling",
+              "label": "Tool / Function Calling",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Schema Design", "Input Validation", "Error Handling", "Tool Selection Strategy"],
+              "masteryLevels": [
+                "Can explain what function calling is, describe how a model decides when to invoke a tool versus answer directly, and identify the JSON schema format used to define tool signatures.",
+                "Defines a simple tool schema, registers it with a model API, handles the tool call response to execute the function, and returns results back to the model to complete the response.",
+                "Designs a well-structured tool library with precise descriptions that guide reliable tool selection, implements input validation and graceful error handling so agents recover cleanly from failed tool calls.",
+                "Architects a tool registry with versioning and access controls, implements parallel tool calling for independent sub-tasks, and evaluates tool selection accuracy across agent traces to identify and fix description ambiguities.",
+                "Defines the organisation's tool design standards and naming conventions; builds shared tool libraries consumed across multiple agents and teams; advises on tool granularity tradeoffs to minimise agent loops and hallucinated parameters."
+              ],
+              "resources": [
+                { "title": "Anthropic tool use documentation", "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use", "type": "Official docs" },
+                { "title": "OpenAI function calling guide", "url": "https://platform.openai.com/docs/guides/function-calling", "type": "Official docs" },
+                { "title": "LangChain tools documentation", "url": "https://python.langchain.com/docs/concepts/tools/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-agent-observability",
+              "label": "Agent Observability",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Trace Capture", "Step-Level Logging", "Failure Analysis", "Cost Per Run"],
+              "masteryLevels": [
+                "Can explain why observing agent execution is harder than observing traditional software, and describe what needs to be captured — steps, tools called, tokens consumed, and decisions made.",
+                "Configures LangSmith or a similar tracing tool to capture agent runs, navigates trace visualisations to follow a single agent execution step by step, and identifies where an agent went wrong.",
+                "Instruments an agent system with structured step-level logging, calculates cost per run from token usage across all steps, sets up alerts for runs exceeding latency or cost thresholds, and uses traces to diagnose systematic failure patterns.",
+                "Designs an observability platform for a fleet of agents that aggregates traces, surfaces anomalies, and tracks quality metrics over time; implements evaluation runs against production traces to catch regressions after prompt or model changes.",
+                "Defines the organisation's agent observability standards including trace schema, retention policy, and alerting thresholds; builds tooling that makes agent behaviour auditable for compliance; presents agent reliability metrics to executive stakeholders."
+              ],
+              "resources": [
+                { "title": "LangSmith tracing documentation", "url": "https://docs.smith.langchain.com/tracing", "type": "Official docs" },
+                { "title": "OpenLLMetry — OpenTelemetry for LLM observability", "url": "https://github.com/traceloop/openllmetry", "type": "Official docs" },
+                { "title": "Arize Phoenix — LLM observability platform", "url": "https://docs.arize.com/phoenix", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-mcp",
+              "label": "Model Context Protocol (MCP)",
+              "shared": false,
+              "notes": "Emerging 2026 standard",
+              "subSkills": ["MCP Server Design", "Tool Exposure", "Resource Definitions", "Integration Patterns"],
+              "masteryLevels": [
+                "Can explain what the Model Context Protocol is, why Anthropic introduced it, and how it standardises the way AI applications connect to external tools and data sources.",
+                "Runs an existing MCP server locally, connects it to an MCP-compatible client such as Claude Desktop or Cursor, and inspects the tools and resources it exposes.",
+                "Builds a custom MCP server that exposes domain-specific tools and resources, integrates it with an LLM application, and validates that the model correctly selects and invokes the exposed tools.",
+                "Designs a production-grade MCP server with authentication, input validation, and error handling; implements multiple capability types (tools, prompts, resources); and deploys it as a shared service consumed by multiple AI applications.",
+                "Defines the organisation's MCP server design standards; evaluates the MCP ecosystem for servers to adopt; architects a composable tool layer that exposes the organisation's capabilities to AI systems in a governed, reusable way."
+              ],
+              "resources": [
+                { "title": "Model Context Protocol — official documentation", "url": "https://modelcontextprotocol.io/introduction", "type": "Official docs" },
+                { "title": "Anthropic — Introducing the Model Context Protocol", "url": "https://www.anthropic.com/news/model-context-protocol", "type": "Official docs" },
+                { "title": "MCP servers — reference implementations (GitHub)", "url": "https://github.com/modelcontextprotocol/servers", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
           "id": "ai-security-governance",
           "label": "AI Security, Governance & Ethics",
           "skills": [
-            { "id": "ai-security",        "label": "AI Security",          "shared": false, "notes": "Critical enterprise skill",  "subSkills": ["Prompt Injection Defense", "Jailbreak Mitigation", "Input/Output Validation", "PII Detection", "Data Exfiltration Prevention"] },
-            { "id": "ai-responsible",     "label": "Responsible AI",       "shared": false, "notes": "",                           "subSkills": ["Bias Awareness", "Fairness Evaluation", "Transparency", "Human-in-the-Loop Design", "AI Impact Assessment"] },
-            { "id": "ai-content-safety",  "label": "Content Safety",       "shared": false, "notes": "",                           "subSkills": ["Azure Content Safety API", "Harm Categories", "Safety Filters", "Custom Blocklists"] },
-            { "id": "ai-governance",      "label": "AI Governance",        "shared": false, "notes": "",                           "subSkills": ["Model Versioning", "Audit Trails", "Access Control for AI Services", "Usage Monitoring", "Cost Guardrails"] },
-            { "id": "ai-data-privacy",    "label": "Data Privacy in AI",   "shared": false, "notes": "",                           "subSkills": ["PII Handling", "Data Residency", "Anonymization", "GDPR/HIPAA Considerations"] },
-            { "id": "ai-system-testing",  "label": "AI System Testing",    "shared": false, "notes": "",                           "subSkills": ["Adversarial Testing", "Red-Teaming", "Regression Evals", "A/B Testing Models"] }
+            { "id": "ai-security",
+              "label": "AI Security",
+              "shared": false,
+              "notes": "Critical enterprise skill",
+              "subSkills": ["Prompt Injection Defense", "Jailbreak Mitigation", "Input/Output Validation", "PII Detection", "Data Exfiltration Prevention"],
+              "masteryLevels": [
+                "Can explain the difference between direct and indirect prompt injection, describe why AI systems introduce attack surfaces not present in traditional software, and name the primary threat categories in the OWASP LLM Top 10.",
+                "Applies basic input sanitisation to user-supplied prompts, implements output filtering to catch sensitive data in model responses, and tests an AI endpoint manually using common prompt injection payloads.",
+                "Designs a multi-layer defence for a production AI application covering input validation, system prompt hardening, output scanning for PII and policy violations, and rate limiting to constrain exfiltration attempts.",
+                "Architects an AI security posture across the full attack surface — model, data pipeline, tool integrations, and API gateway — integrates automated adversarial testing into CI, and defines incident response procedures specific to AI system compromise.",
+                "Defines the organisation's AI threat model and security framework; leads red-team exercises against production AI systems; advises on the security controls required for enterprise compliance; represents AI security risk in architecture review boards."
+              ],
+              "resources": [
+                { "title": "OWASP Top 10 for LLM Applications", "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/", "type": "Official docs" },
+                { "title": "Anthropic — Responsible scaling policy and safety", "url": "https://www.anthropic.com/responsible-scaling-policy", "type": "Official docs" },
+                { "title": "NIST AI Risk Management Framework", "url": "https://airc.nist.gov/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-responsible",
+              "label": "Responsible AI",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Bias Awareness", "Fairness Evaluation", "Transparency", "Human-in-the-Loop Design", "AI Impact Assessment"],
+              "masteryLevels": [
+                "Can explain the core responsible AI principles (fairness, accountability, transparency, reliability, privacy, inclusiveness) and describe one real-world case where an AI system caused measurable harm.",
+                "Identifies potential bias sources in a dataset or prompt design for a specific use case, documents system assumptions and limitations in a feature spec, and proposes a human review step proportionate to the decision stakes.",
+                "Conducts an AI impact assessment for a new feature, designs human-in-the-loop checkpoints at high-stakes decision points, and produces a model card that communicates system capabilities, limitations, and intended use to downstream stakeholders.",
+                "Designs fairness evaluation pipelines that measure model performance across demographic subgroups, implements explainability tooling so affected users can understand decisions, and defines escalation and appeal paths when automated decisions are challenged.",
+                "Leads the organisation's responsible AI programme; defines the governance framework, approval gates, and accountability structure for AI products; advises on the EU AI Act and applicable regulations; represents responsible AI risk in product and engineering leadership."
+              ],
+              "resources": [
+                { "title": "Microsoft Responsible AI principles", "url": "https://www.microsoft.com/en-us/ai/responsible-ai", "type": "Official docs" },
+                { "title": "EU AI Act — European Parliament overview", "url": "https://www.europarl.europa.eu/topics/en/article/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence", "type": "Official docs" },
+                { "title": "Google Model Cards — about and examples", "url": "https://modelcards.withgoogle.com/about", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-content-safety",
+              "label": "Content Safety",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Azure Content Safety API", "Harm Categories", "Safety Filters", "Custom Blocklists"],
+              "masteryLevels": [
+                "Can describe the main harm categories AI content safety systems address — hate speech, violence, sexual content, self-harm — and explain why keyword filtering alone is insufficient for LLM outputs.",
+                "Integrates Azure Content Safety API into an AI application to classify input and output text, reviews flagged results, and configures severity thresholds appropriate to the application's risk level.",
+                "Designs a layered content safety strategy combining Azure Content Safety, model-level system prompt instructions, and custom blocklists tailored to the application's domain and user base.",
+                "Builds a content safety evaluation pipeline that tests model outputs against a curated harm dataset, tracks safety metric trends across model updates, and tunes threshold configurations to balance false positives against harm recall.",
+                "Defines the organisation's content safety architecture and harm taxonomy; advises product teams on risk-proportionate controls; leads safety incident reviews when harmful content reaches production; owns content safety requirements in model selection decisions."
+              ],
+              "resources": [
+                { "title": "Azure Content Safety documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/content-safety/", "type": "Official docs" },
+                { "title": "OpenAI moderation endpoint guide", "url": "https://platform.openai.com/docs/guides/moderation", "type": "Official docs" },
+                { "title": "Perspective API — toxicity detection", "url": "https://perspectiveapi.com/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-governance",
+              "label": "AI Governance",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Model Versioning", "Audit Trails", "Access Control for AI Services", "Usage Monitoring", "Cost Guardrails"],
+              "masteryLevels": [
+                "Can explain why AI governance differs from traditional IT governance and describe the key questions any governed AI system must answer: who owns it, what data does it use, what decisions does it make, and how is it monitored.",
+                "Creates an inventory of AI services in use within a project, documents model versions and deployment dates, and configures access controls so only authorised identities can call production AI APIs.",
+                "Implements audit logging for all AI API calls capturing inputs, outputs, model version, and latency; sets up cost guardrails with budget alerts; and maintains a model registry tracking which version is deployed to each environment.",
+                "Designs an AI governance framework covering the full model lifecycle — risk classification and approval before deployment, monitoring in production, incident response, and retirement — and enforces it via policy guardrails in CI/CD pipelines.",
+                "Defines the organisation's AI governance policy, risk tiers, and review committee structure; ensures deployments satisfy regulatory requirements including the EU AI Act; leads responses to AI audit findings; reports AI risk posture to leadership and the board."
+              ],
+              "resources": [
+                { "title": "NIST AI Risk Management Framework", "url": "https://airc.nist.gov/", "type": "Official docs" },
+                { "title": "Azure AI services — responsible use overview", "url": "https://learn.microsoft.com/en-us/azure/ai-services/responsible-use-of-ai-overview", "type": "Official docs" },
+                { "title": "EU AI Act — European Commission regulatory framework", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-data-privacy",
+              "label": "Data Privacy in AI",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["PII Handling", "Data Residency", "Anonymization", "GDPR/HIPAA Considerations"],
+              "masteryLevels": [
+                "Can identify categories of PII and protected health information, explain why sending personal data to third-party LLM APIs creates privacy risk, and describe data residency as a concept.",
+                "Reviews an AI feature design to identify personal data flows, documents what PII reaches the model, and applies basic tokenisation or field masking to remove sensitive values before API calls.",
+                "Implements PII detection and redaction in an AI data pipeline using a library such as Microsoft Presidio, configures Azure OpenAI Service with private endpoints to satisfy data residency requirements, and documents data handling in a privacy impact assessment.",
+                "Designs a privacy-preserving AI architecture that prevents personal data from leaving defined geographic boundaries, applies anonymisation or synthetic data techniques for evaluation datasets, and ensures the AI system satisfies GDPR data subject rights including the right to erasure.",
+                "Defines the organisation's data privacy framework for AI; owns data processing agreements with AI providers; leads privacy impact assessments for high-risk systems; advises legal and compliance on novel AI privacy risks; represents data privacy in AI product governance."
+              ],
+              "resources": [
+                { "title": "Microsoft Presidio — PII detection and anonymisation", "url": "https://microsoft.github.io/presidio/", "type": "Official docs" },
+                { "title": "Azure OpenAI data privacy documentation", "url": "https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy", "type": "Official docs" },
+                { "title": "ICO guidance on AI and data protection", "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-system-testing",
+              "label": "AI System Testing",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Adversarial Testing", "Red-Teaming", "Regression Evals", "A/B Testing Models"],
+              "masteryLevels": [
+                "Can explain why AI system testing differs from traditional software testing — non-determinism, semantic correctness, emergent failures — and describe what red-teaming means in an AI context.",
+                "Writes manual adversarial test cases targeting a specific AI feature, covering boundary inputs, unexpected user intents, and harmful prompts, and documents the failure patterns found for remediation.",
+                "Designs and runs a structured red-team exercise against a production AI feature, builds a regression eval suite that runs in CI to catch quality or safety regressions across model updates, and uses A/B testing to measure the impact of prompt changes on user outcomes.",
+                "Builds an automated adversarial testing pipeline that generates diverse attack scenarios, maintains a curated golden dataset for regression testing, and applies statistical significance testing when comparing model versions to prevent premature A/B conclusions.",
+                "Defines the organisation's AI testing strategy across functional, safety, and adversarial dimensions; establishes the red-team programme governance and cadence; advises on what level of testing evidence satisfies compliance and deployment approval requirements."
+              ],
+              "resources": [
+                { "title": "Promptfoo red team documentation", "url": "https://www.promptfoo.dev/docs/red-team/", "type": "Official docs" },
+                { "title": "NVIDIA Garak — LLM vulnerability scanner", "url": "https://github.com/NVIDIA/garak", "type": "Official docs" },
+                { "title": "Microsoft AI Red Team", "url": "https://www.microsoft.com/en-us/security/blog/topic/microsoft-ai-red-team/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
