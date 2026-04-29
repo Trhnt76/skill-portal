@@ -685,15 +685,186 @@
           "id": "ai-azure-platform",
           "label": "Azure AI Platform",
           "skills": [
-            { "id": "ai-azure-openai",     "label": "Azure OpenAI Service",              "shared": false, "notes": "Core",                   "subSkills": ["Deployment Types", "API Usage", "Rate Limit Management", "PTU vs Consumption", "Model Versioning"] },
-            { "id": "ai-azure-foundry",    "label": "Azure AI Foundry",                  "shared": false, "notes": "2026 primary platform",   "subSkills": ["Project Setup", "Model Catalog", "Prompt Flow", "Evaluation", "Deployment", "Safety Filters"] },
-            { "id": "shared-azure-ai-search","label": "Azure AI Search",                 "shared": true,  "notes": "",                       "subSkills": ["Indexer Design", "Semantic Ranking", "Vector Search", "Hybrid Search", "Skillsets", "Integrated Vectorization"] },
-            { "id": "ai-doc-intelligence", "label": "Azure Document Intelligence",       "shared": false, "notes": "",                       "subSkills": ["Prebuilt Models", "Custom Models", "Layout API", "Integration Patterns"] },
-            { "id": "ai-azure-language",   "label": "Azure AI Language",                 "shared": false, "notes": "",                       "subSkills": ["NER", "Sentiment", "Summarization", "Custom Classification", "CLU"] },
-            { "id": "ai-azure-vision",     "label": "Azure AI Vision",                   "shared": false, "notes": "",                       "subSkills": ["Image Analysis", "OCR", "Face API", "Custom Vision"] },
-            { "id": "ai-azure-ml",         "label": "Azure Machine Learning",            "shared": false, "notes": "",                       "subSkills": ["Workspace", "Compute Clusters", "Pipelines", "Automated ML", "Model Registry", "Managed Online Endpoints"] },
-            { "id": "shared-copilot-studio","label": "Microsoft Copilot Studio",         "shared": true,  "notes": "",                       "subSkills": ["Topic Design", "Custom Actions", "Power Platform Connectors", "Teams Integration", "Generative Answers"] },
-            { "id": "ai-m365-copilot",     "label": "Microsoft 365 Copilot Extensibility","shared": false,"notes": "",                      "subSkills": ["Graph Connectors", "Copilot Agents (Teams Toolkit)", "Plugin Design"] }
+            { "id": "ai-azure-openai",
+              "label": "Azure OpenAI Service",
+              "shared": false,
+              "notes": "Core",
+              "subSkills": ["Deployment Types", "API Usage", "Rate Limit Management", "PTU vs Consumption", "Model Versioning"],
+              "masteryLevels": [
+                "Can explain what Azure OpenAI Service is, how it differs from the OpenAI API directly, and why an enterprise would choose it for data privacy, compliance, and data residency.",
+                "Creates an Azure OpenAI resource, deploys a model, and makes a successful Chat Completions API call using the Azure SDK with endpoint and API key authentication.",
+                "Manages model deployments across dev and production environments, implements managed identity authentication to remove API keys, handles rate limit errors with exponential backoff, and selects between consumption and PTU deployments based on traffic patterns.",
+                "Architects a production Azure OpenAI setup with private endpoints, implements load balancing across multiple deployments to maximise throughput, and designs a model versioning strategy that enables controlled migration when new model versions are released.",
+                "Defines the organisation's Azure OpenAI deployment strategy and governance framework; manages PTU capacity planning and commitment decisions; advises on model retirement and migration timelines; ensures deployments satisfy data residency and compliance requirements."
+              ],
+              "resources": [
+                { "title": "Azure OpenAI Service documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/", "type": "Official docs" },
+                { "title": "Provisioned throughput (PTU) concepts", "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/provisioned-throughput", "type": "Official docs" },
+                { "title": "Develop AI solutions with Azure OpenAI — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/develop-ai-solutions-azure-openai/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-azure-foundry",
+              "label": "Azure AI Foundry",
+              "shared": false,
+              "notes": "2026 primary platform",
+              "subSkills": ["Project Setup", "Model Catalog", "Prompt Flow", "Evaluation", "Deployment", "Safety Filters"],
+              "masteryLevels": [
+                "Can explain what Azure AI Foundry is, describe how it consolidates Azure's AI development tools, and identify its key capabilities: model catalog, Prompt Flow, evaluation, and managed deployments.",
+                "Creates an Azure AI Foundry project, browses the model catalog to deploy an endpoint, and runs a basic Prompt Flow pipeline connecting an LLM to a simple data source.",
+                "Builds and tests a Prompt Flow pipeline with multiple LLM nodes and tool integrations, runs a structured evaluation against a test dataset using Foundry's built-in metrics, and deploys the validated flow as a managed online endpoint.",
+                "Designs a full development-to-production workflow in Azure AI Foundry from prompt authoring through automated evaluation to deployment, integrates Foundry pipelines with GitHub Actions for CI/CD, and configures content safety filters to meet organisational policy.",
+                "Defines the organisation's AI development lifecycle using Azure AI Foundry as the central platform; architects the hub and project structure for multi-team use; manages model catalog governance and access controls; evaluates new Foundry capabilities as the platform evolves."
+              ],
+              "resources": [
+                { "title": "Azure AI Foundry documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-foundry/", "type": "Official docs" },
+                { "title": "Prompt Flow in Azure AI Foundry", "url": "https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/prompt-flow", "type": "Official docs" },
+                { "title": "Get started with Azure AI Foundry — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/get-started-with-azure-ai-foundry/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-azure-ai-search",
+              "label": "Azure AI Search",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Indexer Design", "Semantic Ranking", "Vector Search", "Hybrid Search", "Skillsets", "Integrated Vectorization"],
+              "masteryLevels": [
+                "Can explain what Azure AI Search is, how it differs from a standard keyword search engine, and identify its primary capabilities: full-text search, semantic ranking, and vector search.",
+                "Creates an Azure AI Search index, populates it with documents using an indexer or push API, and executes basic keyword search and filter queries against the index.",
+                "Configures semantic ranking to improve result relevance, implements vector search by embedding queries and documents, and builds a hybrid search pipeline combining keyword and vector scores as the retrieval layer for a RAG application.",
+                "Designs a production search architecture with AI skillsets for enriched indexing (OCR, entity extraction, key phrase), implements integrated vectorization to automate embedding generation at index time, and tunes relevance scoring for domain-specific content.",
+                "Architects the organisation's enterprise search platform on Azure AI Search; defines index schema standards, data freshness strategies, and tier selection; evaluates vector indexing options for cost and recall tradeoffs at scale; integrates AI Search as the retrieval backbone for enterprise RAG."
+              ],
+              "resources": [
+                { "title": "Azure AI Search documentation", "url": "https://learn.microsoft.com/en-us/azure/search/", "type": "Official docs" },
+                { "title": "Vector search in Azure AI Search", "url": "https://learn.microsoft.com/en-us/azure/search/vector-search-overview", "type": "Official docs" },
+                { "title": "Implement knowledge mining with Azure AI Search — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-doc-intelligence",
+              "label": "Azure Document Intelligence",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Prebuilt Models", "Custom Models", "Layout API", "Integration Patterns"],
+              "masteryLevels": [
+                "Can explain what Azure Document Intelligence does, describe the difference between prebuilt and custom extraction models, and identify the document types prebuilt models support out of the box.",
+                "Calls the Document Intelligence Layout API to extract text, tables, and structure from a PDF, and uses a prebuilt model such as the invoice or receipt model to extract key-value pairs from standard business documents.",
+                "Trains a custom extraction model on labelled sample documents using Document Intelligence Studio, integrates the trained model into an application pipeline, and routes low-confidence extractions to a human review queue.",
+                "Designs a document processing pipeline that classifies incoming documents by type and routes them to the appropriate prebuilt or custom model, implements post-extraction normalisation, and monitors extraction accuracy across document variations in production.",
+                "Defines the organisation's document extraction architecture; evaluates custom versus composed model strategies for complex document portfolios; advises on labelling workflows and training data volume requirements; integrates Document Intelligence as the intake layer for broader AI-powered document workflows."
+              ],
+              "resources": [
+                { "title": "Azure Document Intelligence documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/", "type": "Official docs" },
+                { "title": "Document Intelligence Studio", "url": "https://documentintelligence.ai.azure.com/", "type": "Official docs" },
+                { "title": "Extract data from forms with Document Intelligence — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/extract-data-from-forms-document-intelligence/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-azure-language",
+              "label": "Azure AI Language",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["NER", "Sentiment", "Summarization", "Custom Classification", "CLU"],
+              "masteryLevels": [
+                "Can describe what Azure AI Language provides, list its prebuilt analysis capabilities (NER, sentiment, key phrase extraction, summarisation), and explain what CLU is used for in conversational applications.",
+                "Calls the Azure AI Language API to perform sentiment analysis and named entity recognition on text, interprets confidence scores, and extracts structured insights from the API response.",
+                "Configures extractive and abstractive summarisation for long documents, trains a custom text classification model for domain-specific categories in Language Studio, and integrates Language API results into an application data pipeline.",
+                "Designs a CLU model for a conversational application, iterates the model's intents and entities using Language Studio, and integrates CLU recognition with an orchestration layer to route user requests to the correct downstream service.",
+                "Defines the organisation's text analytics and conversational AI architecture using Azure AI Language; advises on when to use prebuilt capabilities versus custom models versus a general-purpose LLM; leads CLU model versioning and retraining workflows for production."
+              ],
+              "resources": [
+                { "title": "Azure AI Language documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/language-service/", "type": "Official docs" },
+                { "title": "Azure AI Language Studio", "url": "https://language.cognitive.azure.com/", "type": "Official docs" },
+                { "title": "Build natural language processing solutions — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/build-natural-language-processing-solutions/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-azure-vision",
+              "label": "Azure AI Vision",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Image Analysis", "OCR", "Face API", "Custom Vision"],
+              "masteryLevels": [
+                "Can describe what Azure AI Vision provides, identify its primary capabilities (image analysis, OCR, face detection, custom object detection), and explain the responsible AI restrictions that apply to the Face API.",
+                "Calls the Azure AI Vision Image Analysis API to extract captions, tags, and detected objects from images, and uses the Read API to perform OCR on printed and handwritten documents.",
+                "Trains a Custom Vision model for image classification or object detection on a labelled dataset in Custom Vision Studio, exports the model for API hosting or edge deployment, and integrates predictions with confidence thresholds into an application workflow.",
+                "Designs an image processing pipeline that combines Vision OCR output with Document Intelligence for structured extraction, implements Custom Vision predictions with human review fallbacks for low-confidence cases, and monitors model accuracy as production image data drifts.",
+                "Defines the organisation's computer vision architecture; evaluates Azure AI Vision against multimodal models (GPT-4o Vision) and custom CNNs for specific use cases; advises on responsible AI requirements for face recognition; leads Custom Vision model lifecycle management."
+              ],
+              "resources": [
+                { "title": "Azure AI Vision documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/", "type": "Official docs" },
+                { "title": "Custom Vision documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/", "type": "Official docs" },
+                { "title": "Explore computer vision with Azure AI — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/explore-computer-vision-microsoft-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-azure-ml",
+              "label": "Azure Machine Learning",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Workspace", "Compute Clusters", "Pipelines", "Automated ML", "Model Registry", "Managed Online Endpoints"],
+              "masteryLevels": [
+                "Can explain what Azure Machine Learning is, describe its relationship to Azure AI Foundry, and identify the core workspace components: compute, datasets, experiments, and model registry.",
+                "Creates an Azure ML workspace, starts a compute cluster, submits a training job from a notebook or script, and registers the resulting model artifact in the model registry.",
+                "Builds a reusable Azure ML pipeline with component steps for data preparation, training, and evaluation; uses AutoML to generate and compare candidate models for a classification task; and deploys a registered model to a managed online endpoint for real-time inference.",
+                "Designs a production MLOps workflow with automated pipeline triggers, data drift detection, and retraining pipelines; integrates Azure ML with GitHub Actions for CI/CD model promotion; and implements model monitoring to track performance against production traffic.",
+                "Defines the organisation's machine learning platform architecture; establishes workspace governance, RBAC, and compute quota management; advises on when to use Azure ML versus Azure AI Foundry for different workload types; leads MLOps maturity improvements across data science teams."
+              ],
+              "resources": [
+                { "title": "Azure Machine Learning documentation", "url": "https://learn.microsoft.com/en-us/azure/machine-learning/", "type": "Official docs" },
+                { "title": "MLOps with Azure Machine Learning", "url": "https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-management-and-deployment", "type": "Official docs" },
+                { "title": "Build and operate ML solutions with Azure — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/build-ai-solutions-with-azure-ml-service/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-copilot-studio",
+              "label": "Microsoft Copilot Studio",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Topic Design", "Custom Actions", "Power Platform Connectors", "Teams Integration", "Generative Answers"],
+              "masteryLevels": [
+                "Can explain what Microsoft Copilot Studio is, describe how it differs from building a custom bot with the Bot Framework, and identify the use cases it targets — employee-facing copilots and customer service automation.",
+                "Creates a copilot in Copilot Studio with at least three topics, defines trigger phrases and conversation responses, and publishes the copilot to a Microsoft Teams channel for testing.",
+                "Designs a copilot with custom actions that call external APIs via Power Platform connectors, configures Generative Answers to ground responses in SharePoint or website content, and implements topic escalation handling for unrecognised user intents.",
+                "Builds a production copilot with OAuth-authenticated API calls, implements conversation routing across multiple topics and knowledge sources, monitors performance using Analytics dashboards, and integrates with Microsoft 365 data through Graph API actions.",
+                "Defines the organisation's copilot development standards using Copilot Studio; governs approval and publishing workflows for production copilots; evaluates Copilot Studio against custom development for enterprise scenarios; leads the Centre of Excellence for Copilot Studio adoption."
+              ],
+              "resources": [
+                { "title": "Microsoft Copilot Studio documentation", "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/", "type": "Official docs" },
+                { "title": "Copilot Studio — get started guide", "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-get-started", "type": "Official docs" },
+                { "title": "Create bots with Microsoft Copilot Studio — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/work-power-virtual-agents/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-m365-copilot",
+              "label": "Microsoft 365 Copilot Extensibility",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Graph Connectors", "Copilot Agents (Teams Toolkit)", "Plugin Design"],
+              "masteryLevels": [
+                "Can explain what Microsoft 365 Copilot is, describe the three extensibility options (Graph Connectors, plugins, declarative Copilot Agents), and identify when each is the appropriate approach.",
+                "Creates a basic declarative Copilot Agent using Teams Toolkit, defines its instructions and actions, and tests it within Microsoft Teams against a sample user scenario.",
+                "Builds a Graph Connector that indexes an external data source into the Microsoft 365 semantic index so Copilot can reason over it, implements a plugin that calls an external API in response to user intents, and validates agent responses against expected outcomes.",
+                "Designs a production Copilot Agent with OAuth authentication, action orchestration across multiple APIs, and access scoped to specific M365 user groups; implements adaptive card responses for rich output formatting within Teams conversations.",
+                "Defines the organisation's M365 Copilot extensibility strategy; governs which connectors and agents can be deployed and by whom; advises on data sensitivity and permissions scoping for agents with broad M365 access; tracks new extensibility capabilities as the platform evolves quarterly."
+              ],
+              "resources": [
+                { "title": "Microsoft 365 Copilot extensibility documentation", "url": "https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/", "type": "Official docs" },
+                { "title": "Teams Toolkit documentation", "url": "https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/teams-toolkit-fundamentals", "type": "Official docs" },
+                { "title": "Build plugins and connectors for Microsoft 365 Copilot — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/build-plugins-connectors-microsoft-copilot-microsoft-365/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
@@ -1098,22 +1269,212 @@
           "id": "ai-mlops",
           "label": "MLOps & AI Infrastructure",
           "skills": [
-            { "id": "ai-mlops-concepts",   "label": "MLOps Concepts",                 "shared": false, "notes": "",              "subSkills": ["Model Versioning", "Feature Stores", "Data Lineage", "Model Drift", "Retraining Pipelines"] },
-            { "id": "ai-ml-pipelines",     "label": "AI/ML Pipelines",                "shared": false, "notes": "",              "subSkills": ["Azure ML Pipelines", "Kubeflow", "MLflow", "Experiment Tracking"] },
-            { "id": "ai-model-deployment", "label": "Model Deployment Patterns",      "shared": false, "notes": "",              "subSkills": ["Online Endpoints", "Batch Inference", "A/B Deployment", "Shadow Mode", "Canary Releases"] },
-            { "id": "ai-embedding-mgmt",   "label": "Embedding & Vector Management",  "shared": false, "notes": "",              "subSkills": ["Embedding Model Selection", "Chunking Strategy", "Index Refresh", "Incremental Updates"] },
-            { "id": "ai-llmops",           "label": "LLMOps",                         "shared": false, "notes": "Emerging 2026",  "subSkills": ["Prompt Versioning", "Model Swap Strategy", "Cost Monitoring", "Latency SLOs", "Feedback Loops"] }
+            { "id": "ai-mlops-concepts",
+              "label": "MLOps Concepts",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Model Versioning", "Feature Stores", "Data Lineage", "Model Drift", "Retraining Pipelines"],
+              "masteryLevels": [
+                "Can explain what MLOps is, describe how it applies DevOps principles to machine learning, and identify the key challenges it addresses — reproducibility, monitoring, and controlled retraining.",
+                "Versions a trained model using an experiment tracking tool such as MLflow, documents the training dataset and hyperparameters as metadata alongside the artifact, and registers the model in a central model registry.",
+                "Detects model drift by comparing production prediction distributions against a baseline, triggers a retraining pipeline when drift exceeds a threshold, and uses a feature store to ensure training-serving feature consistency.",
+                "Designs a full MLOps lifecycle with automated data lineage tracking, multi-environment model promotion gates, and A/B deployment infrastructure; implements data quality checks that fail the pipeline before wasted training compute.",
+                "Defines the organisation's MLOps maturity model and roadmap; establishes platform-level tooling standards for experiment tracking, model registry, and monitoring; leads MLOps culture adoption across data science teams."
+              ],
+              "resources": [
+                { "title": "MLflow documentation", "url": "https://mlflow.org/docs/latest/index.html", "type": "Official docs" },
+                { "title": "Microsoft — MLOps maturity model", "url": "https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/mlops-maturity-model", "type": "Official docs" },
+                { "title": "Google Cloud — MLOps: continuous delivery and automation pipelines", "url": "https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-ml-pipelines",
+              "label": "AI/ML Pipelines",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Azure ML Pipelines", "Kubeflow", "MLflow", "Experiment Tracking"],
+              "masteryLevels": [
+                "Can explain what an ML pipeline is, describe how it differs from a standard data pipeline, and identify the main stages in a typical ML pipeline: data ingestion, preprocessing, training, evaluation, and model registration.",
+                "Converts a notebook-based training script into a parameterised, reusable pipeline using Azure ML Pipelines or MLflow, runs it on a compute cluster, and compares experiment results using the tracking UI.",
+                "Builds a multi-step Azure ML pipeline with reusable component definitions, caches expensive preprocessing steps to reduce cost, and integrates the pipeline into a CI/CD workflow so model updates trigger automatically on data or code changes.",
+                "Designs a production ML pipeline platform with component versioning, parallel hyperparameter tuning, and automated evaluation gates that block model promotion when performance falls below baseline; implements cross-framework portability using MLflow for tracking.",
+                "Defines the organisation's ML pipeline architecture standards; evaluates pipeline orchestration options (Azure ML, Kubeflow, Vertex AI Pipelines) against team skills and platform requirements; leads adoption of shared reusable component libraries across data science teams."
+              ],
+              "resources": [
+                { "title": "Azure Machine Learning pipelines documentation", "url": "https://learn.microsoft.com/en-us/azure/machine-learning/concept-ml-pipelines", "type": "Official docs" },
+                { "title": "MLflow documentation", "url": "https://mlflow.org/docs/latest/index.html", "type": "Official docs" },
+                { "title": "Kubeflow documentation", "url": "https://www.kubeflow.org/docs/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-model-deployment",
+              "label": "Model Deployment Patterns",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Online Endpoints", "Batch Inference", "A/B Deployment", "Shadow Mode", "Canary Releases"],
+              "masteryLevels": [
+                "Can describe the main deployment patterns — online endpoints, batch inference, shadow mode, canary releases, and A/B deployment — and explain when each is appropriate given latency, throughput, and risk requirements.",
+                "Deploys a trained model to an Azure ML managed online endpoint, sends test requests to verify predictions, and monitors basic endpoint latency and throughput metrics.",
+                "Implements a batch inference pipeline for high-volume asynchronous scoring, configures a traffic split between two model versions for A/B testing, and uses shadow mode to evaluate a new model against live traffic without exposing its predictions to users.",
+                "Designs a zero-downtime deployment strategy with canary releases and automated rollback triggers, implements request-level input/output logging for drift detection, and integrates model deployment into a CI/CD pipeline with performance-gated promotion.",
+                "Defines the organisation's model deployment standards including rollout patterns, rollback procedures, and SLO definitions; advises on infrastructure choices (managed endpoints vs. containers vs. serverless) for different model and traffic types; leads incident response when deployed models underperform."
+              ],
+              "resources": [
+                { "title": "Azure ML managed online endpoints", "url": "https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-online", "type": "Official docs" },
+                { "title": "Azure ML batch endpoints", "url": "https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-batch", "type": "Official docs" },
+                { "title": "Safe rollout for online endpoints — Azure ML", "url": "https://learn.microsoft.com/en-us/azure/machine-learning/how-to-safely-rollout-online-endpoints", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-embedding-mgmt",
+              "label": "Embedding & Vector Management",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Embedding Model Selection", "Chunking Strategy", "Index Refresh", "Incremental Updates"],
+              "masteryLevels": [
+                "Can explain what an embedding model does, describe how model size, dimensionality, and domain training affect retrieval quality, and identify the key decisions in embedding pipeline design: model choice, chunking, and storage.",
+                "Selects an embedding model appropriate to the use case, chunks source documents into passages, generates embeddings via API or a local model, and stores them in a vector database with associated metadata.",
+                "Evaluates embedding model quality using retrieval benchmarks such as MTEB scores, implements a chunking strategy that balances context completeness with retrieval precision, and designs an incremental update pipeline that re-embeds only changed documents rather than the full corpus.",
+                "Manages an embedding model migration — re-embedding a large corpus when upgrading to a higher-quality model — with zero downtime by maintaining two indexes in parallel during the transition; implements embedding caching to reduce repeated API cost for frequently queried content.",
+                "Defines the organisation's embedding model governance strategy; tracks the embedding model landscape and evaluates when migration provides sufficient quality lift to justify re-indexing cost; designs the production embedding pipeline for reliability, cost efficiency, and model upgrade resilience."
+              ],
+              "resources": [
+                { "title": "MTEB leaderboard — Massive Text Embedding Benchmark", "url": "https://huggingface.co/spaces/mteb/leaderboard", "type": "Official docs" },
+                { "title": "OpenAI embeddings guide", "url": "https://platform.openai.com/docs/guides/embeddings", "type": "Official docs" },
+                { "title": "Azure OpenAI embeddings — how-to guide", "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/embeddings", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-llmops",
+              "label": "LLMOps",
+              "shared": false,
+              "notes": "Emerging 2026",
+              "subSkills": ["Prompt Versioning", "Model Swap Strategy", "Cost Monitoring", "Latency SLOs", "Feedback Loops"],
+              "masteryLevels": [
+                "Can explain what LLMOps is, describe how it differs from traditional MLOps — non-deterministic outputs, prompt as code, no gradient-based retraining — and identify the operational concerns specific to LLM-based applications in production.",
+                "Versions prompt templates alongside application code in source control, logs LLM API cost and latency per endpoint, and sets up alerts when cost or latency exceeds defined thresholds.",
+                "Implements a prompt change management process where every update is evaluated against a test dataset before deployment, defines latency SLOs for LLM endpoints, and designs a feedback loop that captures user signals to curate examples for future evaluation datasets.",
+                "Architects a model swap strategy that allows switching the underlying LLM without application code changes, implements A/B testing infrastructure for comparing prompt and model versions against business metrics, and builds cost attribution dashboards showing LLM spend by feature and team.",
+                "Defines the organisation's LLMOps operating model; establishes the governance process for model changes, prompt updates, and evaluation gate thresholds; designs the feedback-to-evaluation pipeline connecting production signals back to improvement cycles; leads LLMOps platform adoption across AI engineering teams."
+              ],
+              "resources": [
+                { "title": "MLflow — LLM tracking documentation", "url": "https://mlflow.org/docs/latest/llms/index.html", "type": "Official docs" },
+                { "title": "Weights & Biases — LLMOps solutions", "url": "https://wandb.ai/site/solutions/llmops", "type": "Official docs" },
+                { "title": "LangSmith — production LLM monitoring", "url": "https://docs.smith.langchain.com/monitoring", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
           "id": "ai-app-dev",
           "label": "AI Application Development",
           "skills": [
-            { "id": "shared-python-ai",        "label": "Python for AI",                    "shared": true,  "notes": "",  "subSkills": ["Core Libraries (pandas, numpy)", "Async Patterns", "API Wrappers", "FastAPI", "Jupyter"] },
-            { "id": "shared-ts-ai",            "label": "TypeScript / JavaScript for AI",   "shared": true,  "notes": "",  "subSkills": ["Node.js AI SDKs", "Streaming Responses", "React AI Components", "Vercel AI SDK"] },
-            { "id": "ai-api-patterns",         "label": "API Integration Patterns",         "shared": false, "notes": "",  "subSkills": ["Webhook Ingestion", "Event-Driven AI", "Background Processing", "Queue-Based Inference"] },
-            { "id": "ai-doc-processing",       "label": "Document Processing",              "shared": false, "notes": "",  "subSkills": ["PDF Extraction", "OCR Pipelines", "HTML Parsing", "Chunking Strategies", "Metadata Enrichment"] },
-            { "id": "ai-search-knowledge",     "label": "Search & Knowledge Architecture",  "shared": false, "notes": "",  "subSkills": ["Hybrid Search Design", "Knowledge Graph Basics", "Ontology Design", "Taxonomy Management"] }
+            { "id": "shared-python-ai",
+              "label": "Python for AI",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Core Libraries (pandas, numpy)", "Async Patterns", "API Wrappers", "FastAPI", "Jupyter"],
+              "masteryLevels": [
+                "Can write basic Python scripts that use pandas to load and inspect a dataset, install AI SDK packages, and make a synchronous API call to an LLM using a standard library wrapper.",
+                "Structures a Python AI project with a virtual environment, uses pandas and numpy to prepare and transform data before passing it to a model, and runs exploratory experiments in Jupyter notebooks.",
+                "Implements async API calls to LLM endpoints using asyncio to handle concurrent requests without blocking, wraps LLM and vector database clients in reusable abstractions, and serves an AI feature via a FastAPI endpoint with input validation and error handling.",
+                "Designs a production Python AI service with async request handling, structured logging, retry logic for transient API failures, and performance profiling to identify inference pipeline bottlenecks; packages the application for containerised deployment.",
+                "Defines the organisation's Python AI development standards covering project structure, dependency management, async patterns, and testing approach; evaluates new AI libraries and SDK releases for production adoption; mentors engineers on building reliable, observable Python AI services."
+              ],
+              "resources": [
+                { "title": "FastAPI documentation", "url": "https://fastapi.tiangolo.com/", "type": "Official docs" },
+                { "title": "Python asyncio documentation", "url": "https://docs.python.org/3/library/asyncio.html", "type": "Official docs" },
+                { "title": "Jupyter documentation", "url": "https://docs.jupyter.org/en/latest/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-ts-ai",
+              "label": "TypeScript / JavaScript for AI",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Node.js AI SDKs", "Streaming Responses", "React AI Components", "Vercel AI SDK"],
+              "masteryLevels": [
+                "Can explain why TypeScript is commonly used for AI web applications, identify the major JS/TS SDKs for LLM APIs (OpenAI, Anthropic, Azure), and describe what the Vercel AI SDK provides.",
+                "Makes authenticated API calls to an LLM using the OpenAI or Anthropic TypeScript SDK in a Node.js application, handles the async response correctly, and logs model output.",
+                "Implements streaming LLM responses in a Node.js backend and renders them progressively in a React component using the Vercel AI SDK useChat hook, reducing perceived latency for end users.",
+                "Builds a production AI-powered web application with server-side streaming, error boundaries for model failures, optimistic UI updates, and type-safe tool call schemas shared between client and server using Zod.",
+                "Defines the organisation's TypeScript AI application architecture; evaluates new AI SDKs and React server patterns for production adoption; establishes streaming and type-safety standards for LLM-powered features; mentors frontend engineers on integrating AI capabilities into existing applications."
+              ],
+              "resources": [
+                { "title": "Vercel AI SDK documentation", "url": "https://sdk.vercel.ai/docs/introduction", "type": "Official docs" },
+                { "title": "Anthropic TypeScript SDK", "url": "https://github.com/anthropics/anthropic-sdk-typescript", "type": "Official docs" },
+                { "title": "OpenAI Node.js library", "url": "https://github.com/openai/openai-node", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-api-patterns",
+              "label": "API Integration Patterns",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Webhook Ingestion", "Event-Driven AI", "Background Processing", "Queue-Based Inference"],
+              "masteryLevels": [
+                "Can describe the common patterns for integrating LLM APIs into systems — synchronous, asynchronous, event-driven, and queue-based — and explain the tradeoffs in terms of latency, reliability, and cost.",
+                "Implements a webhook endpoint that receives an external event, triggers an LLM API call, and writes the result to a database with basic success and error handling.",
+                "Designs an event-driven AI integration where incoming data triggers model inference via a message queue, implements background processing to handle long-running jobs without blocking the API response, and adds dead-letter queue handling for failed inference tasks.",
+                "Architects a queue-based inference platform that fully decouples ingestion from processing, implements back-pressure to prevent queue overflows during traffic spikes, and designs idempotent inference handlers that safely retry without producing duplicate outputs.",
+                "Defines the organisation's AI integration architecture patterns; establishes standards for async job handling, retry policies, and observability; evaluates messaging infrastructure (Azure Service Bus, Event Hubs, AWS SQS) against AI workload requirements; mentors engineers on reliable AI-powered event-driven system design."
+              ],
+              "resources": [
+                { "title": "Azure Service Bus documentation", "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/", "type": "Official docs" },
+                { "title": "Azure Event Hubs documentation", "url": "https://learn.microsoft.com/en-us/azure/event-hubs/", "type": "Official docs" },
+                { "title": "Patterns of Distributed Systems — Martin Fowler", "url": "https://martinfowler.com/articles/patterns-of-distributed-systems/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-doc-processing",
+              "label": "Document Processing",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["PDF Extraction", "OCR Pipelines", "HTML Parsing", "Chunking Strategies", "Metadata Enrichment"],
+              "masteryLevels": [
+                "Can describe the main approaches to extracting text from documents — direct parsing, OCR, and AI-powered extraction — and explain when each is appropriate based on document type and quality.",
+                "Extracts text and structure from PDFs using a library such as PyMuPDF or pdfplumber, parses HTML using BeautifulSoup, and normalises extracted text into a consistent format for downstream processing.",
+                "Builds a document processing pipeline that handles multiple file types (PDF, Word, HTML, image-heavy scans), applies OCR via Azure Document Intelligence for scanned content, and enriches extracted text with metadata (source, date, document type) before indexing.",
+                "Designs a production document ingestion pipeline with file type detection, format-specific extraction handlers, error handling for malformed documents, and chunking strategies tuned to the downstream retrieval task — balancing context completeness against index cost.",
+                "Defines the organisation's document processing architecture; evaluates extraction tools and AI models (traditional OCR vs. multimodal LLMs) against accuracy and cost for the document portfolio; leads design of the document intake layer for enterprise knowledge bases and RAG systems."
+              ],
+              "resources": [
+                { "title": "PyMuPDF documentation", "url": "https://pymupdf.readthedocs.io/", "type": "Official docs" },
+                { "title": "Unstructured — document parsing library", "url": "https://docs.unstructured.io/", "type": "Official docs" },
+                { "title": "Azure Document Intelligence documentation", "url": "https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "ai-search-knowledge",
+              "label": "Search & Knowledge Architecture",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Hybrid Search Design", "Knowledge Graph Basics", "Ontology Design", "Taxonomy Management"],
+              "masteryLevels": [
+                "Can explain the difference between keyword, semantic, and hybrid search, describe what a knowledge graph is, and identify why structured knowledge representation matters for AI applications that need precise, reliable retrieval.",
+                "Implements a basic hybrid search combining BM25 keyword scoring with vector similarity in a search index, and explains how the two score types are merged using Reciprocal Rank Fusion or a weighted sum.",
+                "Designs a hybrid search architecture as the retrieval backbone of a RAG system, defines a content taxonomy that organises documents into categories enabling metadata-filtered retrieval, and implements metadata enrichment at ingestion time to improve search precision.",
+                "Architects a knowledge architecture that combines vector search with graph relationships, enabling the system to answer questions requiring entity traversal rather than just passage retrieval; designs the ontology mapping domain concepts to indexed entities and relationships.",
+                "Defines the organisation's enterprise knowledge architecture strategy; evaluates when a knowledge graph justifies its added complexity over vector search alone; leads taxonomy and ontology design with domain experts; architects the shared knowledge layer underpinning multiple AI-powered products."
+              ],
+              "resources": [
+                { "title": "Azure AI Search — hybrid search overview", "url": "https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview", "type": "Official docs" },
+                { "title": "Azure AI Search — hybrid ranking with RRF", "url": "https://learn.microsoft.com/en-us/azure/search/hybrid-search-ranking", "type": "Official docs" },
+                { "title": "Neo4j graph database documentation", "url": "https://neo4j.com/docs/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         }
       ]
