@@ -128,6 +128,47 @@
 
 /* ── Loading / error ── */
 .sp-loading{text-align:center;padding:3rem;color:var(--sp-text-muted);font-size:13px}
+
+/* ── Skill detail drawer ── */
+#drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+#drawer-overlay.open{opacity:1;pointer-events:auto}
+#skill-drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:var(--sp-bg-primary);border-left:1px solid var(--sp-border);z-index:201;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+#skill-drawer.open{transform:translateX(0)}
+.drw-close{position:sticky;top:0;display:flex;justify-content:flex-end;padding:.75rem 1rem .25rem;background:var(--sp-bg-primary);z-index:1}
+.drw-close-btn{background:none;border:1px solid var(--sp-border);border-radius:var(--sp-radius-sm);width:28px;height:28px;cursor:pointer;font-size:16px;color:var(--sp-text-muted);display:flex;align-items:center;justify-content:center;line-height:1;font-family:var(--sp-font)}
+.drw-close-btn:hover{border-color:var(--sp-border-strong);color:var(--sp-text-primary)}
+.drw-header{padding:0 1.5rem 1.5rem}
+.drw-skill-name{font-size:18px;font-weight:500;color:var(--sp-text-primary);line-height:1.3;margin-bottom:.35rem}
+.drw-meta{font-size:11px;color:var(--sp-text-muted);margin-bottom:.75rem}
+.drw-header-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.drw-shared-badge{font-size:10px;color:var(--sp-accent);border:1px solid var(--sp-accent-light);background:var(--sp-accent-light);border-radius:20px;padding:2px 8px;font-weight:500;cursor:default}
+.drw-section{border-top:1px solid var(--sp-border);padding:1.25rem 1.5rem}
+.drw-sec-hdr{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--sp-text-muted);margin-bottom:.875rem}
+/* Mastery rows */
+.mastery-row{display:flex;gap:12px;padding:8px 10px;border-radius:var(--sp-radius-sm);margin-bottom:2px}
+.mastery-row.current{background:var(--sp-accent-light)}
+.mastery-lv{font-size:11px;font-weight:600;color:var(--sp-text-muted);white-space:nowrap;width:112px;flex-shrink:0;padding-top:1px}
+.mastery-row.current .mastery-lv{color:var(--sp-accent)}
+.mastery-desc{font-size:12px;color:var(--sp-text-secondary);line-height:1.5}
+.mastery-row.current .mastery-desc{color:var(--sp-text-primary)}
+.mastery-placeholder{font-size:12px;color:var(--sp-text-muted);font-style:italic}
+/* Resources */
+.res-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.res-item:last-child{margin-bottom:0}
+.res-type-badge{font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:1px;letter-spacing:.02em}
+.res-type-docs{color:#0055a5;background:#dbeafe}
+.res-type-course{color:#065f46;background:#d1fae5}
+.res-type-video{color:#92400e;background:#fef3c7}
+.res-type-internal{color:var(--sp-text-secondary);background:var(--sp-bg-secondary);border:1px solid var(--sp-border)}
+.res-title{font-size:12px;color:var(--sp-accent);text-decoration:none;line-height:1.5}
+.res-title:hover{text-decoration:underline}
+.res-placeholder{font-size:12px;color:var(--sp-text-muted);font-style:italic}
+/* Cheat sheet */
+.drw-cheat-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sp-accent);text-decoration:none;border:1px solid var(--sp-accent-light);border-radius:var(--sp-radius-sm);padding:6px 12px;background:var(--sp-accent-light)}
+.drw-cheat-link:hover{background:#cee0f5;border-color:#b3ceea}
+/* AI tutor placeholder */
+.ai-tutor-btn{width:100%;padding:9px;border:1px solid var(--sp-border);border-radius:var(--sp-radius);background:var(--sp-bg-secondary);color:var(--sp-text-muted);font-size:13px;font-family:var(--sp-font);cursor:not-allowed;opacity:.6;display:block}
+.ai-tutor-lbl{font-size:10px;color:var(--sp-text-muted);text-align:center;margin-top:.4rem}
 </style>
 
 <div class="sp-page">
@@ -175,6 +216,14 @@
 </div>
 
 </div></div>
+
+<div id="drawer-overlay" onclick="closeDrawer()"></div>
+<div id="skill-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-skill-name">
+  <div class="drw-close">
+    <button class="drw-close-btn" onclick="closeDrawer()" aria-label="Close drawer">×</button>
+  </div>
+  <div id="drawer-inner"></div>
+</div>
 
 <script>
 // PHASE 1 ONLY — replace with Entra auth in Phase 2
@@ -241,6 +290,7 @@ function allUniqueSkills() {
 
 async function init() {
   loadScores();
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
   try {
     const res = await fetch('taxonomy.json');
     if (!res.ok) throw new Error(res.status);
@@ -325,7 +375,7 @@ function renderRole(roleId) {
 
       h += `<div class="sk-row">
         <div class="dot" style="background:${sc > 0 ? lv.fill : 'transparent'};border-color:${lv.border}" onclick="cycleScore('${skill.id}')"></div>
-        <div class="sk-card" onclick="cycleScore('${skill.id}')">
+        <div class="sk-card" onclick="openDrawer('${skill.id}','${roleId}')" style="cursor:pointer">
           <div class="card-top">
             <span class="sk-nm">${skill.label}${skill.shared ? '<span class="shared-tag">shared</span>' : ''}</span>
             <span class="pill" style="color:${lv.color};border-color:${sc > 0 ? lv.border : 'var(--sp-border-mid)'}">${lv.label}</span>
@@ -356,6 +406,7 @@ function cycleScore(skillId) {
   saveScores();
   renderRole(activeRole);
   renderSummary();
+  refreshDrawerRating();
 }
 
 function doReset() {
@@ -482,6 +533,138 @@ function adminReset() {
   scores = {};
   try { localStorage.removeItem(SCORES_KEY); } catch(e) {}
   renderAdmin();
+}
+
+// ── Utilities ─────────────────────────────────────────────────────────────
+
+function esc(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ── Drawer ─────────────────────────────────────────────────────────────────
+
+let drawerSkillId = null;
+let drawerRoleId  = null;
+
+function openDrawer(skillId, roleId) {
+  if (!TAXONOMY) return;
+  drawerSkillId = skillId;
+  drawerRoleId  = roleId;
+
+  const role = TAXONOMY.roles.find(r => r.id === roleId);
+  if (!role) return;
+
+  let skill = null, cat = null;
+  role.categories.forEach(c => {
+    const s = c.skills.find(sk => sk.id === skillId);
+    if (s) { skill = s; cat = c; }
+  });
+  if (!skill) return;
+
+  document.getElementById('drawer-inner').innerHTML = buildDrawerContent(skill, role, cat);
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('skill-drawer').classList.add('open');
+  document.getElementById('skill-drawer').scrollTop = 0;
+}
+
+function closeDrawer() {
+  drawerSkillId = null;
+  drawerRoleId  = null;
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('skill-drawer').classList.remove('open');
+}
+
+function refreshDrawerRating() {
+  if (!drawerSkillId) return;
+  const sc = getScore(drawerSkillId);
+  const lv = LEVELS[sc];
+
+  const pill = document.getElementById('drw-rating-pill');
+  if (pill) {
+    pill.textContent = lv.label;
+    pill.style.color = lv.color;
+    pill.style.borderColor = sc > 0 ? lv.border : 'var(--sp-border-mid)';
+  }
+  for (let i = 1; i <= 5; i++) {
+    const row = document.getElementById('mastery-row-' + i);
+    if (!row) continue;
+    row.classList.toggle('current', i === sc);
+  }
+}
+
+function buildDrawerContent(skill, role, cat) {
+  const sc = getScore(skill.id);
+  const lv = LEVELS[sc];
+
+  const rolesWithSkill = TAXONOMY.roles.filter(r =>
+    r.categories.some(c => c.skills.some(sk => sk.id === skill.id))
+  );
+  const isMultiRole = rolesWithSkill.length > 1;
+  const sharedTip   = isMultiRole ? rolesWithSkill.map(r => r.label).join(' · ') : '';
+
+  // ── Header ──────────────────────────────────────────────────────────────
+  let h = `
+    <div class="drw-header">
+      <div id="drawer-skill-name" class="drw-skill-name">${esc(skill.label)}</div>
+      <div class="drw-meta">${esc(role.label)} &middot; ${esc(cat.label)}</div>
+      <div class="drw-header-row">
+        <span class="pill" id="drw-rating-pill"
+          style="color:${lv.color};border-color:${sc > 0 ? lv.border : 'var(--sp-border-mid)'}">
+          ${lv.label}
+        </span>
+        ${isMultiRole ? `<span class="drw-shared-badge" title="${esc(sharedTip)}">shared &middot; ${rolesWithSkill.length} roles</span>` : ''}
+      </div>
+    </div>`;
+
+  // ── What to master ───────────────────────────────────────────────────────
+  const masteryLevels = skill.masteryLevels || [];
+  const levelNames = ['Awareness', 'Foundational', 'Practitioner', 'Advanced', 'Expert'];
+  let masteryBody;
+
+  if (masteryLevels.length === 5) {
+    masteryBody = levelNames.map((name, i) => {
+      const lvNum = i + 1;
+      return `<div class="mastery-row${sc === lvNum ? ' current' : ''}" id="mastery-row-${lvNum}">
+        <span class="mastery-lv">${lvNum} &middot; ${name}</span>
+        <span class="mastery-desc">${esc(masteryLevels[i])}</span>
+      </div>`;
+    }).join('');
+  } else {
+    masteryBody = `<p class="mastery-placeholder">Mastery guidance not yet added for this skill.</p>`;
+  }
+  h += `<div class="drw-section"><div class="drw-sec-hdr">What to master</div>${masteryBody}</div>`;
+
+  // ── Resources ────────────────────────────────────────────────────────────
+  const resources = skill.resources || [];
+  const typeCls = {
+    'Official docs': 'res-type-docs',
+    'Course':        'res-type-course',
+    'Video':         'res-type-video',
+    'Internal':      'res-type-internal'
+  };
+  const resBody = resources.length
+    ? resources.map(r => `<div class="res-item">
+        <span class="res-type-badge ${typeCls[r.type] || 'res-type-internal'}">${esc(r.type)}</span>
+        <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="res-title">${esc(r.title)}</a>
+      </div>`).join('')
+    : `<p class="res-placeholder">No resources added yet.</p>`;
+  h += `<div class="drw-section"><div class="drw-sec-hdr">Resources</div>${resBody}</div>`;
+
+  // ── Cheat sheet ──────────────────────────────────────────────────────────
+  const cs = skill.cheatSheets && skill.cheatSheets[0];
+  const csBody = cs
+    ? `<a href="${cs}" target="_blank" rel="noopener noreferrer" class="drw-cheat-link">Open cheat sheet &rarr;</a>`
+    : `<p class="res-placeholder">No cheat sheet added yet.</p>`;
+  h += `<div class="drw-section"><div class="drw-sec-hdr">Cheat sheet</div>${csBody}</div>`;
+
+  // ── AI tutor placeholder (Phase 3) ───────────────────────────────────────
+  h += `<div class="drw-section">
+    <div class="drw-sec-hdr">AI Tutor</div>
+    <button class="ai-tutor-btn" disabled>Study this skill with AI</button>
+    <p class="ai-tutor-lbl">AI tutoring coming in Phase 3</p>
+  </div>`;
+
+  return h;
 }
 
 init();
