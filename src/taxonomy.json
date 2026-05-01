@@ -1200,13 +1200,146 @@
           "id": "azure-cloud-governance",
           "label": "Governance & Operations",
           "skills": [
-            { "id": "azure-cloud-mgmt-groups",   "label": "Management Groups & Subscriptions","shared": false,"notes": "",  "subSkills": ["Hierarchy Design", "Policy Inheritance", "RBAC Inheritance"] },
-            { "id": "azure-cloud-lighthouse",    "label": "Azure Lighthouse",                 "shared": false,"notes": "",  "subSkills": ["Delegated Resource Management", "Partner Center", "Cross-Tenant Monitoring"] },
-            { "id": "azure-cloud-update-manager","label": "Azure Update Manager",             "shared": false,"notes": "",  "subSkills": ["Update Assessments", "Maintenance Configurations", "Patch Orchestration"] },
-            { "id": "azure-cloud-backup",        "label": "Azure Backup",                     "shared": false,"notes": "",  "subSkills": ["Recovery Services Vault", "Backup Policies", "MARS Agent", "Cross-Region Restore"] },
-            { "id": "azure-cloud-asr",           "label": "Azure Site Recovery (ASR)",        "shared": false,"notes": "",  "subSkills": ["Replication", "Failover / Failback", "DR Planning"] },
-            { "id": "azure-cloud-migrate",       "label": "Azure Migrate",                    "shared": false,"notes": "",  "subSkills": ["Discovery", "Assessment", "Server Migration", "Database Migration Service"] },
-            { "id": "azure-cloud-landing-zone",  "label": "Azure Landing Zone Design",        "shared": false,"notes": "",  "subSkills": ["CAF (Cloud Adoption Framework)", "Management", "Connectivity", "Identity Subscriptions"] }
+            { "id": "azure-cloud-mgmt-groups",
+              "label": "Management Groups & Subscriptions",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Hierarchy Design", "Policy Inheritance", "RBAC Inheritance"],
+              "masteryLevels": [
+                "Can describe what Management Groups are, explain how they form a hierarchy above subscriptions, and identify how Policy and RBAC assignments made at a management group scope propagate down to all child subscriptions and resource groups.",
+                "Creates a management group in the portal or Bicep, assigns a built-in Azure Policy definition at the management group scope, and verifies that the policy applies to all subscriptions within the group without individual subscription-level assignment.",
+                "Designs a management group hierarchy aligned to the CAF structure (Root → Platform → Landing Zones → Sandboxes), assigns RBAC roles at management group scope to grant platform teams consistent access, and uses exclusion scopes to exempt specific resources or subscriptions from policy enforcement.",
+                "Architects the management group and subscription design for an enterprise estate, implements subscription vending automation that creates new subscriptions pre-configured with the correct parent group, RBAC, and policy assignments, and manages subscription moves as workloads transition through their lifecycle.",
+                "Defines the organisation's management group hierarchy and subscription governance model; establishes RBAC assignment standards for platform and workload teams; governs subscription creation and lifecycle through automation; advises on hierarchy changes as the organisation scales or acquires new business units."
+              ],
+              "resources": [
+                { "title": "Azure Management Groups documentation", "url": "https://learn.microsoft.com/en-us/azure/governance/management-groups/", "type": "Official docs" },
+                { "title": "Management group design — CAF", "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups", "type": "Official docs" },
+                { "title": "Build a cloud governance strategy on Azure — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/build-cloud-governance-strategy-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-lighthouse",
+              "label": "Azure Lighthouse",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Delegated Resource Management", "Partner Center", "Cross-Tenant Monitoring"],
+              "masteryLevels": [
+                "Can describe what Azure Lighthouse is, explain the problem it solves (managing multiple customer tenants without needing per-customer credentials), and identify the two onboarding methods: ARM templates and Azure Marketplace offers.",
+                "Reviews the Azure Lighthouse delegated resource management model, understands how customers authorise management by granting specific RBAC roles to the managing tenant's principals, and navigates delegated customer subscriptions in the Azure portal as a service provider.",
+                "Onboards a customer tenant to Lighthouse by deploying the authorisation ARM template, configures Azure Monitor and Log Analytics queries that span delegated subscriptions, and uses the Lighthouse Multi-Tenant Dashboard to view resource health and policy compliance across the managed portfolio.",
+                "Designs a Lighthouse governance model with least-privilege RBAC authorisations scoped to specific management functions, implements just-in-time access using Lighthouse with Entra ID PIM for sensitive customer operations, and automates customer onboarding through Marketplace published offers.",
+                "Defines the organisation's managed service delivery model using Azure Lighthouse; designs the authorisation model, RBAC roles, and operational runbooks for delivering cloud management at scale; advises customers on Lighthouse trust boundaries and onboarding; governs the managed scope across the full customer portfolio."
+              ],
+              "resources": [
+                { "title": "Azure Lighthouse documentation", "url": "https://learn.microsoft.com/en-us/azure/lighthouse/", "type": "Official docs" },
+                { "title": "Azure Lighthouse managed service offers", "url": "https://learn.microsoft.com/en-us/azure/lighthouse/concepts/managed-services-offers", "type": "Official docs" },
+                { "title": "Onboard a customer to Azure Lighthouse", "url": "https://learn.microsoft.com/en-us/azure/lighthouse/how-to/onboard-customer", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-update-manager",
+              "label": "Azure Update Manager",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Update Assessments", "Maintenance Configurations", "Patch Orchestration"],
+              "masteryLevels": [
+                "Can describe what Azure Update Manager is, explain why it replaced Azure Automation Update Management, and identify the VM types it covers: Azure VMs, Arc-enabled servers, and both Windows and Linux.",
+                "Enables Update Manager for a set of VMs, reviews the Update Assessment report to identify pending patches by severity and classification, and triggers an on-demand patch installation to apply critical updates immediately.",
+                "Creates Maintenance Configurations to define patching windows for different workload tiers (dev, staging, production), schedules recurring patch runs aligned to change management windows, and configures pre/post event scripts to drain connections before patching and validate application health after.",
+                "Designs a patch orchestration strategy for a mixed estate of Azure VMs and Arc-enabled on-premises servers, implements Dynamic Scopes to automatically include new VMs matching defined tags or resource group membership in maintenance configurations, and monitors patch compliance using Update Manager reports and Azure Monitor alerts.",
+                "Defines the organisation's patch management strategy and compliance targets; establishes maintenance windows, severity-based SLAs, and escalation processes for unpatched critical vulnerabilities; governs Maintenance Configurations through Bicep; reports patch compliance posture to operations and security leadership."
+              ],
+              "resources": [
+                { "title": "Azure Update Manager documentation", "url": "https://learn.microsoft.com/en-us/azure/update-manager/", "type": "Official docs" },
+                { "title": "Schedule recurring updates — Azure Update Manager", "url": "https://learn.microsoft.com/en-us/azure/update-manager/scheduled-patching", "type": "Official docs" },
+                { "title": "Introduction to Azure Update Manager — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-update-manager/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-backup",
+              "label": "Azure Backup",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Recovery Services Vault", "Backup Policies", "MARS Agent", "Cross-Region Restore"],
+              "masteryLevels": [
+                "Can describe what Azure Backup is, identify the workload types it protects (Azure VMs, SQL in VMs, Azure Files, on-premises via MARS agent), and explain the role of the Recovery Services Vault as the backup storage and configuration container.",
+                "Creates a Recovery Services Vault, configures VM backup using the default policy, triggers an on-demand backup, and performs a file-level restore to validate that recovery works correctly.",
+                "Authors custom backup policies with appropriate frequency, retention tiers, and instant restore snapshot retention for different workload tiers; configures the MARS agent for on-premises file backup; and enables soft delete on the vault to protect against accidental or malicious backup data deletion.",
+                "Designs a backup architecture with Cross-Region Restore for production VMs to satisfy DR requirements, uses Backup Center to manage and monitor coverage across all vaults in the estate, and implements Azure Backup reports via Log Analytics for compliance auditing and cost visibility.",
+                "Defines the organisation's backup strategy and RPO targets for each workload tier; governs vault creation, backup policy standards, and retention through Bicep and Azure Policy; establishes the backup testing and restore validation cadence; reports backup coverage and compliance to operations leadership."
+              ],
+              "resources": [
+                { "title": "Azure Backup documentation", "url": "https://learn.microsoft.com/en-us/azure/backup/", "type": "Official docs" },
+                { "title": "Azure Backup best practices", "url": "https://learn.microsoft.com/en-us/azure/backup/guidance-best-practices", "type": "Official docs" },
+                { "title": "Protect your virtual machines with Azure Backup — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-asr",
+              "label": "Azure Site Recovery (ASR)",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Replication", "Failover / Failback", "DR Planning"],
+              "masteryLevels": [
+                "Can describe what Azure Site Recovery is, explain the difference between backup (restore from a point-in-time copy) and replication (continuous near-zero RPO copy), and identify the main source-target scenarios: Azure-to-Azure and on-premises-to-Azure.",
+                "Enables ASR replication for an Azure VM to a secondary region, reviews replication health and lag metrics in the ASR portal, and understands the target region requirements (network mapping, compute, storage) that must be configured before failover.",
+                "Executes a test failover to the secondary region without impacting production, documents the steps taken and RTO achieved, performs a test failback to return to primary, and configures a recovery plan to orchestrate multi-VM failover in the correct dependency sequence.",
+                "Designs an ASR architecture for a multi-tier application with network mapping, customised recovery plans that include manual action steps for DNS cutover and load balancer reconfiguration, and pre/post Azure Automation Runbook scripts to reduce manual intervention during a real failover.",
+                "Defines the organisation's BCDR strategy and RTO/RPO targets for each workload tier; designs the replication topology for hybrid and multi-region environments; leads regular DR exercises and validates that recovery plans achieve defined objectives; presents BCDR posture and test evidence to business continuity stakeholders."
+              ],
+              "resources": [
+                { "title": "Azure Site Recovery documentation", "url": "https://learn.microsoft.com/en-us/azure/site-recovery/", "type": "Official docs" },
+                { "title": "About Azure Site Recovery", "url": "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview", "type": "Official docs" },
+                { "title": "Protect your infrastructure with Azure Site Recovery — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/protect-infrastructure-with-site-recovery/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-migrate",
+              "label": "Azure Migrate",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Discovery", "Assessment", "Server Migration", "Database Migration Service"],
+              "masteryLevels": [
+                "Can describe what Azure Migrate is, identify its main tools (Server Assessment, Server Migration, Database Migration Service), and explain the discover-assess-migrate phased approach.",
+                "Deploys the Azure Migrate appliance to an on-premises environment, runs a discovery to inventory VMs and their configurations, and reviews the assessment report for Azure sizing recommendations and estimated monthly costs.",
+                "Executes an agentless server migration for a non-production VM to validate the end-to-end process, uses dependency analysis to map communication relationships before migrating production workloads, and assesses database migration readiness using the Database Migration Assistant (DMA).",
+                "Designs a wave-based migration programme that sequences workloads by dependency group, business criticality, and risk tolerance; uses Azure Database Migration Service for online (minimal-downtime) database migrations; applies performance-based right-sizing to optimise Azure costs versus replicating on-premises VM sizing.",
+                "Defines the organisation's cloud migration strategy including criteria for lift-and-shift, re-platform, and re-architect decisions; leads the migration programme across business and IT stakeholders; governs the toolchain and wave sequencing; reports migration velocity, risk, and cost realisation to the programme steering committee."
+              ],
+              "resources": [
+                { "title": "Azure Migrate documentation", "url": "https://learn.microsoft.com/en-us/azure/migrate/", "type": "Official docs" },
+                { "title": "Azure Database Migration Service documentation", "url": "https://learn.microsoft.com/en-us/azure/dms/", "type": "Official docs" },
+                { "title": "Migrate servers to Azure with Azure Migrate — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/migrate-servers-to-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-landing-zone",
+              "label": "Azure Landing Zone Design",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["CAF (Cloud Adoption Framework)", "Management", "Connectivity", "Identity Subscriptions"],
+              "masteryLevels": [
+                "Can describe the Cloud Adoption Framework and explain the purpose of a Landing Zone: a pre-configured, governed Azure environment that allows workload teams to deploy resources safely and compliantly from day one.",
+                "Describes the CAF landing zone design areas (Identity & Access, Network Topology, Resource Organisation, Governance, Security, Operations, Management) and explains how decisions in each area affect all workloads that are onboarded to the platform.",
+                "Designs the three platform subscriptions (Management, Connectivity, Identity) and their contents, selects between Hub-Spoke and Virtual WAN connectivity models, and implements the baseline governance controls using Azure Policy initiatives aligned to a compliance framework.",
+                "Deploys the Azure Landing Zone accelerator using Bicep, customises the policy assignments and management group hierarchy for the organisation's requirements, and implements subscription vending automation to onboard new workload teams with a defined configuration baseline within a controlled service level.",
+                "Owns the organisation's cloud platform architecture; leads the platform engineering team responsible for the connectivity, identity, and management subscriptions; evolves the landing zone as new workload types emerge (AI, regulated industries, multi-cloud); presents the platform strategy and investment case to technology leadership."
+              ],
+              "resources": [
+                { "title": "Azure Landing Zones — Cloud Adoption Framework", "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/", "type": "Official docs" },
+                { "title": "Landing zone design areas", "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-areas", "type": "Official docs" },
+                { "title": "Introduction to the Microsoft Cloud Adoption Framework — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/microsoft-cloud-adoption-framework-for-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         }
       ]
