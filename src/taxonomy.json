@@ -1807,42 +1807,384 @@
           "id": "staff-leadership",
           "label": "Cross-Team Leadership & Influence",
           "skills": [
-            { "id": "shared-stakeholder-mgmt",   "label": "Stakeholder Management",       "shared": true,  "notes": "Core Staff competency",  "subSkills": ["Stakeholder Mapping", "Communication Cadence", "Expectation Setting", "No-Surprise Principle", "Disagreement Protocols"] },
-            { "id": "staff-consensus",           "label": "Technical Consensus Building", "shared": false, "notes": "",                       "subSkills": ["Pre-alignment", "Running Design Reviews", "Handling Objections", "Decision Escalation", "Public Alignment"] },
-            { "id": "staff-culture",             "label": "Engineering Culture & Standards","shared": false,"notes": "",                       "subSkills": ["Coding/Architecture Standards", "Golden Paths", "Internal Developer Portal Advocacy", "Tech Radar"] },
-            { "id": "staff-mentorship",          "label": "Mentorship & Technical Development","shared": false,"notes": "",                    "subSkills": ["Senior Engineer Development", "Code/Design Review Quality", "Knowledge Sharing (Brown Bags, RFCs)"] },
-            { "id": "staff-cross-functional",    "label": "Cross-Functional Collaboration","shared": false, "notes": "",                       "subSkills": ["Working with Product/Security/Legal/Finance", "Technical Translation", "Dependency Management"] }
+            { "id": "shared-stakeholder-mgmt",
+              "label": "Stakeholder Management",
+              "shared": true,
+              "notes": "Core Staff competency",
+              "subSkills": ["Stakeholder Mapping", "Communication Cadence", "Expectation Setting", "No-Surprise Principle", "Disagreement Protocols"],
+              "masteryLevels": [
+                "Can describe who a stakeholder is, explain why managing expectations is a distinct skill from doing the technical work, and identify the most common failure mode: engineers who are excellent technically but deliver unwelcome surprises because they don't communicate early enough.",
+                "Creates a stakeholder map for a project identifying who needs to know what at what frequency, and sends regular status communications that clearly distinguish 'on track' from 'at risk' without burying the signal in technical detail.",
+                "Establishes a communication cadence calibrated to each stakeholder's interests and decision authority, surfaces risks proactively before they become surprises, and manages disagreements with stakeholders using structured protocols that resolve the issue while preserving the relationship.",
+                "Manages a complex multi-stakeholder environment with conflicting interests; applies an influence map to understand power dynamics; builds coalitions to move decisions forward when formal authority is insufficient; maintains the no-surprise principle even when the news is bad and the conversation is difficult.",
+                "Defines the stakeholder management approach for large-scale engineering programmes; trains engineering leads on stakeholder communication; uses accumulated stakeholder trust as organisational capital to push through difficult technical decisions; advises on escalation paths when stakeholder relationships break down."
+              ],
+              "resources": [
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "The Manager's Path — Camille Fournier", "url": "https://www.oreilly.com/library/view/the-managers-path/9781491973882/", "type": "Course" },
+                { "title": "PMI — stakeholder analysis in projects", "url": "https://www.pmi.org/learning/library/stakeholder-analysis-pivotal-practice-projects-8905", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-consensus",
+              "label": "Technical Consensus Building",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Pre-alignment", "Running Design Reviews", "Handling Objections", "Decision Escalation", "Public Alignment"],
+              "masteryLevels": [
+                "Can describe what technical consensus means versus majority vote or management mandate, explain why pre-alignment conversations before a formal review increase the probability of reaching agreement, and identify why large synchronous meetings are poor venues for first-time consensus attempts.",
+                "Conducts pre-alignment conversations with key stakeholders before a design review to understand objections in advance, incorporates the perspectives heard into a revised proposal, and enters the formal review without unexpected blocking disagreements.",
+                "Handles technical objections constructively by separating valid concerns from personal preferences, applies 'disagree and commit' when consensus is not achievable within the available time, and records the disagreement and decision rationale in writing so it cannot be relitigated without new information.",
+                "Builds consensus across organisational boundaries where teams have different priorities and no shared management above the director level; uses public written summaries of agreed positions to prevent consensus decay; frames escalations to management without making them political fights.",
+                "Defines the organisation's consensus-building norms; trains engineering leads on structured approaches to disagreement; uses the absence of consensus as a diagnostic signal to surface misaligned goals or incentives; builds decision-making capacity so fewer decisions require Staff-level intervention."
+              ],
+              "resources": [
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "Crucial Conversations — Patterson, Grenny et al.", "url": "https://cruciallearning.com/crucial-conversations-book/", "type": "Course" },
+                { "title": "Management 3.0 — delegation and decision models", "url": "https://management30.com/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-culture",
+              "label": "Engineering Culture & Standards",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Coding/Architecture Standards", "Golden Paths", "Internal Developer Portal Advocacy", "Tech Radar"],
+              "masteryLevels": [
+                "Can describe what engineering culture means in practice — the shared norms about how work gets done — and explain the difference between written standards that nobody reads and lived culture that shapes daily decisions.",
+                "Writes a clear coding or architecture standard for a specific pattern the team should follow, explains the rationale behind it so engineers understand the why not just the what, and gets the team to adopt it through demonstration and example rather than mandate.",
+                "Designs a Golden Path for a common engineering task — a well-lit, well-supported route that makes the right choice the easy choice — and advocates for the tooling or documentation investment needed to make it genuinely better than the alternatives.",
+                "Leads the evolution of engineering standards across multiple teams, uses a Tech Radar to make technology choices visible and move conversations about new tools from individual decisions to a collective forum, and tracks adoption of agreed standards as a measurable outcome.",
+                "Defines the engineering culture the organisation aspires to; identifies where the lived culture diverges from the stated culture and takes concrete action to close the gap; uses standards and golden paths as cultural levers rather than bureaucratic controls; mentors engineering leadership on culture as a technical force multiplier."
+              ],
+              "resources": [
+                { "title": "Thoughtworks Technology Radar", "url": "https://www.thoughtworks.com/radar", "type": "Official docs" },
+                { "title": "DORA DevOps research — technical capabilities", "url": "https://dora.dev/", "type": "Official docs" },
+                { "title": "Team Topologies — Matthew Skelton and Manuel Pais", "url": "https://teamtopologies.com/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-mentorship",
+              "label": "Mentorship & Technical Development",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Senior Engineer Development", "Code/Design Review Quality", "Knowledge Sharing (Brown Bags, RFCs)"],
+              "masteryLevels": [
+                "Can describe the difference between mentorship (developing someone's capability) and sponsorship (advocating for their advancement), and explain why high-quality code review is a mentorship mechanism as much as a quality control mechanism.",
+                "Gives structured, actionable feedback in a code or design review that names the root pattern behind an issue rather than only the surface symptom, and offers a learning resource or example alongside the feedback.",
+                "Maintains regular mentorship conversations with one or more senior engineers, sets development goals collaboratively, tracks progress over time, and runs knowledge-sharing sessions (brown bags, RFCs, documentation) that make individual expertise available to the broader team.",
+                "Develops a senior engineer's technical and communication capabilities to a point where they are ready for a staff-level scope; designs stretch assignments and cross-team exposure that accelerate development beyond what normal project work provides; actively sponsors their work to increase their visibility.",
+                "Defines the organisation's senior-to-staff development programme; builds a culture where mentorship and knowledge-sharing are professional expectations rather than personal favours; measures the pipeline of engineers developing toward staff scope; uses sponsorship actively to advance engineers who have the capability but lack the visibility."
+              ],
+              "resources": [
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "The Manager's Path — Camille Fournier", "url": "https://www.oreilly.com/library/view/the-managers-path/9781491973882/", "type": "Course" },
+                { "title": "The Coaching Habit — Michael Bungay Stanier", "url": "https://www.mbs.works/coaching-habit-book/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-cross-functional",
+              "label": "Cross-Functional Collaboration",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Working with Product/Security/Legal/Finance", "Technical Translation", "Dependency Management"],
+              "masteryLevels": [
+                "Can identify the non-engineering functions (Product, Security, Legal, Finance) whose constraints engineering work must account for, and explain why engineering-only decisions made in isolation frequently fail during implementation or compliance review.",
+                "Participates effectively in cross-functional meetings by representing engineering constraints clearly and translating technical concepts into the language and concerns of the partner function, without oversimplifying or retreating into jargon.",
+                "Involves Security and Legal in design decisions early enough that their input shapes the architecture rather than requiring rework; tracks cross-team dependencies explicitly; raises dependency risks to affected teams before they become blockers on the critical path.",
+                "Leads cross-functional workstreams spanning engineering, product, security, and operations; negotiates scope and timeline across functions when requirements conflict; translates engineering constraints into business tradeoff language that product and finance leadership can reason about.",
+                "Defines how engineering engages with its cross-functional partners; establishes the forums, rituals, and escalation paths for cross-functional alignment; builds trusted peer-level relationships with Product, Security, Legal, and Finance leadership; represents engineering interests effectively in company-level strategy and planning."
+              ],
+              "resources": [
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "Inspired — Marty Cagan (product management perspective)", "url": "https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/", "type": "Course" },
+                { "title": "Accelerate — Forsgren, Humble, Kim", "url": "https://itrevolution.com/accelerate-book/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         },
         {
           "id": "staff-execution",
           "label": "Execution & Delivery Oversight",
           "skills": [
-            { "id": "staff-initiative-framing",  "label": "Initiative Framing & Scoping",  "shared": false, "notes": "",  "subSkills": ["Problem Decomposition", "MVP Definition", "Milestone Design", "Definition of Done", "Success Metrics"] },
-            { "id": "staff-tech-risk",           "label": "Technical Risk Management",     "shared": false, "notes": "",  "subSkills": ["Risk Identification", "Mitigation vs Acceptance", "Rollback Planning", "Dependency Mapping"] },
-            { "id": "staff-delivery-guardrails", "label": "Delivery Guardrails",           "shared": false, "notes": "",  "subSkills": ["Definition of Ready", "Architectural Governance", "Implementation Review"] },
-            { "id": "staff-tech-debt",           "label": "Technical Debt Management",     "shared": false, "notes": "",  "subSkills": ["Debt Classification", "Payback Strategy", "Refactoring Patterns", "Negotiating with Product"] },
-            { "id": "staff-incident-leadership", "label": "Incident Leadership",           "shared": false, "notes": "",  "subSkills": ["Incident Commander Role", "Blameless Post-Mortems", "RCA Facilitation", "Corrective Action Ownership"] }
+            { "id": "staff-initiative-framing",
+              "label": "Initiative Framing & Scoping",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Problem Decomposition", "MVP Definition", "Milestone Design", "Definition of Done", "Success Metrics"],
+              "masteryLevels": [
+                "Can describe why unclear scoping is the most common root cause of engineering initiatives that fail to deliver value, and explain the difference between a well-defined problem statement and a solution statement masquerading as a problem.",
+                "Writes a clear problem statement for a technical initiative that a new team member could read and explain back correctly, and proposes an MVP scope that delivers a complete loop of value rather than a partial feature set.",
+                "Decomposes a large initiative into milestones where each delivers something useful and observable, defines measurable success criteria before work begins, and surfaces the key assumptions that — if wrong — would invalidate the approach so they can be tested as early as possible.",
+                "Frames an ambiguous initiative from first principles — starting from the business problem and working backward to technical scope — negotiates milestone boundaries with product and engineering stakeholders, and structures delivery so the team ships continuous value rather than a big-bang release.",
+                "Defines the organisation's initiative framing process; identifies programmes starting without a clear problem statement and intervenes before engineering investment is wasted; uses initiative framing as a coaching tool to develop senior engineers' ability to own and structure ambiguous work."
+              ],
+              "resources": [
+                { "title": "Shape Up — Basecamp's approach to scoping", "url": "https://basecamp.com/shapeup", "type": "Course" },
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "Inspired — Marty Cagan", "url": "https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-tech-risk",
+              "label": "Technical Risk Management",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Risk Identification", "Mitigation vs Acceptance", "Rollback Planning", "Dependency Mapping"],
+              "masteryLevels": [
+                "Can describe what constitutes a technical risk versus a task or dependency, explain the difference between mitigating a risk and accepting it, and identify the most common sources of risk in large engineering initiatives: unknown unknowns, external dependencies, and irreversibility.",
+                "Produces a risk register for a project they own, categorises each risk by likelihood and impact, and identifies at least one mitigation or contingency for the highest-priority risks before work begins.",
+                "Designs the risk management strategy for a cross-team initiative: maps dependencies on external teams and third-party systems, defines rollback plans and feature-flag kill switches for risky changes, and scopes spike experiments or proof-of-concept work to reduce the highest-impact unknowns early.",
+                "Leads technical risk review for large programmes, distinguishes risks engineering can control from those requiring escalation to product or business leadership, and presents risk-adjusted timeline scenarios that show how the schedule changes under different outcomes.",
+                "Defines the organisation's technical risk management practice; establishes the risk identification and review cadence for major initiatives; uses risk posture as an input to architectural decisions; trains engineering leads to own risk rather than routing it upward by default."
+              ],
+              "resources": [
+                { "title": "Google SRE book — Embracing Risk", "url": "https://sre.google/sre-book/embracing-risk/", "type": "Official docs" },
+                { "title": "Azure Well-Architected Framework — reliability", "url": "https://learn.microsoft.com/en-us/azure/well-architected/reliability/", "type": "Official docs" },
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-delivery-guardrails",
+              "label": "Delivery Guardrails",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Definition of Ready", "Architectural Governance", "Implementation Review"],
+              "masteryLevels": [
+                "Can describe what delivery guardrails are, explain the difference between a bottleneck reviewer (where work stops for one person's approval) and an enabling guardrail (that makes teams self-sufficient), and identify why these two patterns produce opposite engineering cultures.",
+                "Defines a Definition of Ready checklist for a team that ensures work is sufficiently understood before implementation starts, reducing the rework that comes from discovering requirements mid-sprint.",
+                "Implements a lightweight architectural governance process where teams self-assess their designs against agreed principles before building, and provides asynchronous implementation review feedback that teaches the underlying pattern rather than just fixing the specific code.",
+                "Designs a guardrail system that scales beyond their personal review bandwidth — through templates, linters, automated checks, and trained engineering leads who share governance responsibility — so standards are maintained without a single point of approval.",
+                "Defines the organisation's governance model for implementation standards; calibrates guardrails to the risk level of each change type; distinguishes standards requiring technical review from those enforceable through tooling; builds the engineering population's self-governance capability so guardrails eventually become part of the team's instinct."
+              ],
+              "resources": [
+                { "title": "Google Engineering Practices", "url": "https://google.github.io/eng-practices/", "type": "Official docs" },
+                { "title": "Accelerate — Forsgren, Humble, Kim", "url": "https://itrevolution.com/accelerate-book/", "type": "Course" },
+                { "title": "Martin Fowler — continuous delivery and architecture", "url": "https://martinfowler.com/tags/continuous%20delivery.html", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-tech-debt",
+              "label": "Technical Debt Management",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Debt Classification", "Payback Strategy", "Refactoring Patterns", "Negotiating with Product"],
+              "masteryLevels": [
+                "Can describe what technical debt is, distinguish intentional debt (deliberate tradeoff documented at the time) from unintentional debt (discovered later), and explain why calling every code quality issue 'technical debt' dilutes the concept and makes prioritisation harder.",
+                "Classifies technical debt in a system by type (architecture, dependency, test, documentation) and estimates the carrying cost of each — the developer velocity being paid in interest every sprint — to build a prioritised case for addressing it.",
+                "Creates a debt payback plan sequenced by impact and risk, negotiates technical debt investment into product roadmaps using business-impact language (velocity loss, incident rate, hiring friction) rather than technical arguments alone, and implements refactoring patterns that reduce debt incrementally without requiring big-bang rewrites.",
+                "Designs a debt management strategy for a multi-team system that prevents new debt accumulating faster than existing debt is paid, integrates debt visibility into engineering health metrics reported to leadership, and identifies when a component has crossed the threshold where redesign is more cost-effective than continued remediation.",
+                "Defines the organisation's technical debt classification and governance approach; ensures the engineering investment case for debt reduction is made credibly at the executive level; builds the engineering culture where managing debt is a professional expectation; uses debt trends as an early warning signal for team health and velocity decline."
+              ],
+              "resources": [
+                { "title": "Martin Fowler — Technical Debt", "url": "https://martinfowler.com/bliki/TechnicalDebt.html", "type": "Official docs" },
+                { "title": "Refactoring — Martin Fowler", "url": "https://refactoring.com/", "type": "Course" },
+                { "title": "Accelerate — Forsgren, Humble, Kim", "url": "https://itrevolution.com/accelerate-book/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-incident-leadership",
+              "label": "Incident Leadership",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Incident Commander Role", "Blameless Post-Mortems", "RCA Facilitation", "Corrective Action Ownership"],
+              "masteryLevels": [
+                "Can describe the Incident Commander role and how it differs from the technical investigator role, explain what blamelessness means in a post-mortem and why it is operationally important rather than just culturally nice, and identify the failure modes of poorly run incident reviews.",
+                "Participates effectively in incident response — communicates clearly in the incident channel about what is known and unknown, avoids speculation, and contributes observations to a post-mortem without framing them as personal blame.",
+                "Serves as Incident Commander: owns communication to stakeholders, coordinates responders, and makes the call on escalation and resolution; then facilitates a post-mortem that produces specific time-bound corrective actions with named owners rather than vague commitments to 'improve monitoring.'",
+                "Leads the post-mortem for a high-severity incident across multiple teams, facilitates RCA through successive layers of contributing factors to reach systemic causes rather than stopping at 'human error', and drives corrective action completion through to closure rather than letting items decay.",
+                "Defines the organisation's incident management framework and on-call culture; establishes post-mortem templates, review cadence, and escalation criteria; ensures corrective actions are tracked and completed; uses incident frequency and severity trends as a leading indicator of systemic engineering health; presents risk posture to operations leadership."
+              ],
+              "resources": [
+                { "title": "Google SRE book — Managing Incidents", "url": "https://sre.google/sre-book/managing-incidents/", "type": "Official docs" },
+                { "title": "Google SRE Workbook — Incident Management", "url": "https://sre.google/workbook/managing-incidents/", "type": "Official docs" },
+                { "title": "PagerDuty Incident Response Guide", "url": "https://response.pagerduty.com/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         },
         {
           "id": "staff-fluency",
           "label": "Broad Technical Fluency",
           "skills": [
-            { "id": "shared-cloud-arch",               "label": "Cloud Architecture (Multi-Cloud)",   "shared": true,  "notes": "",  "subSkills": ["Azure", "AWS", "GCP Basics", "Cloud-Agnostic Patterns"] },
-            { "id": "shared-platform-concepts",        "label": "Platform & Infrastructure Concepts", "shared": true,  "notes": "",  "subSkills": ["IDP Concepts", "Golden Paths", "Service Mesh Basics", "GitOps", "FinOps"] },
-            { "id": "shared-observability",            "label": "Observability & Monitoring",         "shared": true,  "notes": "",  "subSkills": ["MELT (Metrics/Events/Logs/Traces)", "SLO Design", "Dashboard Strategy", "On-Call Design"] },
-            { "id": "shared-networking-fundamentals",  "label": "Networking Fundamentals",            "shared": true,  "notes": "",  "subSkills": ["TCP/IP", "DNS", "TLS/mTLS", "Load Balancing", "CDN", "BGP Basics"] },
-            { "id": "staff-db-patterns",               "label": "Database & Storage Patterns",        "shared": false, "notes": "",  "subSkills": ["OLTP vs OLAP", "Relational vs Document vs Graph vs Time-Series", "Caching Patterns", "Eventual Consistency"] },
-            { "id": "shared-sdlc",                     "label": "Software Development Lifecycle",     "shared": true,  "notes": "",  "subSkills": ["Git Workflows", "CI/CD Pipeline Design", "Testing Strategies", "Feature Flags", "Deployment Patterns (Blue/Green, Canary)"] },
-            { "id": "shared-ai-ml-awareness",          "label": "AI/ML Integration Awareness",        "shared": true,  "notes": "",  "subSkills": ["LLM Integration Patterns", "RAG Concepts", "AI Governance", "Cost/Security Tradeoffs"] }
+            { "id": "shared-cloud-arch",
+              "label": "Cloud Architecture (Multi-Cloud)",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Azure", "AWS", "GCP Basics", "Cloud-Agnostic Patterns"],
+              "masteryLevels": [
+                "Can describe the major cloud providers and their relative market positions, explain cloud-agnostic architectural principles (stateless compute, managed services, everything-as-code), and identify why most architecture patterns transfer across clouds even when specific service names differ.",
+                "Designs a cloud architecture on their primary platform and can read an architecture diagram using a different provider's services with minimal translation effort, mapping analogous services (e.g. Azure Blob Storage ↔ AWS S3).",
+                "Evaluates architectural options across two cloud providers for a given use case, applies cloud-agnostic patterns (event-driven, serverless, container-based) that can be implemented on any major provider, and identifies where provider-specific features create lock-in risk.",
+                "Leads architectural decision-making for a multi-cloud or cloud migration programme, articulates the strategic tradeoffs between provider lock-in and platform optimisation, and produces designs that balance portability with the use of cloud-native capabilities where justified.",
+                "Defines the organisation's cloud platform strategy; evaluates provider selection against workload requirements and commercial terms; designs the governance model for multi-cloud workload placement; advises leadership on cloud-agnostic patterns that protect future architectural optionality."
+              ],
+              "resources": [
+                { "title": "Azure Architecture Center", "url": "https://learn.microsoft.com/en-us/azure/architecture/", "type": "Official docs" },
+                { "title": "AWS Architecture Center", "url": "https://aws.amazon.com/architecture/", "type": "Official docs" },
+                { "title": "Cloud Design Patterns — Microsoft", "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-platform-concepts",
+              "label": "Platform & Infrastructure Concepts",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["IDP Concepts", "Golden Paths", "Service Mesh Basics", "GitOps", "FinOps"],
+              "masteryLevels": [
+                "Can describe what a platform engineering team does, explain the difference between an internal developer platform and a customer-facing product, and identify the problem that golden paths, service meshes, and GitOps each solve.",
+                "Explains how an Internal Developer Platform reduces cognitive load for application teams, describes the GitOps reconciliation loop (desired state in git, controller applies to cluster), and articulates when a service mesh adds value versus when it adds unnecessary complexity.",
+                "Evaluates the platform maturity of an engineering organisation, identifies where cognitive load on development teams is excessive, and designs the golden paths and platform services that would have the highest developer experience impact.",
+                "Leads the design of an engineering platform strategy covering CI/CD, IaC, observability, and developer experience layers; makes the build-vs-buy-vs-assemble decision for each platform component; defines the success metrics (DORA, developer NPS) that validate the investment.",
+                "Defines the organisation's platform engineering vision and investment case; presents the platform as a product with a roadmap and internal customers; establishes the feedback loops between platform and application teams; uses platform maturity as a lever for engineering velocity at scale."
+              ],
+              "resources": [
+                { "title": "Team Topologies — Skelton and Pais", "url": "https://teamtopologies.com/", "type": "Course" },
+                { "title": "Backstage — open source developer portal", "url": "https://backstage.io/", "type": "Official docs" },
+                { "title": "DORA DevOps research", "url": "https://dora.dev/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-observability",
+              "label": "Observability & Monitoring",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["MELT (Metrics/Events/Logs/Traces)", "SLO Design", "Dashboard Strategy", "On-Call Design"],
+              "masteryLevels": [
+                "Can describe the four pillars of observability (metrics, events, logs, traces), explain why observability differs from monitoring (instrumentation for unknown failures vs. checking known ones), and identify what question each pillar is best suited to answer.",
+                "Evaluates an existing system's observability coverage by reviewing what is and isn't instrumented, identifies the gaps that would prevent diagnosing an unknown production failure, and recommends the highest-priority additions.",
+                "Designs the observability strategy for a new system: defines the SLIs and SLOs, designs the dashboard hierarchy from high-level health to per-service detail, sets an alerting philosophy (alert on symptoms, not causes), and structures the on-call rotation to distribute load fairly.",
+                "Architects the observability platform for a multi-team system, defines trace propagation and structured logging standards that allow correlation across service boundaries, and uses observability data to surface architectural improvements.",
+                "Defines the organisation's observability strategy and toolchain standards; establishes SLO governance and error budget policy; ensures observability is a first-class architectural requirement rather than a post-deployment add-on; presents observability posture and on-call health trends to engineering leadership."
+              ],
+              "resources": [
+                { "title": "Google Site Reliability Engineering book", "url": "https://sre.google/sre-book/table-of-contents/", "type": "Official docs" },
+                { "title": "Observability Engineering — Majors, Fong-Jones, Miranda", "url": "https://www.oreilly.com/library/view/observability-engineering/9781492076438/", "type": "Course" },
+                { "title": "OpenTelemetry documentation", "url": "https://opentelemetry.io/docs/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-networking-fundamentals",
+              "label": "Networking Fundamentals",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["TCP/IP", "DNS", "TLS/mTLS", "Load Balancing", "CDN", "BGP Basics"],
+              "masteryLevels": [
+                "Can describe the TCP/IP model's layers, explain what DNS resolves and why TTLs matter for system changes, and identify why TLS is required for any data in transit over a network that isn't fully trusted.",
+                "Explains how a TCP connection is established and why connection pools matter for database and API performance, understands how DNS propagation delay affects service migrations, and can read a TLS certificate to verify its validity and scope.",
+                "Designs the networking strategy for a distributed system: selects the appropriate load balancing approach (L4 vs L7), determines the TLS termination point, configures CDN caching for static assets, and specifies mTLS requirements for service-to-service communication in a zero-trust architecture.",
+                "Diagnoses network-related production issues (high latency, connection failures, TLS errors, DNS resolution failures) using standard tools (curl, openssl, dig, nslookup), and evaluates network architecture changes proposed by the infrastructure team for their impact on application behaviour.",
+                "Defines the organisation's network architecture principles for distributed systems; ensures networking decisions align with application reliability, performance, and security requirements; advises on protocol selection (HTTP/2, gRPC, WebSockets) and their tradeoffs for specific communication patterns."
+              ],
+              "resources": [
+                { "title": "Cloudflare Learning Center — networking fundamentals", "url": "https://www.cloudflare.com/learning/", "type": "Official docs" },
+                { "title": "Julia Evans — networking guides and illustrations", "url": "https://jvns.ca/", "type": "Official docs" },
+                { "title": "High Performance Browser Networking — Ilya Grigorik", "url": "https://hpbn.co/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-db-patterns",
+              "label": "Database & Storage Patterns",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["OLTP vs OLAP", "Relational vs Document vs Graph vs Time-Series", "Caching Patterns", "Eventual Consistency"],
+              "masteryLevels": [
+                "Can describe the difference between OLTP and OLAP workloads, explain why choosing the wrong database model for a workload creates architectural problems, and identify the four main storage paradigms: relational, document, graph, and time-series.",
+                "Selects the appropriate database model for a given data shape and access pattern, explains the tradeoff between normalisation (integrity, flexibility) and denormalisation (read performance), and identifies when a cache is appropriate versus when it adds unnecessary complexity.",
+                "Designs a data layer that uses multiple storage systems for distinct access patterns — relational for transactional integrity, cache for hot read paths, time-series for metrics — and implements the caching strategy appropriate to each data type's consistency and freshness requirements.",
+                "Architects a data layer for a system that spans eventual consistency boundaries: designs APIs that tolerate stale reads, implements conflict resolution strategies, and selects consistency levels in distributed databases based on the business consequence of returning an incorrect result.",
+                "Defines the organisation's data architecture standards; evaluates storage technology choices at programme level; advises on consistency-availability-partition tolerance tradeoffs for specific business-critical operations; ensures data architecture decisions align with privacy, compliance, and retention requirements."
+              ],
+              "resources": [
+                { "title": "Designing Data-Intensive Applications — Martin Kleppmann", "url": "https://dataintensive.net/", "type": "Course" },
+                { "title": "Azure — choose a data store", "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/data-store-overview", "type": "Official docs" },
+                { "title": "Martin Fowler — NoSQL Distilled", "url": "https://martinfowler.com/books/nosql.html", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-sdlc",
+              "label": "Software Development Lifecycle",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Git Workflows", "CI/CD Pipeline Design", "Testing Strategies", "Feature Flags", "Deployment Patterns (Blue/Green, Canary)"],
+              "masteryLevels": [
+                "Can describe the key stages of a software development lifecycle, explain trunk-based development versus long-lived feature branches and the tradeoffs, and identify the main CI/CD pipeline stages and what each validates.",
+                "Follows a consistent Git branching strategy, configures a CI pipeline that runs automated tests on every commit, and deploys to a staging environment on merge to the main branch.",
+                "Designs a CI/CD pipeline strategy for a team including unit, integration, and end-to-end tests at appropriate stages, implements feature flags for dark launches and rollout control, and uses blue/green or canary deployment patterns for zero-downtime releases.",
+                "Architects the SDLC for a multi-team product with shared pipeline templates, branch protection policies, deployment promotion gates, and a feature flag governance process that prevents flag proliferation from accumulating as technical debt.",
+                "Defines the organisation's SDLC standards covering Git workflow, CI/CD pipeline templates, testing pyramid expectations, and deployment pattern requirements; uses DORA metrics (deployment frequency, lead time, change failure rate, MTTR) to measure and improve engineering delivery performance."
+              ],
+              "resources": [
+                { "title": "DORA DevOps research", "url": "https://dora.dev/", "type": "Official docs" },
+                { "title": "Accelerate — Forsgren, Humble, Kim", "url": "https://itrevolution.com/accelerate-book/", "type": "Course" },
+                { "title": "Martin Fowler — Continuous Delivery", "url": "https://martinfowler.com/delivery.html", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-ai-ml-awareness",
+              "label": "AI/ML Integration Awareness",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["LLM Integration Patterns", "RAG Concepts", "AI Governance", "Cost/Security Tradeoffs"],
+              "masteryLevels": [
+                "Can describe what a large language model does and what it cannot reliably do, explain what RAG addresses compared to relying on model knowledge alone, and identify the main cost and security tradeoffs when integrating third-party LLM APIs.",
+                "Reviews an AI-powered feature design and identifies the key architectural risks (hallucination, prompt injection, data privacy, cost unpredictability), recommends appropriate mitigations, and distinguishes between using LLM APIs versus deploying self-hosted models.",
+                "Evaluates the architecture of a proposed AI integration — selecting between RAG, fine-tuning, and prompt engineering for a given use case — and ensures the design includes adequate observability, evaluation, and human review checkpoints for high-stakes decisions.",
+                "Leads the architectural design of AI-powered systems that are safe, cost-predictable, and auditable; integrates AI governance requirements into the system architecture upfront rather than retrofitting; identifies where AI adds genuine value and where traditional software is more reliable.",
+                "Defines the organisation's AI integration standards and governance framework; advises leadership on strategic AI investment and risk; ensures AI systems meet responsible AI principles; represents engineering's perspective on AI capability and risk in executive-level discussions."
+              ],
+              "resources": [
+                { "title": "Anthropic — Building effective agents", "url": "https://www.anthropic.com/research/building-effective-agents", "type": "Official docs" },
+                { "title": "NIST AI Risk Management Framework", "url": "https://airc.nist.gov/", "type": "Official docs" },
+                { "title": "EU AI Act — European Commission regulatory framework", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
           "id": "staff-strategy",
           "label": "Strategic & Organizational Thinking",
           "skills": [
-            { "id": "staff-tech-roadmap",  "label": "Technical Roadmap Development",   "shared": false, "notes": "",  "subSkills": ["Quarterly/Annual Planning", "Capability Mapping", "Dependency Sequencing", "Make vs Buy Analysis"] },
+            { "id": "staff-tech-roadmap",
+              "label": "Technical Roadmap Development",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Quarterly/Annual Planning", "Capability Mapping", "Dependency Sequencing", "Make vs Buy Analysis"],
+              "masteryLevels": [
+                "Can describe what a technical roadmap is and how it differs from a project plan — a roadmap shows the direction and sequence of capability investment over time, a plan shows work breakdown and schedule.",
+                "Produces a quarterly roadmap for a team's technical investment that shows what capabilities will exist at each milestone, ties each item to a business or engineering rationale, and explicitly communicates what is out of scope and why.",
+                "Builds an annual technical capability roadmap that sequences investments to resolve dependencies in the right order, maps current-state capabilities against target-state requirements, and includes explicit build vs buy decisions for each new capability.",
+                "Leads technical roadmap development for a multi-team programme, aligns the roadmap with product and business planning cycles, and uses roadmap visibility to enable leadership to make informed tradeoff decisions between competing investment priorities.",
+                "Defines the organisation's technical roadmap process; ensures engineering investment is driven by capability gaps against strategic objectives rather than internal technology preferences; uses a compelling roadmap to attract and retain engineers; presents engineering direction and rationale credibly at board level."
+              ],
+              "resources": [
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "Azure Cloud Adoption Framework — strategy", "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/strategy/", "type": "Official docs" },
+                { "title": "DORA DevOps research", "url": "https://dora.dev/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "shared-finops",
               "label": "FinOps / Cloud Economics",
               "shared": true,
@@ -1863,8 +2205,46 @@
               "cheatSheets": [],
               "reviewCycle": "annual"
             },
-            { "id": "staff-build-buy",     "label": "Build vs Buy vs Integrate",       "shared": false, "notes": "",  "subSkills": ["Vendor Evaluation", "OSS Assessment", "Total Cost Modeling", "Lock-in Analysis"] },
-            { "id": "staff-org-design",    "label": "Organizational Design Awareness", "shared": false, "notes": "",  "subSkills": ["Conway's Law", "Team Topologies", "API-first Team Design"] }
+            { "id": "staff-build-buy",
+              "label": "Build vs Buy vs Integrate",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Vendor Evaluation", "OSS Assessment", "Total Cost Modeling", "Lock-in Analysis"],
+              "masteryLevels": [
+                "Can describe the build vs buy vs integrate decision framework and identify the factors favouring each option: build (unique competitive advantage), buy (commodity capability, vendor domain expertise), integrate (good enough, standard API, low lock-in risk).",
+                "Produces a basic comparison of two vendor or OSS options for a capability gap, documents what functional requirements each meets and what gaps remain, and identifies the primary risk in each option.",
+                "Conducts a total cost of ownership analysis for a build vs buy decision that includes not just licensing but integration cost, migration cost, ongoing maintenance burden, and the engineering opportunity cost of building versus shipping product.",
+                "Leads a strategic build vs buy vs integrate evaluation for a major platform capability, models the lock-in risk over a 3–5 year horizon, defines the exit criteria and migration path if the chosen option fails to meet requirements, and accounts for OSS community health and governance as adoption factors.",
+                "Defines the organisation's build vs buy evaluation process; establishes the criteria for when to build (genuine competitive differentiation or no suitable vendor) versus buy or integrate; ensures build decisions are properly resourced and buy decisions include negotiated terms and exit rights."
+              ],
+              "resources": [
+                { "title": "Staff Engineer — Will Larson", "url": "https://staffeng.com/book", "type": "Course" },
+                { "title": "Thoughtworks Technology Radar", "url": "https://www.thoughtworks.com/radar", "type": "Official docs" },
+                { "title": "Open Source Initiative", "url": "https://opensource.org/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "staff-org-design",
+              "label": "Organizational Design Awareness",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Conway's Law", "Team Topologies", "API-first Team Design"],
+              "masteryLevels": [
+                "Can state Conway's Law — organisations design systems that mirror their own communication structure — give a concrete example of it in practice, and explain why changing software architecture often requires changing team structure, and vice versa.",
+                "Identifies where the current team structure is creating friction in the software architecture — where tight coupling in the org produces tight coupling in the code — and articulates what team structure change would enable a desired architectural change.",
+                "Applies Team Topologies concepts (stream-aligned, platform, enabling, complicated subsystem) to propose a team structure that reduces cognitive load and creates clear ownership boundaries aligned to the software architecture.",
+                "Leads an organisational design discussion for a growing engineering organisation, designs API-first team interfaces (charters with explicit contracts for what each team provides and consumes), and uses the inverse Conway manoeuvre to deliberately design team structure to produce the desired system architecture.",
+                "Defines the engineering organisation's team topology and ownership model; advises HR and engineering leadership on structure changes as the organisation scales; uses Team Topologies vocabulary to make org design conversations concrete; ensures architectural reviews treat team structure as a first-class constraint."
+              ],
+              "resources": [
+                { "title": "Team Topologies — Skelton and Pais", "url": "https://teamtopologies.com/", "type": "Course" },
+                { "title": "Martin Fowler — Conway's Law", "url": "https://martinfowler.com/bliki/ConwaysLaw.html", "type": "Official docs" },
+                { "title": "Accelerate — Forsgren, Humble, Kim", "url": "https://itrevolution.com/accelerate-book/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         }
       ]
