@@ -192,10 +192,86 @@
           "id": "azure-cloud-integration",
           "label": "App Services & Integration",
           "skills": [
-            { "id": "shared-azure-apim",       "label": "Azure API Management (APIM)", "shared": true,  "notes": "",  "subSkills": ["Policies", "Developer Portal", "Rate Limiting", "OAuth/JWT Validation", "Versioning", "Self-Hosted Gateway"] },
-            { "id": "azure-cloud-logic-apps",  "label": "Azure Logic Apps",            "shared": false, "notes": "",  "subSkills": ["Standard vs Consumption", "Connectors", "Stateful vs Stateless"] },
-            { "id": "shared-azure-app-config", "label": "Azure App Configuration",     "shared": true,  "notes": "",  "subSkills": ["Feature Flags", "Key-Value Store", "Sentinel Keys", "Integration with App Service/AKS"] },
-            { "id": "shared-azure-swa",        "label": "Azure Static Web Apps",       "shared": true,  "notes": "",  "subSkills": ["GitHub/ADO Integration", "Managed Functions Backend", "Custom Auth"] }
+            { "id": "shared-azure-apim",
+              "label": "Azure API Management (APIM)",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Policies", "Developer Portal", "Rate Limiting", "OAuth/JWT Validation", "Versioning", "Self-Hosted Gateway"],
+              "masteryLevels": [
+                "Can explain what Azure API Management is, describe its role as a reverse proxy and gateway for APIs, and identify its three planes: gateway (runtime), management (control), and developer portal (discovery).",
+                "Creates an APIM instance, imports an existing API from an OpenAPI spec or Azure Function, configures a basic rate limiting policy, and uses the developer portal to test the published API.",
+                "Authors custom inbound and outbound policies using policy expressions, implements OAuth 2.0 and JWT validation to protect APIs, configures API versioning using path or header-based schemes, and manages subscription-based access control for different consumer audiences.",
+                "Designs an APIM architecture with multiple API products targeting distinct consumer groups, deploys a self-hosted gateway for APIs in on-premises or multi-cloud environments, and applies policies at different scopes (global, product, API, operation) to enforce cross-cutting concerns such as logging and transformation.",
+                "Defines the organisation's API governance strategy using APIM; designs the shared policy library and versioning standards for all published APIs; evaluates APIM as the AI gateway for managing and rate-limiting traffic across Azure OpenAI and other LLM deployments."
+              ],
+              "resources": [
+                { "title": "Azure API Management documentation", "url": "https://learn.microsoft.com/en-us/azure/api-management/", "type": "Official docs" },
+                { "title": "APIM policy reference", "url": "https://learn.microsoft.com/en-us/azure/api-management/api-management-policies", "type": "Official docs" },
+                { "title": "Explore Azure API Management — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/explore-api-management/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "azure-cloud-logic-apps",
+              "label": "Azure Logic Apps",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Standard vs Consumption", "Connectors", "Stateful vs Stateless"],
+              "masteryLevels": [
+                "Can describe what Azure Logic Apps is, explain the trigger-action model, and distinguish between the Consumption (serverless, per-execution) and Standard (single-tenant, container-based) hosting plans.",
+                "Creates a Consumption Logic App with an HTTP trigger that calls an external API using a managed connector, reviews run history to trace execution steps, and handles basic success and failure branches.",
+                "Designs a Standard Logic App with stateful workflows for long-running processes and stateless workflows for high-throughput scenarios, implements retry policies and failure notifications, and integrates with Azure services using built-in connectors for Service Bus, Blob Storage, and Key Vault.",
+                "Architects a multi-workflow integration solution using Logic Apps Standard, deploys workflows via CI/CD using Bicep, and monitors performance and failure rates using Application Insights and Logic Apps built-in metrics.",
+                "Defines the organisation's integration platform strategy; evaluates Logic Apps against Azure Functions, Service Bus, Power Automate, and Event Grid for specific integration patterns; governs connector permissions and workflow design standards; advises on when Logic Apps Standard is the right hosting choice versus Consumption."
+              ],
+              "resources": [
+                { "title": "Azure Logic Apps documentation", "url": "https://learn.microsoft.com/en-us/azure/logic-apps/", "type": "Official docs" },
+                { "title": "Logic Apps Standard vs Consumption differences", "url": "https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview#resource-environment-differences", "type": "Official docs" },
+                { "title": "Automate business processes with Azure Logic Apps — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/build-azure-logic-apps-processes/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-app-config",
+              "label": "Azure App Configuration",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Feature Flags", "Key-Value Store", "Sentinel Keys", "Integration with App Service/AKS"],
+              "masteryLevels": [
+                "Can explain what Azure App Configuration is, describe its role as a centralised store for application settings, and distinguish it from Azure Key Vault — configuration versus secrets.",
+                "Creates an App Configuration store, adds key-value pairs with environment-specific labels, and retrieves configuration in an application using the App Configuration provider library.",
+                "Implements feature flags in App Configuration to control feature rollout without code deployments, configures App Service and AKS applications to load configuration at startup, and uses Sentinel Keys to trigger configuration refresh in running applications without requiring restarts.",
+                "Designs a configuration management strategy across multiple environments using App Configuration labels, implements dynamic configuration refresh with event-driven push updates, and restricts access to configuration data using RBAC and private endpoints.",
+                "Defines the organisation's application configuration strategy using App Configuration; establishes key naming conventions, label standards, and access control policies; governs feature flag lifecycle from creation through gradual rollout to retirement; integrates App Configuration into the standard application deployment pipeline."
+              ],
+              "resources": [
+                { "title": "Azure App Configuration documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/", "type": "Official docs" },
+                { "title": "Use feature flags in Azure App Configuration", "url": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core", "type": "Official docs" },
+                { "title": "Implement a feature flag — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/implement-azure-app-configuration/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-swa",
+              "label": "Azure Static Web Apps",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["GitHub/ADO Integration", "Managed Functions Backend", "Custom Auth"],
+              "masteryLevels": [
+                "Can explain what Azure Static Web Apps is, describe its integrated CI/CD model with GitHub Actions or Azure DevOps, and identify the difference between the Free and Standard tiers.",
+                "Deploys a static site to SWA by connecting a GitHub repository, lets the auto-generated Actions workflow build and deploy the site, and configures a custom domain with the auto-provisioned TLS certificate.",
+                "Configures a managed Azure Functions backend for API routes, implements pre-built authentication using SWA's built-in providers (Entra ID, GitHub), and controls routing and response headers using the staticwebapp.config.json configuration file.",
+                "Implements a custom OpenID Connect authentication provider for enterprise SSO, configures pull request preview environments for staging, and manages environment-specific application settings and secrets through the SWA configuration.",
+                "Defines the organisation's static web application deployment standard using SWA; designs the Bicep module and reusable GitHub Actions workflow for repeatable SWA deployments; evaluates SWA against Azure CDN with Blob Storage and other static hosting options for different performance and auth requirements."
+              ],
+              "resources": [
+                { "title": "Azure Static Web Apps documentation", "url": "https://learn.microsoft.com/en-us/azure/static-web-apps/", "type": "Official docs" },
+                { "title": "staticwebapp.config.json reference", "url": "https://learn.microsoft.com/en-us/azure/static-web-apps/configuration", "type": "Official docs" },
+                { "title": "Publish a web app with Azure Static Web Apps — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/azure-static-web-apps/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         },
         {
@@ -222,11 +298,106 @@
               "cheatSheets": [],
               "reviewCycle": "6-month"
             },
-            { "id": "azure-cloud-arm",                    "label": "Azure Resource Manager (ARM)","shared": false,"notes": "Legacy but relevant", "subSkills": ["Template Structure", "Linked Templates", "Deployment Modes"] },
-            { "id": "shared-terraform",                   "label": "Terraform",                "shared": true,  "notes": "",                       "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"] },
-            { "id": "shared-azure-cli",                   "label": "Azure CLI",                "shared": true,  "notes": "",                       "subSkills": ["Resource Management", "Scripting", "JMESPath Queries"] },
-            { "id": "shared-powershell",                  "label": "PowerShell / Az Module",   "shared": true,  "notes": "",                       "subSkills": ["Az PowerShell", "DSC", "Runbooks"] },
-            { "id": "shared-azure-devops-pipelines",      "label": "Azure DevOps Pipelines",   "shared": true,  "notes": "",                       "subSkills": ["YAML Pipelines", "Service Connections", "Library Groups", "Environments", "Approvals"] },
+            { "id": "azure-cloud-arm",
+              "label": "Azure Resource Manager (ARM)",
+              "shared": false,
+              "notes": "Legacy but relevant",
+              "subSkills": ["Template Structure", "Linked Templates", "Deployment Modes"],
+              "masteryLevels": [
+                "Can describe Azure Resource Manager's role as the deployment and management layer for Azure, and read an existing ARM template to identify resource declarations, parameters, variables, and outputs.",
+                "Deploys a multi-resource ARM template using the Azure CLI, interprets deployment error messages in the Activity Log to diagnose schema or dependency issues.",
+                "Authors an ARM template with linked templates for modular deployment, configures Incremental versus Complete deployment modes appropriately, and migrates an existing ARM template to Bicep using the az bicep decompile command.",
+                "Troubleshoots complex ARM deployments by reading deployment operation logs in detail, implements What-If validation in CI, and advises teams on when ARM templates are still appropriate versus committing to a Bicep migration.",
+                "Defines the organisation's legacy ARM template migration strategy; classifies the estate into templates to migrate, maintain, or decommission; establishes migration patterns and mentors engineers on translating complex ARM constructs to idiomatic Bicep."
+              ],
+              "resources": [
+                { "title": "ARM template documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview", "type": "Official docs" },
+                { "title": "Migrate ARM templates to Bicep", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/migrate", "type": "Official docs" },
+                { "title": "ARM template deployment modes", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-terraform",
+              "label": "Terraform",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"],
+              "masteryLevels": [
+                "Can explain what Terraform is, describe the plan-apply workflow, and identify the purpose of the state file in tracking the relationship between configuration and deployed infrastructure.",
+                "Writes a Terraform configuration that provisions cloud resources using a provider, runs terraform plan to preview changes and terraform apply to deploy them, and stores state in a remote backend such as Azure Blob Storage.",
+                "Designs reusable Terraform modules with input variables and outputs, manages multiple environments using workspaces or separate state files, and uses targeted plan/apply to manage changes safely within large configurations.",
+                "Architects a multi-team Terraform platform with a versioned module registry, implements drift detection in CI to alert on out-of-band changes, and uses Terragrunt to reduce configuration boilerplate across a complex multi-account or multi-region estate.",
+                "Defines the organisation's Terraform architecture standards and module governance; evaluates Terragrunt, OpenTofu, and alternative IaC tools for strategic fit; leads the design of the remote state architecture and RBAC model across all cloud accounts."
+              ],
+              "resources": [
+                { "title": "Terraform documentation", "url": "https://developer.hashicorp.com/terraform/docs", "type": "Official docs" },
+                { "title": "Terraform — Get started with Azure", "url": "https://developer.hashicorp.com/terraform/tutorials/azure-get-started", "type": "Course" },
+                { "title": "Terraform module development guide", "url": "https://developer.hashicorp.com/terraform/language/modules/develop", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "shared-azure-cli",
+              "label": "Azure CLI",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Resource Management", "Scripting", "JMESPath Queries"],
+              "masteryLevels": [
+                "Can install and configure the Azure CLI with the correct subscription context, and run basic az commands to list and inspect Azure resources.",
+                "Creates, modifies, and deletes Azure resources using az commands, interprets JSON output, and writes a simple shell script that automates a multi-step Azure operation.",
+                "Uses JMESPath --query expressions to extract specific fields from complex API responses, writes reusable scripts with error handling and variable substitution, and integrates Azure CLI commands into GitHub Actions workflows using OIDC authentication.",
+                "Designs complex Azure CLI automation scripts that handle pagination, implement retry logic for transient API failures, and use az deployment what-if for safe infrastructure validation; authors CLI-based resource health checks integrated into operational runbooks.",
+                "Defines the organisation's Azure CLI scripting standards and patterns; maintains a shared library of approved scripts for common operational tasks; advises on when Azure CLI, PowerShell, or the REST API directly is the right tool for a specific automation requirement."
+              ],
+              "resources": [
+                { "title": "Azure CLI documentation", "url": "https://learn.microsoft.com/en-us/cli/azure/", "type": "Official docs" },
+                { "title": "Azure CLI command reference", "url": "https://learn.microsoft.com/en-us/cli/azure/reference-index", "type": "Official docs" },
+                { "title": "How to query Azure CLI output using JMESPath", "url": "https://learn.microsoft.com/en-us/cli/azure/query-azure-cli", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-powershell",
+              "label": "PowerShell / Az Module",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Az PowerShell", "DSC", "Runbooks"],
+              "masteryLevels": [
+                "Can explain what the Az PowerShell module is, describe when PowerShell is preferred over the Azure CLI (Windows environments, DSC, Azure Automation), and run basic cmdlets to list and inspect Azure resources.",
+                "Creates, modifies, and deletes Azure resources using Az PowerShell cmdlets, writes scripts that authenticate using Connect-AzAccount and a service principal, and iterates over resource collections with filtering and formatting.",
+                "Authors reusable PowerShell functions for common Azure operations, deploys and manages Azure Automation Runbooks for scheduled or event-triggered tasks, and writes Desired State Configuration resources to enforce baseline configuration on Azure VMs.",
+                "Designs Azure Automation runbooks that orchestrate multi-step workflows with structured error handling and job logging, implements DSC pull server configurations for hybrid VM compliance, and integrates Az PowerShell into CI/CD pipelines with service principal or managed identity authentication.",
+                "Defines the organisation's PowerShell automation standards; builds and maintains a shared module library for common Azure management operations; governs Azure Automation Runbook usage and credentials across subscriptions; advises on when PowerShell is the right choice versus other automation approaches."
+              ],
+              "resources": [
+                { "title": "Azure PowerShell documentation", "url": "https://learn.microsoft.com/en-us/powershell/azure/", "type": "Official docs" },
+                { "title": "Az PowerShell module overview", "url": "https://learn.microsoft.com/en-us/powershell/azure/new-azureps-module-az", "type": "Official docs" },
+                { "title": "Azure Automation runbooks documentation", "url": "https://learn.microsoft.com/en-us/azure/automation/automation-runbook-types", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-devops-pipelines",
+              "label": "Azure DevOps Pipelines",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["YAML Pipelines", "Service Connections", "Library Groups", "Environments", "Approvals"],
+              "masteryLevels": [
+                "Can explain what Azure DevOps Pipelines is, describe the difference between Classic and YAML pipelines, and identify the key concepts: triggers, stages, jobs, steps, and agent pools.",
+                "Creates a YAML pipeline that triggers on a push event, runs build and test steps on a Microsoft-hosted agent, and publishes a build artifact on successful completion.",
+                "Configures service connections for Azure deployments authenticated with a managed identity or service principal, uses Library Groups to manage shared variables and secrets, and implements multi-stage pipelines with environment approval gates that protect production releases.",
+                "Designs a multi-repo pipeline architecture with reusable YAML templates consumed across teams, implements branch-based deployment promotion (dev → staging → production), and uses deployment gates with Azure Monitor or REST API queries to automate quality checks before release.",
+                "Defines the organisation's Azure DevOps Pipelines standards including YAML template libraries, service connection governance, and pipeline security controls; leads the migration from Classic to YAML pipelines across engineering teams."
+              ],
+              "resources": [
+                { "title": "Azure Pipelines documentation", "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/", "type": "Official docs" },
+                { "title": "YAML schema reference for Azure Pipelines", "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/", "type": "Official docs" },
+                { "title": "Build and deploy with Azure Pipelines — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/build-applications-with-azure-devops/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "shared-github-actions",
               "label": "GitHub Actions",
               "shared": true,
@@ -253,16 +424,206 @@
           "id": "azure-cloud-monitoring",
           "label": "Monitoring & Observability",
           "skills": [
-            { "id": "shared-azure-monitor",    "label": "Azure Monitor",                    "shared": true,  "notes": "",                 "subSkills": ["Metrics", "Alerts", "Action Groups", "Diagnostic Settings", "Activity Log"] },
-            { "id": "shared-log-analytics",    "label": "Log Analytics Workspace",          "shared": true,  "notes": "",                 "subSkills": ["KQL Queries", "Table Schema", "Workspace Design", "Data Retention", "Cost Management"] },
-            { "id": "shared-app-insights",     "label": "Application Insights",             "shared": true,  "notes": "",                 "subSkills": ["SDK Integration", "Live Metrics", "Distributed Tracing", "Dependency Tracking", "Availability Tests"] },
-            { "id": "azure-cloud-ama-dcr",     "label": "Azure Monitor Agent & DCRs",       "shared": false, "notes": "",                 "subSkills": ["Data Collection Rules", "DCR Association", "Migration from MMA/OMS"] },
-            { "id": "shared-azure-workbooks",  "label": "Azure Workbooks",                  "shared": true,  "notes": "",                 "subSkills": ["Template Design", "Parameters", "Linked Resources", "Sharing"] },
-            { "id": "shared-grafana",          "label": "Grafana",                          "shared": true,  "notes": "",                 "subSkills": ["Dashboard Design", "Data Source Config", "Alerting", "Templating Variables", "RBAC"] },
-            { "id": "shared-kql",              "label": "KQL (Kusto Query Language)",        "shared": true,  "notes": "Deep skill",        "subSkills": ["Basic Queries", "Joins", "Aggregations", "Time Series", "Rendering", "Performance Optimization"] },
-            { "id": "azure-cloud-advisor",     "label": "Azure Advisor",                    "shared": false, "notes": "",                 "subSkills": ["Recommendations Review", "Score Improvement", "Cost Optimization"] },
-            { "id": "azure-cloud-svc-health",  "label": "Azure Service Health",             "shared": false, "notes": "",                 "subSkills": ["Service Issues", "Planned Maintenance", "Health Alerts"] },
-            { "id": "shared-finops",           "label": "Cost Management & FinOps",         "shared": true,  "notes": "",                 "subSkills": ["Budgets", "Alerts", "Cost Analysis", "Tagging Strategy", "Reservations vs PAYG"] }
+            { "id": "shared-azure-monitor",
+              "label": "Azure Monitor",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Metrics", "Alerts", "Action Groups", "Diagnostic Settings", "Activity Log"],
+              "masteryLevels": [
+                "Can explain what Azure Monitor is, describe its role as the central monitoring platform for Azure resources, and identify its main data types: metrics, logs, and the Activity Log.",
+                "Configures diagnostic settings on a resource to route metrics and logs to a Log Analytics workspace, creates a metric alert rule with an action group that notifies the operations team, and uses the Activity Log to investigate recent configuration changes.",
+                "Designs an alert strategy with severity-appropriate action group routing, writes log-based alert rules using KQL for application-specific conditions, and configures Azure Monitor Agent with Data Collection Rules to control what data is collected from VMs and other sources.",
+                "Architects an Azure Monitor deployment across a multi-subscription estate, evaluates centralised versus workspace-per-subscription topologies against cost and access isolation requirements, deploys alert rules and diagnostic settings at scale using Bicep and Azure Policy.",
+                "Defines the organisation's observability strategy on Azure Monitor; establishes workspace architecture, data retention, and cost governance standards; leads the migration from legacy MMA/OMS agents to Azure Monitor Agent; presents the monitoring posture and coverage to operations leadership."
+              ],
+              "resources": [
+                { "title": "Azure Monitor documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/", "type": "Official docs" },
+                { "title": "Azure Monitor best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/best-practices-monitoring", "type": "Official docs" },
+                { "title": "Monitor resources with Azure Monitor — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/monitor-usage-performance-availability-resources-azure-monitor/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-log-analytics",
+              "label": "Log Analytics Workspace",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["KQL Queries", "Table Schema", "Workspace Design", "Data Retention", "Cost Management"],
+              "masteryLevels": [
+                "Can explain what a Log Analytics Workspace is, describe its role as the storage and query engine for Azure Monitor logs, and identify standard table schemas for common data types such as AzureActivity, SecurityEvent, and Heartbeat.",
+                "Writes a basic KQL query to filter and display recent log entries from a table, creates a saved search for a frequently used query, and understands the difference between workspace-level and resource-level access control.",
+                "Designs a workspace architecture decision (centralised versus workspace-per-subscription) based on access control, data sovereignty, and cost requirements; configures per-table data retention and archival; implements resource-based access control so teams can only query their own logs.",
+                "Optimises Log Analytics cost by tuning data collection to exclude high-volume low-value sources, commits to a pricing tier based on data volume analysis, and uses workspace transformation rules to filter or enrich data before ingestion; writes cross-workspace queries to correlate data across multiple workspaces.",
+                "Defines the organisation's Log Analytics workspace architecture standards; establishes data governance, access control, and cost management policies; leads the design of the ingestion pipeline from all Azure, hybrid, and third-party sources; presents log management costs and coverage to operations leadership."
+              ],
+              "resources": [
+                { "title": "Log Analytics workspace documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview", "type": "Official docs" },
+                { "title": "Log Analytics workspace design guide", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/workspace-design", "type": "Official docs" },
+                { "title": "Analyse infrastructure with Azure Monitor logs — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/analyze-infrastructure-with-azure-monitor-logs/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-app-insights",
+              "label": "Application Insights",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["SDK Integration", "Live Metrics", "Distributed Tracing", "Dependency Tracking", "Availability Tests"],
+              "masteryLevels": [
+                "Can describe what Application Insights is, explain its role in application performance monitoring (APM), and identify the telemetry types it collects: requests, dependencies, exceptions, traces, and custom events.",
+                "Adds the Application Insights SDK to a web application, verifies telemetry is flowing to the portal, and uses the Live Metrics stream to observe real-time request rates and failures during a deployment.",
+                "Uses the Application Map to identify slow dependencies, follows a request across services using distributed tracing, configures URL availability tests with alert rules, and enables Smart Detection for anomalous failure rate notifications.",
+                "Implements custom telemetry using TrackEvent, TrackMetric, and TrackDependency to capture business-level metrics; configures adaptive sampling to reduce ingestion cost on high-volume applications while preserving full visibility into failures; builds SLO-based alert rules from Application Insights metrics.",
+                "Defines the organisation's application observability standards using Application Insights; establishes SDK integration patterns, custom telemetry taxonomy, and sampling configuration guidelines; leads cost optimisation across all instrumented applications; advises on when to migrate from Application Insights SDK to OpenTelemetry with a custom collector."
+              ],
+              "resources": [
+                { "title": "Application Insights documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview", "type": "Official docs" },
+                { "title": "Distributed tracing and telemetry correlation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing-telemetry-correlation", "type": "Official docs" },
+                { "title": "Instrument applications with Application Insights — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/instrument-web-app-code-with-application-insights/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-ama-dcr",
+              "label": "Azure Monitor Agent & DCRs",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Data Collection Rules", "DCR Association", "Migration from MMA/OMS"],
+              "masteryLevels": [
+                "Can explain what the Azure Monitor Agent (AMA) is, describe why it replaced the legacy MMA and OMS agents, and identify the role of Data Collection Rules (DCRs) in controlling what data is collected from each source.",
+                "Deploys the Azure Monitor Agent to a VM using Bicep or Azure Policy, creates a DCR that collects Windows Event Logs and Performance Counters, and associates the DCR with the target VMs to begin data ingestion.",
+                "Designs DCRs that collect different data sets from different VM roles, uses filtering expressions to exclude low-value events before they leave the agent to reduce ingestion costs, and validates collection is working using DCR monitoring metrics.",
+                "Migrates an existing MMA/OMS monitoring estate to AMA and DCRs at scale, deploys DCR associations across all in-scope VMs using Azure Policy, and manages DCR versioning as collection requirements evolve without disrupting running agents.",
+                "Defines the organisation's agent and data collection strategy; architects the DCR hierarchy across VM tiers and workload types; ensures the MMA/OMS migration is fully complete; establishes DCR-as-code governance using Bicep and CI/CD so all collection changes are reviewed and deployed consistently."
+              ],
+              "resources": [
+                { "title": "Azure Monitor Agent documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-overview", "type": "Official docs" },
+                { "title": "Data Collection Rules overview", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview", "type": "Official docs" },
+                { "title": "Migrate to Azure Monitor Agent from legacy agents", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-migration", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-workbooks",
+              "label": "Azure Workbooks",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Template Design", "Parameters", "Linked Resources", "Sharing"],
+              "masteryLevels": [
+                "Can describe what Azure Workbooks is, explain how it differs from a pinned dashboard, and identify the interactive features (parameters, conditional visibility, drill-through) that make it suited for operational reports and troubleshooting guides.",
+                "Opens an existing Workbook template from the Azure Monitor gallery, customises a visualisation for a specific resource, and saves the Workbook to a resource group for sharing with colleagues.",
+                "Authors a Workbook from scratch with multiple step types (KQL queries, metric charts, text), adds parameter controls for time range, subscription, and resource that drive all visualisations dynamically, and links to related Workbooks or Azure resources.",
+                "Designs complex operational Workbooks that combine Log Analytics queries, metric charts, and ARM resource data across subscriptions; builds parameterised troubleshooting guides with decision-tree flows; deploys Workbooks as code using Bicep for consistent deployment across environments.",
+                "Defines the organisation's Workbook library strategy; establishes reusable templates for standard operational reviews (availability, cost, security posture); governs Workbook sharing and permissions; integrates Workbooks into incident response runbooks as interactive diagnostic tools."
+              ],
+              "resources": [
+                { "title": "Azure Workbooks documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-overview", "type": "Official docs" },
+                { "title": "Create an Azure Workbook", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-create-workbook", "type": "Official docs" },
+                { "title": "Azure Workbooks data sources", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-data-sources", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-grafana",
+              "label": "Grafana",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Dashboard Design", "Data Source Config", "Alerting", "Templating Variables", "RBAC"],
+              "masteryLevels": [
+                "Can describe what Grafana is, explain its data source plugin architecture, and identify the common data sources used in Azure and AWS environments: Azure Monitor, Prometheus, CloudWatch, and Log Analytics.",
+                "Connects Grafana to a data source, imports an existing community dashboard, and customises a panel to display a specific metric with appropriate visualisation type and time range.",
+                "Builds a dashboard from scratch with templating variables that allow users to filter by environment, service, or resource; configures alert rules on key metrics with notification channels; and manages dashboard access using Grafana RBAC roles.",
+                "Designs a Grafana dashboard library for operational and business metrics; implements dashboard provisioning-as-code to deploy dashboards and data sources from a Git repository; integrates Grafana alerting with on-call tools such as PagerDuty or OpsGenie.",
+                "Defines the organisation's Grafana deployment architecture and governance model; manages the Grafana instance lifecycle including upgrades, plugin governance, and authentication integration; evaluates Azure Managed Grafana versus self-hosted for compliance and operational requirements."
+              ],
+              "resources": [
+                { "title": "Grafana documentation", "url": "https://grafana.com/docs/grafana/latest/", "type": "Official docs" },
+                { "title": "Azure Managed Grafana documentation", "url": "https://learn.microsoft.com/en-us/azure/managed-grafana/", "type": "Official docs" },
+                { "title": "Grafana dashboard best practices", "url": "https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-kql",
+              "label": "KQL (Kusto Query Language)",
+              "shared": true,
+              "notes": "Deep skill",
+              "subSkills": ["Basic Queries", "Joins", "Aggregations", "Time Series", "Rendering", "Performance Optimization"],
+              "masteryLevels": [
+                "Can describe what KQL is, identify which Azure services use it (Log Analytics, Application Insights, Azure Data Explorer, Microsoft Sentinel), and write a basic table query with a where filter and project to select specific columns.",
+                "Writes KQL queries that filter by time range and resource, uses summarize to aggregate counts and averages, and saves queries to a Log Analytics workspace for reuse in dashboards and alert rules.",
+                "Joins multiple tables using join and union operators, writes time-series aggregations to detect trends and anomalies in metric or log data, and uses the render operator to produce charts directly in the portal.",
+                "Optimises query performance by applying filters early, minimising scanned data through appropriate table and column selection, and using materialize() for expensive sub-expressions reused across a query; writes parametric queries for Azure Workbooks and complex threat-hunting queries in Microsoft Sentinel.",
+                "Defines the organisation's KQL query library and style guide; develops standardised queries for operational dashboards, alert rules, and security investigations; mentors engineers on query optimisation patterns; contributes reference queries used across teams for common operational and compliance scenarios."
+              ],
+              "resources": [
+                { "title": "KQL quick reference", "url": "https://learn.microsoft.com/en-us/azure/data-explorer/kql-quick-reference", "type": "Official docs" },
+                { "title": "Get started with log queries in Azure Monitor", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries", "type": "Official docs" },
+                { "title": "Must Learn KQL — Rod Trent (free series)", "url": "https://github.com/rod-trent/MustLearnKQL", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-advisor",
+              "label": "Azure Advisor",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Recommendations Review", "Score Improvement", "Cost Optimization"],
+              "masteryLevels": [
+                "Can describe what Azure Advisor is, identify its five recommendation categories (Cost, Security, Reliability, Operational Excellence, Performance), and explain how Advisor Score measures overall cloud posture.",
+                "Reviews Advisor recommendations for a subscription, applies a quick-win cost recommendation such as rightsizing an underused VM or removing an idle resource, and postpones or dismisses recommendations that are not applicable.",
+                "Exports Advisor recommendations across all subscriptions to a central location for triage, configures Advisor alerts to notify the team when high-impact recommendations are generated, and tracks Advisor Score improvement over time as remediation work is completed.",
+                "Designs a governance process that assigns Advisor recommendations to resource owners, integrates Advisor data with Azure Monitor Workbooks to produce a regular posture review report, and uses Advisor cost recommendations to inform reservation and savings plan purchasing decisions.",
+                "Defines the organisation's Advisor Score improvement programme; establishes accountability for recommendation categories across platform and application teams; uses Advisor insights to drive cost reduction initiatives; reports posture improvement trends to leadership as a measure of cloud operational maturity."
+              ],
+              "resources": [
+                { "title": "Azure Advisor documentation", "url": "https://learn.microsoft.com/en-us/azure/advisor/", "type": "Official docs" },
+                { "title": "Azure Advisor Score", "url": "https://learn.microsoft.com/en-us/azure/advisor/azure-advisor-score", "type": "Official docs" },
+                { "title": "Improve your Azure posture with Azure Advisor — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/get-started-azure-advisor/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-svc-health",
+              "label": "Azure Service Health",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Service Issues", "Planned Maintenance", "Health Alerts"],
+              "masteryLevels": [
+                "Can describe what Azure Service Health is, explain the difference between Service Issues, Planned Maintenance, and Health Advisories, and navigate the portal to check current status of Azure regions and services.",
+                "Subscribes to Service Health alerts for services and regions used by the organisation, configures action groups to notify the operations team when a service incident is detected.",
+                "Creates alert rules across all three tiers — Service Issues, Planned Maintenance, and Health Advisories — with routing to appropriate notification channels; uses the Health History view to correlate past Azure incidents with application degradation events during post-incident reviews.",
+                "Designs a Service Health monitoring strategy covering all critical service dependencies, integrates Service Health events with ITSM tools via Logic Apps or webhooks, and uses Resource Health data to distinguish Azure platform failures from application-layer issues.",
+                "Defines the organisation's service dependency monitoring and incident communication strategy; builds the escalation and stakeholder communication playbook for Azure service incidents; ensures SLA calculations account for Azure outages using Service Health history as evidence."
+              ],
+              "resources": [
+                { "title": "Azure Service Health documentation", "url": "https://learn.microsoft.com/en-us/azure/service-health/", "type": "Official docs" },
+                { "title": "Azure Resource Health documentation", "url": "https://learn.microsoft.com/en-us/azure/service-health/resource-health-overview", "type": "Official docs" },
+                { "title": "Introduction to Azure Service Health — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-service-health/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-finops",
+              "label": "Cost Management & FinOps",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Budgets", "Alerts", "Cost Analysis", "Tagging Strategy", "Reservations vs PAYG"],
+              "masteryLevels": [
+                "Can explain what FinOps is, describe its three phases (Inform, Optimise, Operate), and identify the primary Azure tools for cloud cost management: Cost Management + Billing and Azure Advisor cost recommendations.",
+                "Uses Azure Cost Management to analyse spending by resource group and service, sets up a budget with email alerts when spend reaches defined thresholds, and identifies the top cost drivers for a subscription.",
+                "Implements a resource tagging strategy for cost attribution across business units, creates Cost Management views and exports for team-level chargeback, and uses reservation and savings plan analysis to identify committed-use purchase opportunities.",
+                "Designs a FinOps operating model with showback and chargeback reporting, implements right-sizing systematically using Advisor recommendations, and builds cost governance guardrails using Azure Policy and budget alerts that trigger automated remediation or escalation.",
+                "Defines the organisation's FinOps strategy and operating model; establishes cost allocation taxonomy, tagging governance, and budget ownership across all cloud workloads; leads the FinOps practice maturity journey; presents cloud unit economics and cost efficiency trends to executive leadership."
+              ],
+              "resources": [
+                { "title": "Azure Cost Management documentation", "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/", "type": "Official docs" },
+                { "title": "Azure Cost Management best practices", "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-best-practices", "type": "Official docs" },
+                { "title": "FinOps Foundation — FinOps Framework", "url": "https://www.finops.org/framework/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         },
         {
@@ -372,7 +733,26 @@
           "skills": [
             { "id": "aws-cloudformation",    "label": "AWS CloudFormation",               "shared": false, "notes": "",                       "subSkills": ["Template Structure", "Stacks", "StackSets", "Change Sets", "Drift Detection"] },
             { "id": "aws-cdk",               "label": "AWS CDK",                          "shared": false, "notes": "Growing 2026 relevance",  "subSkills": ["Constructs (L1/L2/L3)", "App Structure", "Synthesis", "CDK Pipelines"] },
-            { "id": "shared-terraform",      "label": "Terraform",                        "shared": true,  "notes": "",                       "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"] },
+            { "id": "shared-terraform",
+              "label": "Terraform",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"],
+              "masteryLevels": [
+                "Can explain what Terraform is, describe the plan-apply workflow, and identify the purpose of the state file in tracking the relationship between configuration and deployed infrastructure.",
+                "Writes a Terraform configuration that provisions cloud resources using a provider, runs terraform plan to preview changes and terraform apply to deploy them, and stores state in a remote backend such as Azure Blob Storage.",
+                "Designs reusable Terraform modules with input variables and outputs, manages multiple environments using workspaces or separate state files, and uses targeted plan/apply to manage changes safely within large configurations.",
+                "Architects a multi-team Terraform platform with a versioned module registry, implements drift detection in CI to alert on out-of-band changes, and uses Terragrunt to reduce configuration boilerplate across a complex multi-account or multi-region estate.",
+                "Defines the organisation's Terraform architecture standards and module governance; evaluates Terragrunt, OpenTofu, and alternative IaC tools for strategic fit; leads the design of the remote state architecture and RBAC model across all cloud accounts."
+              ],
+              "resources": [
+                { "title": "Terraform documentation", "url": "https://developer.hashicorp.com/terraform/docs", "type": "Official docs" },
+                { "title": "Terraform — Get started with Azure", "url": "https://developer.hashicorp.com/terraform/tutorials/azure-get-started", "type": "Course" },
+                { "title": "Terraform module development guide", "url": "https://developer.hashicorp.com/terraform/language/modules/develop", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
             { "id": "aws-cli",               "label": "AWS CLI",                          "shared": false, "notes": "",                       "subSkills": ["Resource Management", "Profiles", "Output Formatting"] },
             { "id": "aws-systems-manager",   "label": "AWS Systems Manager",              "shared": false, "notes": "",                       "subSkills": ["Parameter Store", "Session Manager", "Run Command", "Patch Manager", "Automation Documents"] },
             { "id": "aws-codepipeline",      "label": "AWS CodePipeline / CodeBuild / CodeDeploy","shared": false,"notes": "",              "subSkills": ["Pipeline Structure", "Build Specs", "Deployment Strategies"] },
@@ -404,7 +784,26 @@
           "skills": [
             { "id": "aws-cloudwatch",      "label": "Amazon CloudWatch",       "shared": false, "notes": "Core",  "subSkills": ["Metrics", "Alarms", "Log Groups", "Insights (Logs/Container/Lambda)", "Dashboards", "Composite Alarms"] },
             { "id": "aws-xray",            "label": "AWS X-Ray",               "shared": false, "notes": "",      "subSkills": ["Traces", "Service Maps", "Annotations", "Integration with Lambda/ECS"] },
-            { "id": "shared-grafana",      "label": "Grafana",                 "shared": true,  "notes": "",      "subSkills": ["Dashboard Design", "Data Source Config", "Alerting", "Templating Variables"] },
+            { "id": "shared-grafana",
+              "label": "Grafana",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Dashboard Design", "Data Source Config", "Alerting", "Templating Variables"],
+              "masteryLevels": [
+                "Can describe what Grafana is, explain its data source plugin architecture, and identify the common data sources used in Azure and AWS environments: Azure Monitor, Prometheus, CloudWatch, and Log Analytics.",
+                "Connects Grafana to a data source, imports an existing community dashboard, and customises a panel to display a specific metric with appropriate visualisation type and time range.",
+                "Builds a dashboard from scratch with templating variables that allow users to filter by environment, service, or resource; configures alert rules on key metrics with notification channels; and manages dashboard access using Grafana RBAC roles.",
+                "Designs a Grafana dashboard library for operational and business metrics; implements dashboard provisioning-as-code to deploy dashboards and data sources from a Git repository; integrates Grafana alerting with on-call tools such as PagerDuty or OpsGenie.",
+                "Defines the organisation's Grafana deployment architecture and governance model; manages the Grafana instance lifecycle including upgrades, plugin governance, and authentication integration; evaluates Azure Managed Grafana versus self-hosted for compliance and operational requirements."
+              ],
+              "resources": [
+                { "title": "Grafana documentation", "url": "https://grafana.com/docs/grafana/latest/", "type": "Official docs" },
+                { "title": "Azure Managed Grafana documentation", "url": "https://learn.microsoft.com/en-us/azure/managed-grafana/", "type": "Official docs" },
+                { "title": "Grafana dashboard best practices", "url": "https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "aws-cloudtrail",      "label": "AWS CloudTrail",          "shared": false, "notes": "",      "subSkills": ["Event History", "Data Events", "Insights", "Multi-Region", "S3 Integration"] },
             { "id": "aws-cost-explorer",   "label": "AWS Cost Explorer",       "shared": false, "notes": "",      "subSkills": ["Cost Allocation Tags", "Savings Plans", "Rightsizing", "Budgets"] },
             { "id": "aws-trusted-advisor", "label": "AWS Trusted Advisor",     "shared": false, "notes": "",      "subSkills": ["Category Checks", "Priority Recommendations"] }
@@ -494,7 +893,26 @@
           "label": "Strategic & Organizational Thinking",
           "skills": [
             { "id": "staff-tech-roadmap",  "label": "Technical Roadmap Development",   "shared": false, "notes": "",  "subSkills": ["Quarterly/Annual Planning", "Capability Mapping", "Dependency Sequencing", "Make vs Buy Analysis"] },
-            { "id": "shared-finops",       "label": "FinOps / Cloud Economics",        "shared": true,  "notes": "",  "subSkills": ["Cost Attribution", "Tagging Strategy", "Reservation Planning", "Unit Economics"] },
+            { "id": "shared-finops",
+              "label": "FinOps / Cloud Economics",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Cost Attribution", "Tagging Strategy", "Reservation Planning", "Unit Economics"],
+              "masteryLevels": [
+                "Can explain what FinOps is, describe its three phases (Inform, Optimise, Operate), and identify the primary Azure tools for cloud cost management: Cost Management + Billing and Azure Advisor cost recommendations.",
+                "Uses Azure Cost Management to analyse spending by resource group and service, sets up a budget with email alerts when spend reaches defined thresholds, and identifies the top cost drivers for a subscription.",
+                "Implements a resource tagging strategy for cost attribution across business units, creates Cost Management views and exports for team-level chargeback, and uses reservation and savings plan analysis to identify committed-use purchase opportunities.",
+                "Designs a FinOps operating model with showback and chargeback reporting, implements right-sizing systematically using Advisor recommendations, and builds cost governance guardrails using Azure Policy and budget alerts that trigger automated remediation or escalation.",
+                "Defines the organisation's FinOps strategy and operating model; establishes cost allocation taxonomy, tagging governance, and budget ownership across all cloud workloads; leads the FinOps practice maturity journey; presents cloud unit economics and cost efficiency trends to executive leadership."
+              ],
+              "resources": [
+                { "title": "Azure Cost Management documentation", "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/", "type": "Official docs" },
+                { "title": "Azure Cost Management best practices", "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-best-practices", "type": "Official docs" },
+                { "title": "FinOps Foundation — FinOps Framework", "url": "https://www.finops.org/framework/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "staff-build-buy",     "label": "Build vs Buy vs Integrate",       "shared": false, "notes": "",  "subSkills": ["Vendor Evaluation", "OSS Assessment", "Total Cost Modeling", "Lock-in Analysis"] },
             { "id": "staff-org-design",    "label": "Organizational Design Awareness", "shared": false, "notes": "",  "subSkills": ["Conway's Law", "Team Topologies", "API-first Team Design"] }
           ]
@@ -546,7 +964,26 @@
             { "id": "shared-github-advanced-security",    "label": "GitHub Advanced Security",       "shared": true,  "notes": "",  "subSkills": ["Code Scanning (CodeQL)", "Secret Scanning", "Dependabot", "Security Overview"] },
             { "id": "platform-github-projects",           "label": "GitHub Projects",                "shared": false, "notes": "",  "subSkills": ["Kanban Boards", "Automation", "Roadmap Views", "Status Fields"] },
             { "id": "platform-github-packages",           "label": "GitHub Packages",                "shared": false, "notes": "",  "subSkills": ["Container Registry", "npm/Maven/NuGet Packages", "Package Visibility"] },
-            { "id": "shared-azure-devops-pipelines",      "label": "Azure DevOps Pipelines",        "shared": true,  "notes": "",  "subSkills": ["YAML Pipelines", "Classic Pipelines", "Multi-Stage", "Service Connections", "Environments", "Deployment Gates"] },
+            { "id": "shared-azure-devops-pipelines",
+              "label": "Azure DevOps Pipelines",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["YAML Pipelines", "Classic Pipelines", "Multi-Stage", "Service Connections", "Environments", "Deployment Gates"],
+              "masteryLevels": [
+                "Can explain what Azure DevOps Pipelines is, describe the difference between Classic and YAML pipelines, and identify the key concepts: triggers, stages, jobs, steps, and agent pools.",
+                "Creates a YAML pipeline that triggers on a push event, runs build and test steps on a Microsoft-hosted agent, and publishes a build artifact on successful completion.",
+                "Configures service connections for Azure deployments authenticated with a managed identity or service principal, uses Library Groups to manage shared variables and secrets, and implements multi-stage pipelines with environment approval gates that protect production releases.",
+                "Designs a multi-repo pipeline architecture with reusable YAML templates consumed across teams, implements branch-based deployment promotion (dev → staging → production), and uses deployment gates with Azure Monitor or REST API queries to automate quality checks before release.",
+                "Defines the organisation's Azure DevOps Pipelines standards including YAML template libraries, service connection governance, and pipeline security controls; leads the migration from Classic to YAML pipelines across engineering teams."
+              ],
+              "resources": [
+                { "title": "Azure Pipelines documentation", "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/", "type": "Official docs" },
+                { "title": "YAML schema reference for Azure Pipelines", "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/", "type": "Official docs" },
+                { "title": "Build and deploy with Azure Pipelines — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/build-applications-with-azure-devops/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "platform-azure-devops-repos",        "label": "Azure DevOps: Repos",           "shared": false, "notes": "",  "subSkills": ["Branch Policies", "Pull Request Templates", "Protected Branches"] },
             { "id": "platform-azure-devops-artifacts",    "label": "Azure DevOps: Artifacts",       "shared": false, "notes": "",  "subSkills": ["Feed Management", "Upstream Sources", "Retention Policies"] },
             { "id": "shared-azure-devops-boards",         "label": "Azure DevOps: Boards",          "shared": true,  "notes": "",  "subSkills": ["Backlogs", "Sprint Planning", "Queries", "Reporting"] },
@@ -559,7 +996,26 @@
           "id": "platform-iac",
           "label": "Infrastructure as Code",
           "skills": [
-            { "id": "shared-terraform",          "label": "Terraform",          "shared": true,  "notes": "Deep skill",     "subSkills": ["Provider Configuration", "Resource Lifecycle", "State Management (Remote)", "Modules", "Workspaces", "Terragrunt", "Drift Detection"] },
+            { "id": "shared-terraform",
+              "label": "Terraform",
+              "shared": true,
+              "notes": "Deep skill",
+              "subSkills": ["Provider Configuration", "Resource Lifecycle", "State Management (Remote)", "Modules", "Workspaces", "Terragrunt", "Drift Detection"],
+              "masteryLevels": [
+                "Can explain what Terraform is, describe the plan-apply workflow, and identify the purpose of the state file in tracking the relationship between configuration and deployed infrastructure.",
+                "Writes a Terraform configuration that provisions cloud resources using a provider, runs terraform plan to preview changes and terraform apply to deploy them, and stores state in a remote backend such as Azure Blob Storage.",
+                "Designs reusable Terraform modules with input variables and outputs, manages multiple environments using workspaces or separate state files, and uses targeted plan/apply to manage changes safely within large configurations.",
+                "Architects a multi-team Terraform platform with a versioned module registry, implements drift detection in CI to alert on out-of-band changes, and uses Terragrunt to reduce configuration boilerplate across a complex multi-account or multi-region estate.",
+                "Defines the organisation's Terraform architecture standards and module governance; evaluates Terragrunt, OpenTofu, and alternative IaC tools for strategic fit; leads the design of the remote state architecture and RBAC model across all cloud accounts."
+              ],
+              "resources": [
+                { "title": "Terraform documentation", "url": "https://developer.hashicorp.com/terraform/docs", "type": "Official docs" },
+                { "title": "Terraform — Get started with Azure", "url": "https://developer.hashicorp.com/terraform/tutorials/azure-get-started", "type": "Course" },
+                { "title": "Terraform module development guide", "url": "https://developer.hashicorp.com/terraform/language/modules/develop", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
             { "id": "platform-terraform-testing","label": "Terraform: Testing", "shared": false, "notes": "",              "subSkills": ["Terratest", "Checkov", "tflint", "Pre-commit Hooks"] },
             { "id": "shared-bicep",
               "label": "Azure Bicep",
@@ -611,10 +1067,67 @@
           "skills": [
             { "id": "platform-observability-strategy","label": "Observability Strategy",       "shared": false, "notes": "",              "subSkills": ["MELT Framework", "SLI/SLO/SLA Design", "Error Budget Policy", "Observability-as-Code"] },
             { "id": "platform-prometheus",           "label": "Prometheus & Alertmanager",     "shared": false, "notes": "",              "subSkills": ["Scrape Configuration", "PromQL", "Recording Rules", "Alerting Rules", "Remote Write"] },
-            { "id": "shared-grafana",                "label": "Grafana",                       "shared": true,  "notes": "",              "subSkills": ["Dashboard Design", "Data Sources", "Alerting", "Templating Variables", "Annotations", "Provisioning"] },
+            { "id": "shared-grafana",
+              "label": "Grafana",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Dashboard Design", "Data Sources", "Alerting", "Templating Variables", "Annotations", "Provisioning"],
+              "masteryLevels": [
+                "Can describe what Grafana is, explain its data source plugin architecture, and identify the common data sources used in Azure and AWS environments: Azure Monitor, Prometheus, CloudWatch, and Log Analytics.",
+                "Connects Grafana to a data source, imports an existing community dashboard, and customises a panel to display a specific metric with appropriate visualisation type and time range.",
+                "Builds a dashboard from scratch with templating variables that allow users to filter by environment, service, or resource; configures alert rules on key metrics with notification channels; and manages dashboard access using Grafana RBAC roles.",
+                "Designs a Grafana dashboard library for operational and business metrics; implements dashboard provisioning-as-code to deploy dashboards and data sources from a Git repository; integrates Grafana alerting with on-call tools such as PagerDuty or OpsGenie.",
+                "Defines the organisation's Grafana deployment architecture and governance model; manages the Grafana instance lifecycle including upgrades, plugin governance, and authentication integration; evaluates Azure Managed Grafana versus self-hosted for compliance and operational requirements."
+              ],
+              "resources": [
+                { "title": "Grafana documentation", "url": "https://grafana.com/docs/grafana/latest/", "type": "Official docs" },
+                { "title": "Azure Managed Grafana documentation", "url": "https://learn.microsoft.com/en-us/azure/managed-grafana/", "type": "Official docs" },
+                { "title": "Grafana dashboard best practices", "url": "https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "platform-otel",                 "label": "OpenTelemetry (OTel)",          "shared": false, "notes": "2026 standard",  "subSkills": ["Instrumentation (Auto/Manual)", "Collector Config", "OTLP Protocol", "Trace/Metric/Log Correlation"] },
-            { "id": "shared-azure-monitor",          "label": "Azure Monitor (Platform Layer)","shared": true,  "notes": "",              "subSkills": ["Log Analytics Workspace Architecture", "DCR Design", "Diagnostic Settings at Scale", "Alert Rule Governance"] },
-            { "id": "shared-kql",                    "label": "KQL",                           "shared": true,  "notes": "",              "subSkills": ["Query Patterns", "Joins", "Summarize", "Time Series", "Anomaly Detection"] },
+            { "id": "shared-azure-monitor",
+              "label": "Azure Monitor (Platform Layer)",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Log Analytics Workspace Architecture", "DCR Design", "Diagnostic Settings at Scale", "Alert Rule Governance"],
+              "masteryLevels": [
+                "Can explain what Azure Monitor is, describe its role as the central monitoring platform for Azure resources, and identify its main data types: metrics, logs, and the Activity Log.",
+                "Configures diagnostic settings on a resource to route metrics and logs to a Log Analytics workspace, creates a metric alert rule with an action group that notifies the operations team, and uses the Activity Log to investigate recent configuration changes.",
+                "Designs an alert strategy with severity-appropriate action group routing, writes log-based alert rules using KQL for application-specific conditions, and configures Azure Monitor Agent with Data Collection Rules to control what data is collected from VMs and other sources.",
+                "Architects an Azure Monitor deployment across a multi-subscription estate, evaluates centralised versus workspace-per-subscription topologies against cost and access isolation requirements, deploys alert rules and diagnostic settings at scale using Bicep and Azure Policy.",
+                "Defines the organisation's observability strategy on Azure Monitor; establishes workspace architecture, data retention, and cost governance standards; leads the migration from legacy MMA/OMS agents to Azure Monitor Agent; presents the monitoring posture and coverage to operations leadership."
+              ],
+              "resources": [
+                { "title": "Azure Monitor documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/", "type": "Official docs" },
+                { "title": "Azure Monitor best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/best-practices-monitoring", "type": "Official docs" },
+                { "title": "Monitor resources with Azure Monitor — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/monitor-usage-performance-availability-resources-azure-monitor/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-kql",
+              "label": "KQL",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Query Patterns", "Joins", "Summarize", "Time Series", "Anomaly Detection"],
+              "masteryLevels": [
+                "Can describe what KQL is, identify which Azure services use it (Log Analytics, Application Insights, Azure Data Explorer, Microsoft Sentinel), and write a basic table query with a where filter and project to select specific columns.",
+                "Writes KQL queries that filter by time range and resource, uses summarize to aggregate counts and averages, and saves queries to a Log Analytics workspace for reuse in dashboards and alert rules.",
+                "Joins multiple tables using join and union operators, writes time-series aggregations to detect trends and anomalies in metric or log data, and uses the render operator to produce charts directly in the portal.",
+                "Optimises query performance by applying filters early, minimising scanned data through appropriate table and column selection, and using materialize() for expensive sub-expressions reused across a query; writes parametric queries for Azure Workbooks and complex threat-hunting queries in Microsoft Sentinel.",
+                "Defines the organisation's KQL query library and style guide; develops standardised queries for operational dashboards, alert rules, and security investigations; mentors engineers on query optimisation patterns; contributes reference queries used across teams for common operational and compliance scenarios."
+              ],
+              "resources": [
+                { "title": "KQL quick reference", "url": "https://learn.microsoft.com/en-us/azure/data-explorer/kql-quick-reference", "type": "Official docs" },
+                { "title": "Get started with log queries in Azure Monitor", "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries", "type": "Official docs" },
+                { "title": "Must Learn KQL — Rod Trent (free series)", "url": "https://github.com/rod-trent/MustLearnKQL", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
             { "id": "platform-distributed-tracing",  "label": "Distributed Tracing",           "shared": false, "notes": "",              "subSkills": ["Trace Context Propagation", "Sampling Strategies", "Jaeger/Zipkin/Tempo"] },
             { "id": "platform-log-management",       "label": "Log Management",                "shared": false, "notes": "",              "subSkills": ["Log Aggregation Design", "Structured Logging Standards", "Retention Strategy", "Cost Management"] },
             { "id": "platform-oncall-runbooks",      "label": "On-Call & Runbook Design",      "shared": false, "notes": "",              "subSkills": ["Runbook Templates", "Alert Routing", "Escalation Policies", "PagerDuty/OpsGenie Integration"] }
@@ -628,7 +1141,26 @@
             { "id": "platform-dev-productivity",   "label": "Developer Productivity Tooling", "shared": false, "notes": "",  "subSkills": ["Local Dev Environments (devcontainers)", "CLI Tooling", "Scaffolding", "Automation"] },
             { "id": "platform-self-service-infra", "label": "Self-Service Infrastructure",    "shared": false, "notes": "",  "subSkills": ["Infrastructure Vending", "Account/Subscription Vending", "Cost Guardrails", "Quota Management"] },
             { "id": "platform-api-design",         "label": "Platform API Design",            "shared": false, "notes": "",  "subSkills": ["Internal API Standards", "Platform Contracts", "Versioning", "Deprecation Policy"] },
-            { "id": "shared-finops",               "label": "FinOps & Cost Visibility",       "shared": true,  "notes": "",  "subSkills": ["Showback/Chargeback Models", "Cost Allocation Tags", "Budget Alerts", "Right-Sizing Tooling"] }
+            { "id": "shared-finops",
+              "label": "FinOps & Cost Visibility",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Showback/Chargeback Models", "Cost Allocation Tags", "Budget Alerts", "Right-Sizing Tooling"],
+              "masteryLevels": [
+                "Can explain what FinOps is, describe its three phases (Inform, Optimise, Operate), and identify the primary Azure tools for cloud cost management: Cost Management + Billing and Azure Advisor cost recommendations.",
+                "Uses Azure Cost Management to analyse spending by resource group and service, sets up a budget with email alerts when spend reaches defined thresholds, and identifies the top cost drivers for a subscription.",
+                "Implements a resource tagging strategy for cost attribution across business units, creates Cost Management views and exports for team-level chargeback, and uses reservation and savings plan analysis to identify committed-use purchase opportunities.",
+                "Designs a FinOps operating model with showback and chargeback reporting, implements right-sizing systematically using Advisor recommendations, and builds cost governance guardrails using Azure Policy and budget alerts that trigger automated remediation or escalation.",
+                "Defines the organisation's FinOps strategy and operating model; establishes cost allocation taxonomy, tagging governance, and budget ownership across all cloud workloads; leads the FinOps practice maturity journey; presents cloud unit economics and cost efficiency trends to executive leadership."
+              ],
+              "resources": [
+                { "title": "Azure Cost Management documentation", "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/", "type": "Official docs" },
+                { "title": "Azure Cost Management best practices", "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-best-practices", "type": "Official docs" },
+                { "title": "FinOps Foundation — FinOps Framework", "url": "https://www.finops.org/framework/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         }
       ]
