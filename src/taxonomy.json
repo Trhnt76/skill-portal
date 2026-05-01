@@ -144,48 +144,618 @@
           "id": "azure-cloud-network",
           "label": "Networking",
           "skills": [
-            { "id": "shared-vnet",                  "label": "Virtual Network (VNet)",         "shared": true,  "notes": "",                              "subSkills": ["Address Space Design", "Subnetting", "Peering (VNet-to-VNet)", "Hub-Spoke Topology", "Service Endpoints"] },
-            { "id": "azure-cloud-firewall",         "label": "Azure Firewall",                 "shared": false, "notes": "",                              "subSkills": ["Firewall Policy", "DNAT/SNAT Rules", "Threat Intelligence", "Premium SKU (IDPS)"] },
-            { "id": "azure-cloud-app-gateway",      "label": "Azure Application Gateway",      "shared": false, "notes": "",                              "subSkills": ["WAF v2", "URL-Based Routing", "SSL Termination", "Autoscaling"] },
-            { "id": "azure-cloud-front-door",       "label": "Azure Front Door",               "shared": false, "notes": "",                              "subSkills": ["Global Routing", "CDN Integration", "WAF Policies", "Health Probes", "Custom Domains"] },
-            { "id": "azure-cloud-private-link",     "label": "Private Link / Private Endpoints","shared": false,"notes": "Critical for enterprise security","subSkills": ["PaaS Service Isolation", "DNS Private Zones", "Network Security Groups"] },
-            { "id": "azure-cloud-vpn-expressroute", "label": "VPN Gateway / ExpressRoute",     "shared": false, "notes": "",                              "subSkills": ["Site-to-Site VPN", "Point-to-Site VPN", "ExpressRoute Circuit", "Hybrid Connectivity"] },
-            { "id": "azure-cloud-dns",              "label": "Azure DNS",                      "shared": false, "notes": "",                              "subSkills": ["Public Zones", "Private Zones", "DNS Resolver", "Split-Horizon DNS"] },
-            { "id": "azure-cloud-ddos",             "label": "Azure DDoS Protection",          "shared": false, "notes": "",                              "subSkills": ["Standard Plan", "Diagnostic Logs", "Alert Configuration"] },
-            { "id": "azure-cloud-nsg",              "label": "Network Security Groups (NSG)",  "shared": false, "notes": "",                              "subSkills": ["Inbound/Outbound Rules", "Flow Logs", "Application Security Groups"] },
-            { "id": "azure-cloud-load-balancer",    "label": "Azure Load Balancer",            "shared": false, "notes": "",                              "subSkills": ["Internal vs Public", "Backend Pools", "Health Probes", "SKU Selection (Standard)"] },
-            { "id": "azure-cloud-nat-gateway",      "label": "Azure NAT Gateway",              "shared": false, "notes": "",                              "subSkills": ["Outbound SNAT", "Availability Zones", "Integration with Subnets"] }
+            { "id": "shared-vnet",
+              "label": "Virtual Network (VNet)",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Address Space Design", "Subnetting", "Peering (VNet-to-VNet)", "Hub-Spoke Topology", "Service Endpoints"],
+              "masteryLevels": [
+                "Can describe what an Azure VNet is, explain the relationship between address spaces and subnets, and identify why VNet isolation is the foundation of network security in Azure.",
+                "Creates a VNet with multiple subnets using Bicep, assigns address ranges that avoid overlap with on-premises or other VNets, and enables Service Endpoints on a subnet to provide a network path to specific Azure services.",
+                "Configures VNet Peering for direct routing between two VNets, designs a Hub-Spoke topology where a hub VNet hosts shared services (firewall, DNS, VPN gateway), and understands the routing implications of peering including the absence of transitive routing without a hub.",
+                "Designs a full landing zone VNet architecture with dedicated subnets for each tier (management, application, data, gateway), implements NSG and route table associations at the subnet level, and architects the peering model for spoke VNets to reach the internet and on-premises via the hub.",
+                "Defines the organisation's VNet addressing scheme and subnet design standards; governs VNet creation, address allocation, and peering through Bicep and Azure Policy; advises on Hub-Spoke versus Virtual WAN topology decisions; leads the network design for enterprise-scale landing zones."
+              ],
+              "resources": [
+                { "title": "Azure Virtual Network documentation", "url": "https://learn.microsoft.com/en-us/azure/virtual-network/", "type": "Official docs" },
+                { "title": "Hub-spoke network topology in Azure", "url": "https://learn.microsoft.com/en-us/azure/architecture/networking/architecture/hub-spoke", "type": "Official docs" },
+                { "title": "Configure virtual networks — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-firewall",
+              "label": "Azure Firewall",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Firewall Policy", "DNAT/SNAT Rules", "Threat Intelligence", "Premium SKU (IDPS)"],
+              "masteryLevels": [
+                "Can describe what Azure Firewall is, explain how it differs from NSGs (stateful L7 service with FQDN filtering versus stateful L4 port rules), and identify the three rule collection types: DNAT, Network, and Application.",
+                "Deploys Azure Firewall Standard in a hub VNet, creates network rule collections to allow specific traffic flows, and configures a DNAT rule to forward inbound internet traffic to a private backend.",
+                "Manages Azure Firewall using Firewall Policy, writes application rule collections to allow FQDN-based outbound internet access for spoke workloads, enables Threat Intelligence filtering to block traffic to known malicious destinations, and routes spoke subnet traffic through the firewall using User Defined Routes.",
+                "Deploys Azure Firewall Premium with IDPS in Alert and Deny mode for deep packet inspection, enables TLS inspection for encrypted traffic analysis, and designs a parent-child Firewall Policy hierarchy so organisation-wide baseline rules are inherited by all deployment-specific policies.",
+                "Defines the organisation's network security perimeter strategy using Azure Firewall; designs the policy hierarchy and rule governance process; evaluates Azure Firewall versus third-party NVAs for specific inspection requirements; leads the network security model design for the Azure landing zone."
+              ],
+              "resources": [
+                { "title": "Azure Firewall documentation", "url": "https://learn.microsoft.com/en-us/azure/firewall/", "type": "Official docs" },
+                { "title": "Azure Firewall Policy overview", "url": "https://learn.microsoft.com/en-us/azure/firewall-manager/policy-overview", "type": "Official docs" },
+                { "title": "Introduction to Azure Firewall — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/introduction-azure-firewall/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-app-gateway",
+              "label": "Azure Application Gateway",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["WAF v2", "URL-Based Routing", "SSL Termination", "Autoscaling"],
+              "masteryLevels": [
+                "Can describe what Azure Application Gateway is, explain its role as a regional L7 load balancer, and distinguish it from Azure Load Balancer (L4) and Azure Front Door (global CDN and WAF).",
+                "Deploys an Application Gateway with a basic HTTP listener and backend pool, routes traffic to App Service or VM backends, and validates that health probes correctly mark backends healthy or unhealthy.",
+                "Configures URL path-based routing rules to direct traffic to different backend pools, enables the WAF v2 SKU with the OWASP managed ruleset in Detection mode, and terminates SSL at the gateway using a certificate stored in Key Vault.",
+                "Enables WAF Prevention mode after validating no legitimate traffic is blocked, creates custom WAF rules to handle application-specific patterns, configures autoscaling to handle variable traffic, and implements a private frontend IP for internal application load balancing.",
+                "Defines the organisation's regional web application ingress strategy; evaluates Application Gateway versus Front Door versus third-party WAF solutions for different geographic and performance requirements; governs WAF ruleset management and exclusion justification processes; leads WAF tuning for production applications."
+              ],
+              "resources": [
+                { "title": "Azure Application Gateway documentation", "url": "https://learn.microsoft.com/en-us/azure/application-gateway/", "type": "Official docs" },
+                { "title": "Azure Application Gateway WAF documentation", "url": "https://learn.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview", "type": "Official docs" },
+                { "title": "Load balance HTTP traffic with Application Gateway — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/load-balancing-https-traffic-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-front-door",
+              "label": "Azure Front Door",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Global Routing", "CDN Integration", "WAF Policies", "Health Probes", "Custom Domains"],
+              "masteryLevels": [
+                "Can describe what Azure Front Door is, explain its global anycast routing capabilities, and identify when Front Door is appropriate versus Application Gateway — global multi-region delivery versus single-region L7 load balancing.",
+                "Creates a Front Door profile, adds an origin group pointing to an App Service or storage account, configures health probes, and maps a custom domain with an auto-provisioned managed TLS certificate.",
+                "Configures URL path-based routing rules to direct traffic to different origins, attaches WAF policies with OWASP managed rules to protect against web attacks, and uses response caching rules to reduce origin load for static and semi-static content.",
+                "Designs a global application delivery architecture with Front Door routing across multiple Azure regions for active-active or active-passive failover, implements geo-filtering to restrict access by country, and configures origin groups with weighted load balancing for blue-green deployments.",
+                "Defines the organisation's global application delivery strategy; evaluates Front Door Standard versus Premium and Azure CDN profiles against content and security requirements; designs the origin topology and routing rules for multi-region applications; governs WAF policy lifecycle and exclusion approval processes."
+              ],
+              "resources": [
+                { "title": "Azure Front Door documentation", "url": "https://learn.microsoft.com/en-us/azure/frontdoor/", "type": "Official docs" },
+                { "title": "Azure Front Door WAF documentation", "url": "https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/afds-overview", "type": "Official docs" },
+                { "title": "Introduction to Azure Front Door — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-front-door/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-private-link",
+              "label": "Private Link / Private Endpoints",
+              "shared": false,
+              "notes": "Critical for enterprise security",
+              "subSkills": ["PaaS Service Isolation", "DNS Private Zones", "Network Security Groups"],
+              "masteryLevels": [
+                "Can describe what Azure Private Link and Private Endpoints are, explain how they bring PaaS services into a VNet's private address space, and identify why they are critical for preventing data exfiltration and meeting compliance requirements.",
+                "Creates a Private Endpoint for an Azure Storage account, verifies it receives a private IP in the target subnet, and tests that the storage account is reachable from a VM in the same VNet.",
+                "Configures a Private DNS Zone linked to the VNet so the PaaS service's hostname resolves to the private IP instead of the public endpoint, applies NSG rules to control which subnets can reach the Private Endpoint, and disables the PaaS service's public network access to complete the isolation.",
+                "Designs a private connectivity architecture for a Hub-Spoke topology where Private Endpoints in a central spoke or hub DNS landing zone are accessible from all other spokes via DNS forwarding, and deploys Private DNS Zone integration at scale using Azure Policy with DINE (DeployIfNotExists) effects.",
+                "Defines the organisation's private connectivity standards; mandates Private Endpoints for all PaaS services handling sensitive data through Azure Policy; architects the Private DNS Zone hierarchy for consistent name resolution; advises on Private Link Service design for exposing internal services to customers or partners."
+              ],
+              "resources": [
+                { "title": "Azure Private Link documentation", "url": "https://learn.microsoft.com/en-us/azure/private-link/", "type": "Official docs" },
+                { "title": "Private Endpoint DNS integration", "url": "https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns", "type": "Official docs" },
+                { "title": "Introduction to Azure Private Link — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/introduction-azure-private-link/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-vpn-expressroute",
+              "label": "VPN Gateway / ExpressRoute",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Site-to-Site VPN", "Point-to-Site VPN", "ExpressRoute Circuit", "Hybrid Connectivity"],
+              "masteryLevels": [
+                "Can describe the three Azure hybrid connectivity options (Site-to-Site VPN, Point-to-Site VPN, ExpressRoute) and identify when each is appropriate based on bandwidth, latency, reliability, and cost requirements.",
+                "Deploys an Azure VPN Gateway and configures a Site-to-Site IPsec tunnel to an on-premises VPN device, verifies connectivity by routing test traffic between Azure and on-premises address ranges.",
+                "Configures a Point-to-Site VPN for remote user access using Azure AD authentication, implements BGP on a Site-to-Site VPN for dynamic route exchange, and designs the address space to prevent IP overlap between Azure VNets and on-premises networks.",
+                "Configures ExpressRoute with a provider circuit, implements ExpressRoute FastPath for low-latency workloads, and deploys ExpressRoute and VPN Gateway in coexistence on the same VNet for failover resilience when the private circuit is unavailable.",
+                "Defines the organisation's hybrid connectivity strategy; evaluates Site-to-Site VPN versus ExpressRoute versus Virtual WAN for bandwidth, latency, and cost requirements; designs the connectivity model for multiple offices and regions; leads the circuit ordering and peering configuration with network and carrier teams."
+              ],
+              "resources": [
+                { "title": "Azure VPN Gateway documentation", "url": "https://learn.microsoft.com/en-us/azure/vpn-gateway/", "type": "Official docs" },
+                { "title": "Azure ExpressRoute documentation", "url": "https://learn.microsoft.com/en-us/azure/expressroute/", "type": "Official docs" },
+                { "title": "Connect your on-premises network to Azure with VPN — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/connect-on-premises-network-with-vpn-gateway/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-dns",
+              "label": "Azure DNS",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Public Zones", "Private Zones", "DNS Resolver", "Split-Horizon DNS"],
+              "masteryLevels": [
+                "Can describe what Azure DNS is, explain the difference between Public zones (internet-resolvable) and Private zones (VNet-internal resolution), and identify why Azure-managed DNS removes the operational burden of running DNS server infrastructure.",
+                "Creates a Public DNS zone, adds A, CNAME, and TXT records, delegates the zone from a domain registrar to Azure DNS name servers, and verifies resolution using nslookup or dig from an external client.",
+                "Creates a Private DNS Zone, links it to a VNet for VM auto-registration, configures the zone for Private Endpoint integration so PaaS services resolve to their private IPs, and implements split-horizon DNS so the same domain resolves differently inside and outside Azure.",
+                "Deploys Azure DNS Private Resolver with inbound and outbound endpoints to forward queries bidirectionally between on-premises DNS and Azure Private DNS, designs conditional forwarding rules so on-premises clients can resolve Azure private DNS names without relying on custom DNS servers in Azure VMs.",
+                "Defines the organisation's DNS architecture; designs the zone hierarchy, Private Resolver topology, and forwarding ruleset for a full hybrid environment; governs DNS zone creation, record TTLs, and Private Endpoint DNS integration through Bicep and policy; advises on DNS root authority and delegation decisions."
+              ],
+              "resources": [
+                { "title": "Azure DNS documentation", "url": "https://learn.microsoft.com/en-us/azure/dns/", "type": "Official docs" },
+                { "title": "Azure DNS Private Resolver documentation", "url": "https://learn.microsoft.com/en-us/azure/dns/dns-private-resolver-overview", "type": "Official docs" },
+                { "title": "Host a domain on Azure DNS — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-ddos",
+              "label": "Azure DDoS Protection",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Standard Plan", "Diagnostic Logs", "Alert Configuration"],
+              "masteryLevels": [
+                "Can describe what Azure DDoS Protection is, explain the difference between the default Basic protection (included with all Azure subscriptions) and the paid Network Protection plan, and identify the attack types each tier addresses.",
+                "Enables Azure DDoS Network Protection on a VNet, reviews the per-public-IP protection policies automatically tuned by the service, and understands the telemetry available in Azure Monitor during and after a DDoS event.",
+                "Exports DDoS diagnostic logs to a Log Analytics workspace for attack event analysis, creates metric-based alerts to notify the operations team when an attack is detected or mitigated, and validates that all internet-facing public IP resources in scope have protection coverage.",
+                "Designs a DDoS protection architecture covering all internet-facing public IPs across the estate, registers for Microsoft's DDoS Rapid Response team access for expert assistance during active attacks, and integrates DDoS telemetry with a SIEM for correlation with other security events.",
+                "Defines the organisation's DDoS protection strategy; evaluates Network Protection versus IP Protection tiers against cost and coverage requirements per workload; establishes the incident response playbook for DDoS events; presents DDoS risk posture and mitigation effectiveness to security leadership."
+              ],
+              "resources": [
+                { "title": "Azure DDoS Protection documentation", "url": "https://learn.microsoft.com/en-us/azure/ddos-protection/", "type": "Official docs" },
+                { "title": "Azure DDoS Protection fundamental best practices", "url": "https://learn.microsoft.com/en-us/azure/ddos-protection/fundamental-best-practices", "type": "Official docs" },
+                { "title": "Introduction to Azure DDoS Protection — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/introduction-azure-ddos-protection/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-nsg",
+              "label": "Network Security Groups (NSG)",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Inbound/Outbound Rules", "Flow Logs", "Application Security Groups"],
+              "masteryLevels": [
+                "Can describe what a Network Security Group is, explain how priority-ordered inbound and outbound rules determine whether traffic is allowed or denied, and identify the default rules Azure adds to every NSG.",
+                "Creates an NSG, adds inbound allow rules for specific ports and source ranges, associates it with a subnet, and uses Network Watcher IP flow verify to confirm traffic is permitted or blocked as expected.",
+                "Implements Application Security Groups to group VMs by application tier and write rules that reference ASGs instead of IP ranges, making the ruleset maintainable as IPs change; enables NSG Flow Logs to capture traffic metadata for security investigation.",
+                "Designs an NSG strategy for a landing zone with deny-all defaults and explicit allow rules at both subnet and NIC levels, integrates Flow Logs with Traffic Analytics to visualise network patterns and identify overly permissive rules, and enforces NSG requirements on all subnets at creation using Azure Policy.",
+                "Defines the organisation's NSG baseline ruleset and design standards; governs NSG rule creation, justification, and review cadence through Bicep templates and Azure Policy; uses Traffic Analytics to drive least-privilege remediation; trains engineering teams on network security group design principles."
+              ],
+              "resources": [
+                { "title": "Network Security Groups documentation", "url": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview", "type": "Official docs" },
+                { "title": "NSG Flow Logs documentation", "url": "https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview", "type": "Official docs" },
+                { "title": "Filter network traffic with NSGs — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/filter-network-traffic-network-security-group/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-load-balancer",
+              "label": "Azure Load Balancer",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Internal vs Public", "Backend Pools", "Health Probes", "SKU Selection (Standard)"],
+              "masteryLevels": [
+                "Can describe what Azure Load Balancer is, explain the difference between Public and Internal (private) load balancers, and identify the key distinctions between Basic and Standard SKUs.",
+                "Creates a Standard Public Load Balancer, defines a backend pool from a set of VMs, configures a TCP health probe on the application port, and verifies that traffic distributes across healthy instances.",
+                "Configures load-balancing rules with session persistence for stateful applications, adds inbound NAT rules for direct management access to individual backend instances, and deploys an Internal Load Balancer to distribute traffic between application tiers within a VNet.",
+                "Designs a zone-redundant Load Balancer architecture using Standard SKU with cross-zone load balancing, integrates it with VMSS for elastic backend pools, and implements floating IP to support SQL Server Always On Availability Group listeners without requiring listener IPs on each VM.",
+                "Defines the organisation's load balancing architecture standards; evaluates Azure Load Balancer versus Application Gateway versus Front Door for L4 versus L7 versus global traffic patterns; designs health probe strategies for reliable traffic routing; governs Load Balancer deployment through Bicep and naming standards."
+              ],
+              "resources": [
+                { "title": "Azure Load Balancer documentation", "url": "https://learn.microsoft.com/en-us/azure/load-balancer/", "type": "Official docs" },
+                { "title": "Azure Load Balancer health probes", "url": "https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-custom-probe-overview", "type": "Official docs" },
+                { "title": "Improve app scalability with Azure Load Balancer — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/improve-app-scalability-resiliency-with-load-balancer/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-nat-gateway",
+              "label": "Azure NAT Gateway",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Outbound SNAT", "Availability Zones", "Integration with Subnets"],
+              "masteryLevels": [
+                "Can describe what Azure NAT Gateway is, explain why it solves the SNAT port exhaustion problem that affects VMs making high volumes of outbound connections, and identify when NAT Gateway is the right outbound connectivity solution.",
+                "Deploys a NAT Gateway with a public IP address, associates it with a subnet, and confirms that outbound connections from VMs use the NAT Gateway's IP rather than the default Azure outbound SNAT.",
+                "Configures NAT Gateway with a public IP prefix to provide a predictable range of outbound source IPs for allowlisting at external services, and associates the gateway with zone-redundant resources for resilient outbound connectivity.",
+                "Designs an outbound connectivity architecture that routes all production subnet internet traffic through NAT Gateway for consistent and reliable SNAT, eliminates default outbound access ahead of Azure's retirement of it, and shares NAT Gateway public IPs across spoke subnets in a Hub-Spoke topology via routing.",
+                "Defines the organisation's outbound internet connectivity standards; mandates NAT Gateway for all production subnets through Azure Policy; designs the public IP prefix strategy for subnets requiring predictable source IPs; advises on the NAT Gateway versus Azure Firewall decision for subnets with different outbound inspection requirements."
+              ],
+              "resources": [
+                { "title": "Azure NAT Gateway documentation", "url": "https://learn.microsoft.com/en-us/azure/nat-gateway/", "type": "Official docs" },
+                { "title": "Azure NAT Gateway design guidelines", "url": "https://learn.microsoft.com/en-us/azure/nat-gateway/nat-gateway-design", "type": "Official docs" },
+                { "title": "Design and implement Azure networking — AZ-700 MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/az-700-design-implement-microsoft-azure-networking-solutions/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         },
         {
           "id": "azure-cloud-compute",
           "label": "Compute",
           "skills": [
-            { "id": "shared-azure-vm",          "label": "Azure Virtual Machines",         "shared": true,  "notes": "",                  "subSkills": ["VM Sizing", "Availability Sets", "Availability Zones", "Extensions", "Custom Images", "Scale Sets", "Spot VMs"] },
-            { "id": "azure-cloud-vmss",         "label": "Azure VM Scale Sets (VMSS)",     "shared": false, "notes": "",                  "subSkills": ["Autoscale Profiles", "Custom Scripts", "Rolling Upgrades", "Flexible Orchestration"] },
-            { "id": "shared-aks",               "label": "Azure Kubernetes Service (AKS)", "shared": true,  "notes": "Deep skill",         "subSkills": ["Cluster Provisioning", "Node Pools", "Ingress Controllers", "RBAC", "Workload Identity", "AKS Networking (CNI/Overlay)", "Cluster Upgrades", "Monitoring Integration"] },
-            { "id": "azure-cloud-container-apps","label": "Azure Container Apps",          "shared": false, "notes": "",                  "subSkills": ["Environment Setup", "Dapr Integration", "Scale-to-Zero", "Ingress", "Managed Certificates"] },
-            { "id": "azure-cloud-aci",          "label": "Azure Container Instances",      "shared": false, "notes": "",                  "subSkills": ["Sidecar Patterns", "Init Containers", "Private Registry Pull"] },
-            { "id": "shared-azure-app-service", "label": "Azure App Service",              "shared": true,  "notes": "",                  "subSkills": ["Web Apps", "API Apps", "Deployment Slots", "Custom Domains/TLS", "Scaling Plans", "VNet Integration"] },
-            { "id": "shared-azure-functions",   "label": "Azure Functions",                "shared": true,  "notes": "",                  "subSkills": ["Trigger Types", "Durable Functions", "Consumption vs Premium Plan", "Cold Start Optimization"] },
-            { "id": "azure-cloud-avd",          "label": "Azure Virtual Desktop (AVD)",    "shared": false, "notes": "",                  "subSkills": ["Host Pool Types", "FSLogix", "Image Management", "RDP Shortpath"] },
-            { "id": "azure-cloud-batch",        "label": "Azure Batch",                    "shared": false, "notes": "",                  "subSkills": ["Pool Configuration", "Task Scheduling", "Integration with Storage"] },
-            { "id": "azure-cloud-arc",          "label": "Azure Arc",                      "shared": false, "notes": "Hybrid-critical",    "subSkills": ["Arc-Enabled Servers", "Arc-Enabled Kubernetes", "GitOps with Arc", "Policy at Arc Scale"] }
+            { "id": "shared-azure-vm",
+              "label": "Azure Virtual Machines",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["VM Sizing", "Availability Sets", "Availability Zones", "Extensions", "Custom Images", "Scale Sets", "Spot VMs"],
+              "masteryLevels": [
+                "Can describe what Azure Virtual Machines is, explain the difference between Availability Sets, Availability Zones, and single-instance deployments for fault tolerance, and identify the major VM families and their intended workloads.",
+                "Provisions a VM from the Marketplace using Bicep, connects via SSH or RDP, attaches a managed data disk, and resizes the VM to understand how compute resources are adjusted without reprovisioning.",
+                "Creates a custom VM image using Azure Compute Gallery, deploys VM Extensions for monitoring agent installation and configuration management, and uses Spot VMs for interruptible batch workloads to reduce cost.",
+                "Designs a VM architecture with Availability Zones for zone-redundant compute, deploys VM Scale Sets in Flexible orchestration mode for application-tier autoscaling, and implements Maintenance Configurations to control OS patching windows and minimise unplanned reboots.",
+                "Defines the organisation's VM lifecycle management standards; governs VM creation, sizing, naming, and tagging through Bicep modules and Azure Policy; leads VM fleet right-sizing using Advisor data; advises engineering teams on when VMs are the right choice versus PaaS compute alternatives."
+              ],
+              "resources": [
+                { "title": "Azure Virtual Machines documentation", "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/", "type": "Official docs" },
+                { "title": "VM sizes in Azure", "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview", "type": "Official docs" },
+                { "title": "Create a Linux virtual machine in Azure — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/azure-linux/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-vmss",
+              "label": "Azure VM Scale Sets (VMSS)",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Autoscale Profiles", "Custom Scripts", "Rolling Upgrades", "Flexible Orchestration"],
+              "masteryLevels": [
+                "Can describe what Azure VM Scale Sets is, explain the difference between Uniform and Flexible orchestration modes, and identify the use cases where VMSS is preferable to managing individual VMs.",
+                "Deploys a VMSS using a Bicep template, uses a Custom Script Extension to install software on instances at boot, and manually adjusts the instance count to validate scaling behaviour.",
+                "Configures autoscale profiles with schedule-based and metric-based rules to respond to load changes, implements Rolling Upgrade policies to deploy application updates without downtime, and configures health probes with automatic instance repair to replace unhealthy nodes.",
+                "Designs a VMSS architecture with custom images from Azure Compute Gallery, uses Spot instance mix in Flexible orchestration to reduce cost for fault-tolerant workloads, and integrates VMSS behind Azure Load Balancer and Application Gateway for traffic distribution.",
+                "Defines the organisation's VMSS deployment standards; evaluates VMSS against AKS and Container Apps for stateless application hosting; designs the autoscale policy, instance protection strategy, and update mechanism for production services; governs VMSS configuration through Bicep and CI/CD."
+              ],
+              "resources": [
+                { "title": "Azure VM Scale Sets documentation", "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/", "type": "Official docs" },
+                { "title": "Autoscale with VM Scale Sets", "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview", "type": "Official docs" },
+                { "title": "Build a scalable app with VM Scale Sets — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/build-app-with-scale-sets/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-aks",
+              "label": "Azure Kubernetes Service (AKS)",
+              "shared": true,
+              "notes": "Deep skill",
+              "subSkills": ["Cluster Provisioning", "Node Pools", "Ingress Controllers", "RBAC", "Workload Identity", "AKS Networking (CNI/Overlay)", "Cluster Upgrades", "Monitoring Integration"],
+              "masteryLevels": [
+                "Can describe what AKS is, explain how it manages the Kubernetes control plane on your behalf, and identify the key concepts: node pools, the API server, kubelet, and how kubectl issues commands to the cluster.",
+                "Provisions an AKS cluster using Bicep, deploys a containerised application using Kubernetes manifests, exposes it via a LoadBalancer service, and upgrades the cluster to a newer Kubernetes version without downtime.",
+                "Configures multiple node pools with different VM sizes for heterogeneous workload requirements, implements Workload Identity to authenticate pods to Azure services without storing credentials, deploys an Ingress Controller for host-based HTTP routing, and integrates the cluster with Azure Monitor and Container Insights.",
+                "Designs an AKS network architecture (CNI, CNI Overlay, or Cilium) based on scale and security requirements, implements cluster autoscaling using Node Autoprovisioner, enforces pod security standards using Azure Policy for AKS, and designs a rolling cluster upgrade strategy with maintenance windows to minimise disruption.",
+                "Defines the organisation's AKS platform architecture; designs the multi-cluster topology, network design, and security baseline; evaluates new AKS features for production adoption; leads the platform team that operates the AKS estate; establishes standards for node pool management, upgrade cadence, and cost governance."
+              ],
+              "resources": [
+                { "title": "Azure Kubernetes Service documentation", "url": "https://learn.microsoft.com/en-us/azure/aks/", "type": "Official docs" },
+                { "title": "AKS best practices", "url": "https://learn.microsoft.com/en-us/azure/aks/best-practices", "type": "Official docs" },
+                { "title": "Introduction to Kubernetes on Azure — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/intro-to-kubernetes-on-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "azure-cloud-container-apps",
+              "label": "Azure Container Apps",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Environment Setup", "Dapr Integration", "Scale-to-Zero", "Ingress", "Managed Certificates"],
+              "masteryLevels": [
+                "Can describe what Azure Container Apps is, explain how it abstracts away cluster management from application teams, and identify when Container Apps is preferred over AKS (no infra management needed) and Azure Functions (long-running containers).",
+                "Deploys a containerised application to a Container Apps environment, exposes it on a public ingress endpoint, and configures minimum replicas and HTTP scaling rules to handle variable traffic.",
+                "Configures Scale-to-Zero for event-driven workloads to eliminate idle cost, enables the Dapr sidecar for service discovery and pub/sub messaging between container apps, and provisions a managed TLS certificate for a custom domain.",
+                "Designs a Container Apps environment with internal VNet-integrated ingress for private workloads, implements multi-container apps with Dapr components for state and pub/sub, and deploys Container Apps via GitHub Actions CI/CD with blue-green revision switching and traffic splitting.",
+                "Defines the organisation's containerised workload hosting strategy; evaluates Container Apps versus AKS for different team and workload requirements; designs the environment topology, managed identity model, and network integration; governs Container Apps deployment through Bicep and policy."
+              ],
+              "resources": [
+                { "title": "Azure Container Apps documentation", "url": "https://learn.microsoft.com/en-us/azure/container-apps/", "type": "Official docs" },
+                { "title": "Dapr integration in Azure Container Apps", "url": "https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview", "type": "Official docs" },
+                { "title": "Deploy a microservices app with Azure Container Apps — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/implement-azure-container-apps/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "azure-cloud-aci",
+              "label": "Azure Container Instances",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Sidecar Patterns", "Init Containers", "Private Registry Pull"],
+              "masteryLevels": [
+                "Can describe what Azure Container Instances is, explain when it is appropriate (fast, serverless container execution) versus AKS or Container Apps (long-running, orchestrated workloads), and identify the billing model.",
+                "Deploys a single container to ACI using Bicep or the Azure CLI, maps a port for external access, and retrieves container logs to confirm the application started correctly.",
+                "Deploys a multi-container group with a main container and a sidecar for log forwarding or monitoring, pulls images from a private Azure Container Registry using managed identity, and mounts an Azure File Share for persistent storage across container restarts.",
+                "Designs ACI deployments within Logic Apps or Azure Functions orchestrations for burst processing workloads, implements init containers for setup tasks that must complete before the main process starts, and configures VNet injection for container groups that require access to private network resources.",
+                "Defines the organisation's container execution strategy; establishes when ACI is the right choice for ephemeral, burst, and sidecar workloads versus Container Apps and AKS; designs the ACI Bicep template library for common patterns; governs container image sources and registry access across all ACI deployments."
+              ],
+              "resources": [
+                { "title": "Azure Container Instances documentation", "url": "https://learn.microsoft.com/en-us/azure/container-instances/", "type": "Official docs" },
+                { "title": "Multi-container groups in ACI", "url": "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-multi-container-group", "type": "Official docs" },
+                { "title": "Run container images in Azure Container Instances — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/run-docker-with-azure-container-instances/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-app-service",
+              "label": "Azure App Service",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Web Apps", "API Apps", "Deployment Slots", "Custom Domains/TLS", "Scaling Plans", "VNet Integration"],
+              "masteryLevels": [
+                "Can describe what Azure App Service is, identify the supported runtime stacks (.NET, Node.js, Java, Python, PHP), and explain how the App Service Plan determines the compute resources and features available.",
+                "Creates an App Service Plan and web application, deploys code via GitHub Actions or Azure CLI, and configures a custom domain with an auto-provisioned managed TLS certificate.",
+                "Uses deployment slots to stage a new release and perform a zero-downtime slot swap to production, configures VNet Integration to allow the app to reach private backend resources, and sets up autoscale rules to respond to load.",
+                "Configures a private endpoint to remove the app from the public internet, implements managed identity for authenticating to Key Vault and downstream Azure services, and uses Application Insights to diagnose and resolve performance and availability issues in production.",
+                "Defines the organisation's App Service deployment standards; governs App Service Plan sizing, VNet integration patterns, and managed identity usage through Bicep and policy; evaluates App Service against Container Apps and AKS for different application workload profiles; leads performance and cost optimisation across the App Service fleet."
+              ],
+              "resources": [
+                { "title": "Azure App Service documentation", "url": "https://learn.microsoft.com/en-us/azure/app-service/", "type": "Official docs" },
+                { "title": "App Service deployment slots", "url": "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots", "type": "Official docs" },
+                { "title": "Deploy a website with Azure App Service — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/deploy-a-website-with-azure-app-service/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-functions",
+              "label": "Azure Functions",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Trigger Types", "Durable Functions", "Consumption vs Premium Plan", "Cold Start Optimization"],
+              "masteryLevels": [
+                "Can describe what Azure Functions is, identify the common trigger types (HTTP, Timer, Queue, Blob, Event Hub), and explain the difference between Consumption, Flex Consumption, and Premium hosting plans.",
+                "Creates an HTTP-triggered Function, deploys it using Azure Functions Core Tools or GitHub Actions, configures app settings for configuration, and monitors invocations and errors in Application Insights.",
+                "Implements Queue or Event Hub-triggered Functions for asynchronous event processing, uses managed identity to authenticate to Azure services without connection strings, and selects between Consumption and Premium plans based on cold start tolerance and VNet integration requirements.",
+                "Designs Durable Functions orchestrations for stateful multi-step workflows with fan-out/fan-in patterns and human approval steps, implements retry policies for resilient processing, and reduces cold start latency on Consumption plan through pre-compiled .NET and package optimisation.",
+                "Defines the organisation's serverless function architecture standards; evaluates Azure Functions against Logic Apps and Container Apps for specific workload patterns; governs function deployment, managed identity permissions, and plan selection through Bicep and policy; leads performance and cost optimisation across the Functions fleet."
+              ],
+              "resources": [
+                { "title": "Azure Functions documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-functions/", "type": "Official docs" },
+                { "title": "Durable Functions documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-functions/durable/", "type": "Official docs" },
+                { "title": "Create serverless applications — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/create-serverless-applications/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-avd",
+              "label": "Azure Virtual Desktop (AVD)",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Host Pool Types", "FSLogix", "Image Management", "RDP Shortpath"],
+              "masteryLevels": [
+                "Can describe what Azure Virtual Desktop is, explain the difference between Personal and Pooled host pools, and identify the use cases where AVD is appropriate versus local desktop computing or competing VDI platforms.",
+                "Deploys a basic AVD environment with a host pool, session hosts, application group, and workspace; assigns users to the application group; and validates connectivity using the AVD web client.",
+                "Deploys FSLogix Profile Containers to separate user profiles from session host images enabling stateless hosts, manages the golden image lifecycle using Azure Compute Gallery to push updates to existing session hosts, and configures RDP Shortpath for direct UDP connectivity to reduce session latency.",
+                "Designs an AVD Autoscale policy to dynamically start and shut down session hosts based on demand to reduce idle cost, integrates session hosts with Intune for compliance management and policy enforcement, and implements AVD Insights with Azure Monitor to track session health and experience metrics.",
+                "Defines the organisation's end-user computing strategy on AVD; designs the host pool topology, image pipeline, and FSLogix storage architecture for the full user population; governs the session host build and patching process; leads migrations from legacy VDI platforms; presents AVD ROI and experience quality metrics to leadership."
+              ],
+              "resources": [
+                { "title": "Azure Virtual Desktop documentation", "url": "https://learn.microsoft.com/en-us/azure/virtual-desktop/", "type": "Official docs" },
+                { "title": "FSLogix documentation", "url": "https://learn.microsoft.com/en-us/fslogix/", "type": "Official docs" },
+                { "title": "Deploy Azure Virtual Desktop — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/deploy-azure-virtual-desktop/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "azure-cloud-batch",
+              "label": "Azure Batch",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Pool Configuration", "Task Scheduling", "Integration with Storage"],
+              "masteryLevels": [
+                "Can describe what Azure Batch is, identify the large-scale parallel and HPC use cases it targets, and explain the key concepts: accounts, pools, jobs, and tasks.",
+                "Creates an Azure Batch account and pool using Bicep, submits a job with multiple parallel tasks, monitors task completion, and retrieves output from Azure Blob Storage.",
+                "Configures pool autoscaling formulas to dynamically add and remove compute nodes based on active task count, integrates Azure Batch with Blob Storage for input data staging and output collection, and uses Low Priority VMs to reduce cost for fault-tolerant workloads.",
+                "Designs a multi-pool architecture for different workload types (CPU-intensive, GPU-accelerated, Windows/Linux), deploys custom application packages to pool nodes, and monitors pool and task metrics to identify bottlenecks and right-size node VM SKUs.",
+                "Defines the organisation's HPC and large-scale parallel compute strategy; evaluates Azure Batch against AKS job queues and Azure CycleCloud for different parallel compute patterns; designs the data staging, compute pool, and output collection architecture for production batch pipelines; governs pool configuration and subscription quota management."
+              ],
+              "resources": [
+                { "title": "Azure Batch documentation", "url": "https://learn.microsoft.com/en-us/azure/batch/", "type": "Official docs" },
+                { "title": "Azure Batch pools and nodes", "url": "https://learn.microsoft.com/en-us/azure/batch/nodes-and-pools", "type": "Official docs" },
+                { "title": "Run parallel jobs with Azure Batch — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/run-parallel-tasks-in-azure-batch-with-the-azure-cli/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-arc",
+              "label": "Azure Arc",
+              "shared": false,
+              "notes": "Hybrid-critical",
+              "subSkills": ["Arc-Enabled Servers", "Arc-Enabled Kubernetes", "GitOps with Arc", "Policy at Arc Scale"],
+              "masteryLevels": [
+                "Can describe what Azure Arc is, explain how it extends Azure management to on-premises and multi-cloud infrastructure, and identify the primary Arc-enabled resource types: servers, Kubernetes clusters, and data services.",
+                "Onboards an on-premises or cloud-hosted server to Azure Arc using the onboarding script, confirms it appears as a resource in the Azure portal, and applies a tag and an Azure Policy definition to the Arc-enabled server.",
+                "Onboards a Kubernetes cluster to Azure Arc, configures GitOps-based application deployment using Flux to maintain desired state from a Git repository, and applies Azure Policy at the Arc Kubernetes scope to enforce pod security and compliance standards on non-Azure clusters.",
+                "Designs an Arc deployment across a hybrid estate, automates Arc agent onboarding at scale using service principal authentication and Azure Policy, integrates Arc-enabled servers with Azure Monitor and Defender for Cloud through auto-provisioning, and uses Arc-enabled SQL Managed Instance for consistent data services at the edge.",
+                "Defines the organisation's hybrid cloud management strategy using Azure Arc; establishes the onboarding process, naming standards, and governance framework for all non-Azure infrastructure; leads the implementation of unified policy, monitoring, and security posture across hybrid and multi-cloud estates."
+              ],
+              "resources": [
+                { "title": "Azure Arc documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-arc/", "type": "Official docs" },
+                { "title": "Azure Arc-enabled Kubernetes documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-arc/kubernetes/", "type": "Official docs" },
+                { "title": "Introduction to Azure Arc — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-arc/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            }
           ]
         },
         {
           "id": "azure-cloud-storage",
           "label": "Storage & Data",
           "skills": [
-            { "id": "shared-azure-blob",        "label": "Azure Blob Storage",         "shared": true,  "notes": "",  "subSkills": ["Access Tiers (Hot/Cool/Archive)", "Lifecycle Policies", "Versioning", "Soft Delete", "Static Website Hosting", "SAS Tokens"] },
-            { "id": "azure-cloud-azure-files",  "label": "Azure Files",                "shared": false, "notes": "",  "subSkills": ["SMB/NFS Shares", "Azure File Sync", "Premium vs Standard"] },
-            { "id": "azure-cloud-sql-db",       "label": "Azure SQL Database",         "shared": false, "notes": "",  "subSkills": ["Service Tiers", "Elastic Pools", "Geo-Replication", "Backup/PITR", "Private Endpoint"] },
-            { "id": "azure-cloud-cosmos-db",    "label": "Azure Cosmos DB",            "shared": false, "notes": "",  "subSkills": ["API Selection (SQL/Mongo/Gremlin)", "Consistency Levels", "Partitioning", "Change Feed"] },
-            { "id": "azure-cloud-adls-gen2",    "label": "Azure Data Lake Storage Gen2","shared": false,"notes": "",  "subSkills": ["ABFS", "ACL vs RBAC", "Integration with Synapse/Databricks"] },
-            { "id": "azure-cloud-redis",        "label": "Azure Cache for Redis",      "shared": false, "notes": "",  "subSkills": ["Cache Patterns", "Clustering", "Persistence", "TLS"] },
-            { "id": "azure-cloud-service-bus",  "label": "Azure Service Bus",          "shared": false, "notes": "",  "subSkills": ["Queues vs Topics", "Message Sessions", "Dead-Letter Queue", "Premium SKU"] },
-            { "id": "shared-azure-eventhubs",   "label": "Azure Event Hubs",           "shared": true,  "notes": "",  "subSkills": ["Partitions", "Consumer Groups", "Capture", "Kafka Protocol Compatibility"] },
-            { "id": "azure-cloud-event-grid",   "label": "Azure Event Grid",           "shared": false, "notes": "",  "subSkills": ["Event Subscriptions", "Custom Topics", "Dead-Letter", "Filtering"] }
+            { "id": "shared-azure-blob",
+              "label": "Azure Blob Storage",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Access Tiers (Hot/Cool/Archive)", "Lifecycle Policies", "Versioning", "Soft Delete", "Static Website Hosting", "SAS Tokens"],
+              "masteryLevels": [
+                "Can describe what Azure Blob Storage is, identify the three access tiers (Hot, Cool, Archive) and their cost-latency tradeoffs, and explain the difference between storage account types (General Purpose v2, BlockBlobStorage, BlobStorage).",
+                "Creates a storage account and container, uploads blobs, generates a SAS token to grant time-limited access to a specific blob, and configures public access settings and firewall rules on the account.",
+                "Implements a lifecycle management policy that transitions blobs between tiers and expires old versions, enables versioning and soft delete for data protection and accidental deletion recovery, and restricts access to private endpoint to remove the account from the public internet.",
+                "Designs a storage account architecture for a multi-workload environment with appropriate redundancy (LRS/ZRS/GRS/GZRS), implements immutable storage policies with WORM locks for compliance requirements, and uses diagnostic logs and Storage Insights to investigate access patterns and performance.",
+                "Defines the organisation's blob storage architecture standards; governs account creation, naming, lifecycle policies, and access control through Azure Policy and Bicep modules; advises on tiering strategy to optimise cost across workloads; designs the storage foundation for high-throughput ingestion and analytics pipelines."
+              ],
+              "resources": [
+                { "title": "Azure Blob Storage documentation", "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/", "type": "Official docs" },
+                { "title": "Azure storage account overview", "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview", "type": "Official docs" },
+                { "title": "Implement Azure Blob Storage — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/implement-azure-blob-storage/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-azure-files",
+              "label": "Azure Files",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["SMB/NFS Shares", "Azure File Sync", "Premium vs Standard"],
+              "masteryLevels": [
+                "Can describe what Azure Files is, explain when a managed cloud file share is preferable to blob storage, and identify the two supported protocols (SMB for Windows and NFS for Linux) and their key use cases.",
+                "Creates an Azure file share, mounts it on a Windows VM using SMB with storage account key authentication, and grants access to specific users via Azure AD-based Kerberos authentication.",
+                "Deploys Azure File Sync to extend an on-premises file server into a cloud-tiered share, configures cloud tiering policies to balance local cache capacity against cloud storage cost, and selects between Standard HDD and Premium SSD tiers based on latency and IOPS requirements.",
+                "Designs an Azure Files architecture for enterprise-scale home directory and FSLogix profile storage (for Azure Virtual Desktop), implements snapshot schedules to meet recovery point objectives, and integrates file shares with Key Vault for automated storage account key rotation.",
+                "Defines the organisation's file storage strategy; evaluates Azure Files against Azure NetApp Files and on-premises NAS for performance, protocol, and cost requirements; architects the File Sync topology for hybrid deployments; governs file share access, quota enforcement, and data residency compliance."
+              ],
+              "resources": [
+                { "title": "Azure Files documentation", "url": "https://learn.microsoft.com/en-us/azure/storage/files/", "type": "Official docs" },
+                { "title": "Azure File Sync documentation", "url": "https://learn.microsoft.com/en-us/azure/storage/file-sync/", "type": "Official docs" },
+                { "title": "Configure Azure Files and File Sync — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-sql-db",
+              "label": "Azure SQL Database",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Service Tiers", "Elastic Pools", "Geo-Replication", "Backup/PITR", "Private Endpoint"],
+              "masteryLevels": [
+                "Can describe what Azure SQL Database is, distinguish it from SQL Server on VMs and Azure SQL Managed Instance, and identify the three purchasing models: DTU, vCore, and Serverless.",
+                "Provisions an Azure SQL Database, connects a client application to it, configures the server firewall, and performs a point-in-time restore to validate that backup is configured and recovery works.",
+                "Selects the appropriate service tier and compute size for a workload based on DTU or vCore requirements, configures active geo-replication to a secondary region for disaster recovery, and enforces private endpoint access to remove the database from the public internet.",
+                "Designs an Elastic Pool to share compute resources across databases with variable workload patterns, implements Transparent Data Encryption with customer-managed keys, uses Query Store and execution plans to diagnose and resolve performance regressions, and monitors resource consumption to right-size the deployment.",
+                "Defines the organisation's Azure SQL architecture standards; evaluates SQL Database versus SQL Managed Instance versus SQL on IaaS for migration and greenfield scenarios; designs the HA/DR topology for production workloads; governs database provisioning, access control, and backup retention through policy and Bicep."
+              ],
+              "resources": [
+                { "title": "Azure SQL Database documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-sql/database/", "type": "Official docs" },
+                { "title": "Azure SQL Database service tiers overview", "url": "https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tiers-sql-database-vcore", "type": "Official docs" },
+                { "title": "Deploy Azure SQL Database — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/deploy-azure-sql-database/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-cosmos-db",
+              "label": "Azure Cosmos DB",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["API Selection (SQL/Mongo/Gremlin)", "Consistency Levels", "Partitioning", "Change Feed"],
+              "masteryLevels": [
+                "Can describe what Azure Cosmos DB is, explain its multi-model API support, and identify the five consistency levels — from Strong to Eventual — and the availability and latency tradeoffs each entails.",
+                "Creates a Cosmos DB account using the NoSQL API, defines containers with partition keys, and performs CRUD operations using the SDK or the Data Explorer portal.",
+                "Designs a partition key strategy that distributes data and requests evenly to avoid hot partitions, configures the appropriate consistency level for the application's latency and correctness requirements, and implements Change Feed to trigger downstream processing when documents are created or updated.",
+                "Architects a globally distributed Cosmos DB deployment with multi-region writes for high availability and low-latency reads, implements the bulk executor pattern for high-throughput data ingestion, and uses the Integrated Cache to reduce RU consumption on hot read paths.",
+                "Defines the organisation's Cosmos DB data architecture standards; evaluates Cosmos DB versus Azure SQL Database and other NoSQL options for specific access patterns; designs the partitioning and consistency strategy for mission-critical applications; manages RU capacity planning and cost optimisation across all accounts."
+              ],
+              "resources": [
+                { "title": "Azure Cosmos DB documentation", "url": "https://learn.microsoft.com/en-us/azure/cosmos-db/", "type": "Official docs" },
+                { "title": "Cosmos DB partitioning and horizontal scaling", "url": "https://learn.microsoft.com/en-us/azure/cosmos-db/partitioning-overview", "type": "Official docs" },
+                { "title": "Work with Azure Cosmos DB — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/work-with-cosmos-db/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "azure-cloud-adls-gen2",
+              "label": "Azure Data Lake Storage Gen2",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["ABFS", "ACL vs RBAC", "Integration with Synapse/Databricks"],
+              "masteryLevels": [
+                "Can describe what Azure Data Lake Storage Gen2 is, explain how it combines blob storage with a hierarchical namespace and POSIX-compatible ACLs, and identify the use cases where it is preferred over standard blob storage.",
+                "Creates a storage account with hierarchical namespace enabled, connects a compute tool such as Databricks or Synapse Analytics using the ABFS driver, and organises data into a raw/curated/refined zone structure.",
+                "Implements fine-grained access control using POSIX ACLs for individual directories and files, configures RBAC for service principals used by analytics pipelines, and designs a folder hierarchy that supports both analytics performance and data governance requirements.",
+                "Designs a multi-zone data lake with lifecycle policies for each zone, integrates ADLS Gen2 with Microsoft Purview or Unity Catalog for data cataloguing and lineage, and implements diagnostic logging to audit who accessed which data and when.",
+                "Defines the organisation's data lake architecture standards; establishes zone design, naming conventions, access control patterns, and data lifecycle governance; advises on integration with Synapse Analytics and Databricks; leads migrations from ADLS Gen1 or on-premises storage platforms."
+              ],
+              "resources": [
+                { "title": "Azure Data Lake Storage Gen2 documentation", "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction", "type": "Official docs" },
+                { "title": "Access control in ADLS Gen2", "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-access-control", "type": "Official docs" },
+                { "title": "Introduction to Azure Data Lake Storage Gen2 — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-data-lake-storage/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-redis",
+              "label": "Azure Cache for Redis",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Cache Patterns", "Clustering", "Persistence", "TLS"],
+              "masteryLevels": [
+                "Can describe what Azure Cache for Redis is, explain the primary caching patterns (cache-aside, write-through, pub/sub), and identify when caching reduces latency or database load in an application architecture.",
+                "Provisions a Redis cache instance, connects an application using the StackExchange.Redis or ioredis client library, and implements the cache-aside pattern to cache database query results with an appropriate TTL.",
+                "Configures Redis Clustering for high-throughput workloads across multiple shards, enables persistence (RDB snapshots or AOF logging) to survive instance restarts, enforces TLS for in-transit encryption, and sets eviction policies appropriate to the data's access and freshness characteristics.",
+                "Designs a Redis architecture with Active Geo-Replication on the Premium tier for multi-region availability, implements distributed locking patterns for coordinating concurrent application operations, and monitors cache hit rate and evictions to tune cache sizing, TTL strategy, and eviction policies.",
+                "Defines the organisation's caching strategy; evaluates Redis cache tiers and SKUs against workload latency and throughput requirements; advises on when Redis, CDN edge caching, or in-process memory caching is the appropriate solution; designs the cache warming, invalidation, and failover strategy for high-traffic production applications."
+              ],
+              "resources": [
+                { "title": "Azure Cache for Redis documentation", "url": "https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/", "type": "Official docs" },
+                { "title": "Azure Cache for Redis best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-best-practices-development", "type": "Official docs" },
+                { "title": "Introduction to Azure Cache for Redis — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-azure-cache-for-redis/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-service-bus",
+              "label": "Azure Service Bus",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Queues vs Topics", "Message Sessions", "Dead-Letter Queue", "Premium SKU"],
+              "masteryLevels": [
+                "Can describe what Azure Service Bus is, explain the difference between queues (point-to-point) and topics with subscriptions (publish-subscribe), and identify when Service Bus is a better choice than Azure Storage Queues.",
+                "Creates a Service Bus namespace with a queue, sends and receives messages using the SDK, and investigates the dead-letter queue to understand why messages failed processing.",
+                "Implements topics and subscriptions for fan-out message distribution, uses message sessions to guarantee FIFO ordered processing of related messages, configures dead-letter queue handling with retry policies, and monitors queue depth and message age to detect processing backlogs.",
+                "Designs a Service Bus architecture for enterprise integration using the Premium SKU with private endpoint isolation, implements the competing consumers pattern for horizontally scalable message processing, and uses Service Bus transactions to ensure exactly-once processing when combined with a database write.",
+                "Defines the organisation's messaging architecture standards; evaluates Service Bus against Event Hubs and Event Grid for specific patterns (command, event, stream); designs dead-letter handling and poison message strategies; governs namespace provisioning, tier selection, and access control through Bicep and policy."
+              ],
+              "resources": [
+                { "title": "Azure Service Bus documentation", "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/", "type": "Official docs" },
+                { "title": "Service Bus queues, topics, and subscriptions", "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions", "type": "Official docs" },
+                { "title": "Implement message-based communication with Service Bus — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/implement-message-workflows-with-service-bus/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "shared-azure-eventhubs",
+              "label": "Azure Event Hubs",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Partitions", "Consumer Groups", "Capture", "Kafka Protocol Compatibility"],
+              "masteryLevels": [
+                "Can describe what Azure Event Hubs is, explain the difference between event streaming (Event Hubs) and message queuing (Service Bus), and identify the high-throughput ingestion use cases where Event Hubs is the appropriate choice.",
+                "Creates an Event Hubs namespace and hub, sends events using the SDK, reads them back using a consumer group, and understands how partition count determines maximum parallelism for consumers.",
+                "Configures Event Hubs Capture to automatically archive incoming events to Blob Storage or ADLS Gen2, implements a consumer application using the Event Processor client for load-balanced multi-partition consumption, and connects an existing Kafka producer using the Event Hubs Kafka protocol endpoint.",
+                "Designs an Event Hubs deployment with the appropriate partition count and throughput units for target ingestion rates, implements Schema Registry for event schema governance and evolution, and uses Dedicated clusters for workloads requiring single-tenant isolation and compliance.",
+                "Defines the organisation's event streaming architecture; evaluates Event Hubs against Apache Kafka and Azure Service Bus for specific streaming and messaging patterns; designs the producer and consumer topology; governs namespace provisioning, partition sizing, and consumer group access through Bicep and policy."
+              ],
+              "resources": [
+                { "title": "Azure Event Hubs documentation", "url": "https://learn.microsoft.com/en-us/azure/event-hubs/", "type": "Official docs" },
+                { "title": "Event Hubs features overview", "url": "https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-features", "type": "Official docs" },
+                { "title": "Enable message streaming with Azure Event Hubs — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/enable-reliable-messaging-for-big-data-apps-using-event-hubs/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-event-grid",
+              "label": "Azure Event Grid",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Event Subscriptions", "Custom Topics", "Dead-Letter", "Filtering"],
+              "masteryLevels": [
+                "Can describe what Azure Event Grid is, explain the difference between events and messages, and identify when Event Grid is the right choice versus Service Bus (reactive events) versus Event Hubs (high-throughput streaming).",
+                "Creates an Event Grid subscription on an Azure storage account or resource group, routes events to a webhook or Azure Function endpoint, and applies event type filters to receive only the relevant subset of events.",
+                "Creates a Custom Topic to publish application-defined events, implements a dead-letter storage endpoint to capture undeliverable events for investigation, and designs an event schema using the CloudEvents 1.0 standard for portability across systems.",
+                "Architects an event-driven solution using Event Grid as the routing layer between Azure services, custom applications, and partner event sources; implements retry policies with exponential backoff; uses Event Grid namespaces for high-throughput MQTT-based scenarios.",
+                "Defines the organisation's event routing architecture; evaluates Event Grid versus Service Bus and Event Hubs for each specific event-driven integration pattern; designs the Custom Topic taxonomy for application-defined events; governs topic and subscription lifecycle through Bicep and naming standards."
+              ],
+              "resources": [
+                { "title": "Azure Event Grid documentation", "url": "https://learn.microsoft.com/en-us/azure/event-grid/", "type": "Official docs" },
+                { "title": "Azure Event Grid event schema", "url": "https://learn.microsoft.com/en-us/azure/event-grid/event-schema", "type": "Official docs" },
+                { "title": "React to Azure resource state changes with Event Grid — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/react-to-state-changes-using-event-grid/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            }
           ]
         },
         {
