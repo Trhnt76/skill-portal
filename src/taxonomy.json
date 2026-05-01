@@ -35,12 +35,89 @@
                 { "title": "What is Microsoft Entra ID?", "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whatis", "type": "Official docs" },
                 { "title": "Implement Microsoft Entra identity management — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/implement-identity-management-solution/", "type": "Course" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             },
-            { "id": "shared-azure-key-vault","label": "Azure Key Vault",              "shared": true,  "notes": "",                               "subSkills": ["Secrets Management", "Certificate Management", "Key Rotation", "Access Policies vs RBAC", "Private Link Integration"] },
-            { "id": "azure-cloud-policy",   "label": "Azure Policy",                  "shared": false, "notes": "Governance critical",            "subSkills": ["Policy Definitions", "Initiatives", "Compliance Reporting", "Remediation Tasks", "Policy-as-Code"] },
-            { "id": "azure-cloud-defender", "label": "Microsoft Defender for Cloud",  "shared": false, "notes": "",                               "subSkills": ["Security Posture (CSPM)", "Workload Protection (CWPP)", "Threat Detection", "Regulatory Compliance Dashboards"] },
-            { "id": "azure-cloud-blueprints","label": "Azure Blueprints / Landing Zones","shared": false,"notes": "",                             "subSkills": ["Blueprint Definitions", "Landing Zone Architecture", "Management Group Structure", "Policy Inheritance"] },
+            { "id": "shared-azure-key-vault",
+              "label": "Azure Key Vault",
+              "shared": true,
+              "notes": "",
+              "subSkills": ["Secrets Management", "Certificate Management", "Key Rotation", "Access Policies vs RBAC", "Private Link Integration"],
+              "masteryLevels": [
+                "Can explain what Azure Key Vault is, describe the three object types it manages (secrets, keys, and certificates), and articulate why centralising credentials in Key Vault is preferable to application config files or environment variables.",
+                "Creates a Key Vault, stores a secret, and retrieves it from an application using the Azure SDK authenticated with a managed identity, configuring an access policy that grants the identity read access to secrets only.",
+                "Migrates application configurations from hardcoded values to Key Vault references in App Service and Azure Functions, switches from legacy access policies to RBAC-based access control, and restricts Key Vault to a private endpoint to eliminate public exposure.",
+                "Designs a Key Vault architecture for a multi-application environment with environment-separated vaults, implements automated certificate lifecycle management with auto-rotation, and configures diagnostic logging with alerts on unauthorised access attempts or policy changes.",
+                "Defines the organisation's secrets management strategy using Key Vault; establishes vault segmentation, RBAC, and key rotation policies as organisational standards; audits compliance across all subscriptions; advises on Key Vault integration patterns for Bicep IaC, CI/CD pipelines, and AKS workload identity."
+              ],
+              "resources": [
+                { "title": "Azure Key Vault documentation", "url": "https://learn.microsoft.com/en-us/azure/key-vault/", "type": "Official docs" },
+                { "title": "Azure Key Vault best practices", "url": "https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices", "type": "Official docs" },
+                { "title": "Configure and manage Azure Key Vault — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/configure-and-manage-azure-key-vault/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-policy",
+              "label": "Azure Policy",
+              "shared": false,
+              "notes": "Governance critical",
+              "subSkills": ["Policy Definitions", "Initiatives", "Compliance Reporting", "Remediation Tasks", "Policy-as-Code"],
+              "masteryLevels": [
+                "Can explain what Azure Policy is, describe how it differs from RBAC (controlling what resources look like vs. what actions you can perform), and identify the key effect types: Audit, Deny, Append, Modify, and DeployIfNotExists.",
+                "Assigns a built-in policy definition to a resource group, reviews the compliance report to identify non-compliant resources, and interprets why a specific resource is flagged against the assigned definition.",
+                "Authors a custom policy definition in JSON, groups related policies into an initiative, assigns the initiative at subscription scope, and creates a remediation task to bring existing non-compliant resources into compliance using DeployIfNotExists.",
+                "Implements Policy-as-Code by managing definitions and assignments in a Git repository with CI/CD deployment, designs an initiative structure enforcing tagging standards, allowed locations, and SKU compliance across all subscriptions, and uses compliance data to produce governance posture reports.",
+                "Defines the organisation's cloud governance framework using Azure Policy; architects the initiative hierarchy across management groups; establishes the policy lifecycle from authoring through testing to enforcement mode; presents compliance posture trends to audit and security leadership."
+              ],
+              "resources": [
+                { "title": "Azure Policy documentation", "url": "https://learn.microsoft.com/en-us/azure/governance/policy/", "type": "Official docs" },
+                { "title": "Azure Policy built-in definitions reference", "url": "https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies", "type": "Official docs" },
+                { "title": "Build a cloud governance strategy on Azure — MS Learn", "url": "https://learn.microsoft.com/en-us/training/modules/build-cloud-governance-strategy-azure/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "annual"
+            },
+            { "id": "azure-cloud-defender",
+              "label": "Microsoft Defender for Cloud",
+              "shared": false,
+              "notes": "",
+              "subSkills": ["Security Posture (CSPM)", "Workload Protection (CWPP)", "Threat Detection", "Regulatory Compliance Dashboards"],
+              "masteryLevels": [
+                "Can describe what Microsoft Defender for Cloud is, explain the difference between CSPM (security posture management) and CWPP (workload protection), and identify the distinction between free foundational coverage and paid Defender plans.",
+                "Enables Defender for Cloud on a subscription, reviews the Secure Score dashboard, and identifies the top recommendations that offer the greatest posture improvement for the least remediation effort.",
+                "Enables Defender plans for specific workload types (Servers, Databases, Storage), investigates and remediates security recommendations, configures regulatory compliance dashboards against a framework such as CIS or NIST SP 800-53, and sets up email alerts for high-severity threats.",
+                "Designs a Defender for Cloud deployment across a multi-subscription estate, implements auto-provisioning for monitoring agents and extensions, integrates security alerts with Microsoft Sentinel, and connects source code repositories to enable DevSecOps posture management.",
+                "Defines the organisation's cloud security posture management strategy; owns the Secure Score improvement roadmap and assigns remediation ownership to subscription teams; advises on Defender plan selection based on workload risk and cost; presents regulatory compliance posture to audit committees."
+              ],
+              "resources": [
+                { "title": "Microsoft Defender for Cloud documentation", "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/", "type": "Official docs" },
+                { "title": "Defender for Cloud security recommendations reference", "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/recommendations-reference", "type": "Official docs" },
+                { "title": "Mitigate threats with Microsoft Defender for Cloud — MS Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/sc-200-mitigate-threats-using-azure-defender/", "type": "Course" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
+            { "id": "azure-cloud-blueprints",
+              "label": "Azure Blueprints / Landing Zones",
+              "shared": false,
+              "notes": "Azure Blueprints deprecated July 2026 — Landing Zone architecture via CAF is the durable skill",
+              "subSkills": ["Blueprint Definitions", "Landing Zone Architecture", "Management Group Structure", "Policy Inheritance"],
+              "masteryLevels": [
+                "Can describe the components of an Azure Landing Zone — management groups, subscriptions, policies, and shared platform services — and explain why a structured landing zone accelerates secure, governed cloud adoption at scale.",
+                "Deploys a basic management group hierarchy (Platform, Landing Zones, Sandboxes) and assigns built-in policies and RBAC at management group scope, demonstrating how settings inherit to all child subscriptions.",
+                "Implements a Landing Zone architecture following the Cloud Adoption Framework, configuring connectivity, identity, and management subscriptions; understands that Azure Blueprints is deprecated in favour of Bicep and Deployment Stacks for landing zone IaC delivery.",
+                "Designs and deploys a multi-subscription Landing Zone using Bicep and Deployment Stacks, configures policy inheritance to enforce compliance guardrails across all child subscriptions, and establishes a subscription vending process for self-service workload onboarding.",
+                "Defines the organisation's landing zone architecture and governance strategy; leads the platform team that owns connectivity, identity, and management subscriptions; evaluates the Azure Landing Zone accelerator; manages the platform's evolution as the organisation scales to many subscriptions."
+              ],
+              "resources": [
+                { "title": "Azure Landing Zones documentation — Cloud Adoption Framework", "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/", "type": "Official docs" },
+                { "title": "Azure Landing Zone accelerator deployment", "url": "https://learn.microsoft.com/en-us/azure/architecture/landing-zones/landing-zone-deploy", "type": "Official docs" },
+                { "title": "Cloud Adoption Framework — Ready phase", "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/", "type": "Official docs" }
+              ],
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
+            },
             { "id": "shared-zero-trust",
               "label": "Zero Trust Architecture",
               "shared": true,
@@ -58,7 +135,8 @@
                 { "title": "NIST SP 800-207: Zero Trust Architecture", "url": "https://csrc.nist.gov/publications/detail/sp/800/207/final", "type": "Official docs" },
                 { "title": "Zero Trust adoption framework — Microsoft", "url": "https://learn.microsoft.com/en-us/security/zero-trust/adopt/zero-trust-adoption-overview", "type": "Official docs" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             }
           ]
         },
@@ -141,7 +219,8 @@
                 { "title": "Fundamentals of Bicep — Microsoft Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/", "type": "Course" },
                 { "title": "Bicep best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices", "type": "Official docs" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             },
             { "id": "azure-cloud-arm",                    "label": "Azure Resource Manager (ARM)","shared": false,"notes": "Legacy but relevant", "subSkills": ["Template Structure", "Linked Templates", "Deployment Modes"] },
             { "id": "shared-terraform",                   "label": "Terraform",                "shared": true,  "notes": "",                       "subSkills": ["Provider Configuration", "State Management", "Module Design", "Remote Backend", "Workspaces"] },
@@ -165,7 +244,8 @@
                 { "title": "Configuring OIDC in Azure — GitHub Docs", "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-azure", "type": "Official docs" },
                 { "title": "GitHub Skills — GitHub Actions courses", "url": "https://skills.github.com/", "type": "Course" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             }
           ]
         },
@@ -235,7 +315,8 @@
                 { "title": "NIST SP 800-207: Zero Trust Architecture", "url": "https://csrc.nist.gov/publications/detail/sp/800/207/final", "type": "Official docs" },
                 { "title": "Zero Trust adoption framework — Microsoft", "url": "https://learn.microsoft.com/en-us/security/zero-trust/adopt/zero-trust-adoption-overview", "type": "Official docs" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             }
           ]
         },
@@ -312,7 +393,8 @@
                 { "title": "Configuring OIDC in Azure — GitHub Docs", "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-azure", "type": "Official docs" },
                 { "title": "GitHub Skills — GitHub Actions courses", "url": "https://skills.github.com/", "type": "Course" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             }
           ]
         },
@@ -458,7 +540,8 @@
                 { "title": "Configuring OIDC in Azure — GitHub Docs", "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-azure", "type": "Official docs" },
                 { "title": "GitHub Skills — GitHub Actions courses", "url": "https://skills.github.com/", "type": "Course" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             },
             { "id": "shared-github-advanced-security",    "label": "GitHub Advanced Security",       "shared": true,  "notes": "",  "subSkills": ["Code Scanning (CodeQL)", "Secret Scanning", "Dependabot", "Security Overview"] },
             { "id": "platform-github-projects",           "label": "GitHub Projects",                "shared": false, "notes": "",  "subSkills": ["Kanban Boards", "Automation", "Roadmap Views", "Status Fields"] },
@@ -495,7 +578,8 @@
                 { "title": "Fundamentals of Bicep — Microsoft Learn path", "url": "https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/", "type": "Course" },
                 { "title": "Bicep best practices", "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices", "type": "Official docs" }
               ],
-              "cheatSheets": []
+              "cheatSheets": [],
+              "reviewCycle": "6-month"
             },
             { "id": "platform-pulumi",           "label": "Pulumi",             "shared": false, "notes": "Growing relevance","subSkills": ["TypeScript/Python SDKs", "State Management"] },
             { "id": "platform-ansible",          "label": "Ansible",            "shared": false, "notes": "Hybrid infra critical","subSkills": ["Playbooks", "Roles", "Inventory", "Vault", "Dynamic Inventory", "AWX/AAP"] },
